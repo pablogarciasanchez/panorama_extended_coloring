@@ -1,2 +1,5 @@
 *.o
 *.json
+bin/*
+models/*
+png/*
