@@ -7,5 +7,10 @@
 
 int main() {
   std::cout << "OpenCV version: " << CV_VERSION << std::endl;
+
+    Malla3D malla;
+
+    malla.load_obj("models/214_izq_posicionado/214_izq_posicionado.obj");
+
   return 0;
 }

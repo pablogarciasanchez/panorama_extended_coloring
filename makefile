@@ -17,7 +17,10 @@ headers := $(wildcard $(addprefix $(INC), *.h*))
 
 x: $(exe)
 	@echo Compilando $(exe)
-#	$(exe)
+	$(exe)
+
+test: $(exe)
+	@echo Compilando $(exe)
 
 $(exe): $(units_o) makefile
 	$(COMPILER) -o $(exe) $(units_o)
