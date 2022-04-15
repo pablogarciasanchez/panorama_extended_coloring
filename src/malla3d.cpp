@@ -51,6 +51,8 @@ void Malla3D::calc_distance(){
     }
 
     d_max = max;
+    radius = 2*d_max;
+    height = 2*radius;
 }
 
 void Malla3D::scale_to_unit(){
@@ -75,9 +77,9 @@ void Malla3D::scale_to_unit(){
 
     std::cout << vertexs.size() << std::endl;
     std::cout << facesIndex.size() << std::endl;
-    std::cout << normals.size() << std::endl;
-    std::cout << centroid.x << ", " << centroid.y << ", " << centroid.z << std::endl;
-    std::cout << d_max << std::endl;
+    // std::cout << normals.size() << std::endl;
+    // std::cout << centroid.x << ", " << centroid.y << ", " << centroid.z << std::endl;
+    // std::cout << d_max << std::endl;
 }
 
 void Malla3D::rotate_mesh(float angle){
@@ -164,11 +166,233 @@ bool Malla3D::load_obj(const std::string path){
 
     std::cout << vertexs.size() << std::endl;
     std::cout << facesIndex.size() << std::endl;
-    std::cout << normals.size() << std::endl;
-    std::cout << centroid.x << ", " << centroid.y << ", " << centroid.z << std::endl;
-    std::cout << d_max << std::endl;
+    // std::cout << normals.size() << std::endl;
+    // std::cout << centroid.x << ", " << centroid.y << ", " << centroid.z << std::endl;
+    // std::cout << d_max << std::endl;
 
     scale_to_unit();
 
     return true;
 }
+
+bool Malla3D::RayIntersectsTriangle(glm::vec3 rayOrigin, 
+                                    glm::vec3 rayVector, 
+                                    std::vector<glm::vec3> inTridegree,
+                                    glm::vec3& outIntersectionPoint){
+    const float EPSILON = 0.0000001;
+    glm::vec3 vertex0 = inTridegree[0];
+    glm::vec3 vertex1 = inTridegree[1];
+    glm::vec3 vertex2 = inTridegree[2];
+    glm::vec3 edge1, edge2, h, s, q;
+    float a,f,u,v;
+    edge1 = vertex1 - vertex0;
+    edge2 = vertex2 - vertex0;
+    h = glm::cross(rayVector,edge2);
+    a = glm::dot(edge1,h);
+
+    if (a > -EPSILON && a < EPSILON){
+        return false;
+    }
+
+    f = 1.0/a;
+    s = rayOrigin - vertex0;
+    u = f * glm::dot(s,h);
+
+    if (u < 0.0 || u > 1.0){
+        return false;
+    }
+
+    q = glm::cross(s,edge1);
+    v = f * glm::dot(rayVector,q);
+
+    if (v < 0.0 || u + v > 1.0){
+        return false;
+    }
+        
+    float t = f * glm::dot(edge2,q);
+
+    if (t > EPSILON){
+        outIntersectionPoint = rayOrigin + rayVector * t;
+        return true;
+    }
+    else{
+        return false;
+    }
+        
+}
+
+glm::vec3 Malla3D::get_orig(Axis axis, float v, int angle){
+    glm::vec3 orig;
+
+    switch (axis)
+    {
+    case X:
+        orig.x = centroid.x - height/2 + v * height/B;
+        orig.y = centroid.y + radius * cos(angle);
+        orig.z = centroid.z + radius * sin(angle);
+        break;
+
+    case Y:
+        orig.x = centroid.x + radius * cos(angle);
+        orig.y = centroid.y - height/2 + v * height/B;
+        orig.z = centroid.z + radius * sin(angle);
+        break;
+
+    case Z:
+        orig.x = centroid.x + radius * cos(angle);
+        orig.y = centroid.y + radius * sin(angle);
+        orig.z = centroid.z - height/2 + v * height/B;
+        break;
+    }
+
+    return orig;
+}
+
+glm::vec3 Malla3D::get_dir(Axis axis, int angle){
+    glm::vec3 dir;
+        switch (axis)
+    {
+    case X:
+        dir.x = 0.0;
+        dir.y = -1 * radius * cos(angle);
+        dir.z = -1 * radius * sin(angle);
+        break;
+
+    case Y:
+        dir.x = -1 * radius * cos(angle);
+        dir.y = 0.0;
+        dir.z = -1 * radius * sin(angle);
+        break;
+
+    case Z:
+        dir.x = -1 * radius * cos(angle);
+        dir.y = -1 * radius * sin(angle);
+        dir.z = 0.0;
+        break;
+    }
+
+    return glm::normalize(dir);
+}
+
+std::vector<std::vector<int>> Malla3D::filter_faces(Axis axis, float v, float threshold){
+    float v_height = height/B;
+    float coord_axis;
+    std::vector<std::vector<int>> facesIndex_filter;
+
+    for(int i = 0; i < facesIndex.size(); i++){
+        for(int j = 0; j < facesIndex[i].size(); j++){
+            switch (axis)
+            {
+            case X:
+                coord_axis = vertexs[facesIndex[i][j]].x;
+                break;
+
+            case Y:
+                coord_axis = vertexs[facesIndex[i][j]].y;
+                break;
+
+            case Z:
+                coord_axis = vertexs[facesIndex[i][j]].z;
+                break;  
+            }
+            
+            if((coord_axis >= (v - threshold*v_height)) &&
+               (coord_axis <= (v + threshold*v_height))){
+                facesIndex_filter.push_back(facesIndex[i]);
+                j = facesIndex[i].size();
+            }
+            
+            // std::cout << "Coord: " << coord_axis << std::endl;
+            // std::cout << "V: " << v << std::endl;
+            // std::cout << "V min: " << v - threshold*v_height << std::endl;
+            // std::cout << "V max: " << v + threshold*v_height << std::endl;
+            
+
+        }
+    }
+
+    return facesIndex_filter;
+
+}
+
+std::vector<float> Malla3D::feature_map(Map map, 
+                                        Axis axis, 
+                                        std::vector<glm::vec3> origins, 
+                                        std::vector<glm::vec3> directions){
+    std::vector<float> row;
+
+    float v;
+    switch (axis)
+    {
+    case X:
+        v = origins[0].x;
+        break;
+
+    case Y:
+        v = origins[0].y;
+        break;
+
+    case Z:
+        v = origins[0].z;
+        break;  
+    }
+
+    // std::cout << v << std::endl;
+    // std::cout << origins[i].x << ", " << origins[i].y << ", " << origins[i].z << std::endl;
+    std::vector<std::vector<int>> facesIndex_filter = filter_faces(axis, v, 1);
+    // std::vector<std::vector<int>> facesIndex_filter = facesIndex;
+    std::cout << "Filtrado de caras: " << facesIndex_filter.size() << std::endl;
+
+    switch (map)
+    {
+    case SDM:
+    
+        for(int i = 0; i < origins.size(); i++){
+            // std::cout << i << std::endl;
+
+            omp_set_num_threads(10);
+            #pragma omp parallel for
+            for(int j = 0; j < facesIndex_filter.size(); j++){
+                glm::vec3 hit_point;
+                glm::vec2 hit;
+                float dist;
+                std::vector<glm::vec3> triangle_points;
+                for(int k = 0; k < facesIndex_filter[j].size(); k++){
+                    triangle_points.push_back(vertexs[facesIndex_filter[j][k]]);
+                }
+                if(RayIntersectsTriangle(origins[i], directions[i], triangle_points, hit_point)){
+                // if(glm::intersectRayTriangle(origins[i], directions[i], triangle_points[0], triangle_points[1], triangle_points[2], hit, dist)){
+                    //std::cout << hit_point.x << ", " << hit_point.y << ", " << hit_point.z << std::endl;
+                    //std::cout << dist << std::endl;
+                } else {
+                    //std::cout << i << ", " << j << std::endl;
+                }
+            }
+        }
+        break;
+    
+    case NDM:
+        /* code */
+        break;
+    }
+}
+
+void Malla3D::calculatePanorama(Map map, Axis axis, float precision, int power){
+    std::vector<std::vector<float>> panorama;
+
+    for(float v = 0; v < B; v += precision){
+        std::vector<glm::vec3> directions;
+        std::vector<glm::vec3> origins;
+
+        for(float u = 0; u < 2*B; u += precision){
+            float angle = u*2*M_PI / (2*B);
+            origins.push_back(get_orig(axis,v,angle));
+            // std::cout << get_orig(axis,v,angle).x << ", " << get_orig(axis,v,angle).y << ", " << get_orig(axis,v,angle).z << std::endl;
+            directions.push_back(get_dir(axis,angle));
+        }
+
+        std::vector<float> row = feature_map(map, axis, origins, directions);
+
+    }
+}
+
