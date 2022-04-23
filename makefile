@@ -1,9 +1,9 @@
 SRC = src/
 OBJ = obj/
 INC = include/
-OPENCV = /usr/include/opencv4
-COMPILER = g++ -fopenmp
-FLAGS = -I$(INC) -I$(OPENCV)
+OPENCV4 = /usr/include/opencv4
+COMPILER = g++ -fopenmp -O3 -lopencv_core -lopencv_imgcodecs -lopencv_highgui
+FLAGS = -I$(INC) -I$(OPENCV4)
 exe = bin/panorama_extended
 units_cpp := $(wildcard $(addprefix $(SRC), *.cpp))
 units_o := $(addprefix $(OBJ), $(addsuffix .o, $(notdir $(basename $(units_cpp)))))

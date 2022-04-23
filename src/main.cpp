@@ -3,7 +3,6 @@
 #include <cmath>    
 #include <cstdlib>  
 #include "malla3d.h"
-#include <opencv2/core.hpp>
 
 int main() {
   std::cout << "OpenCV version: " << CV_VERSION << std::endl;
@@ -11,6 +10,11 @@ int main() {
     Malla3D malla;
 
     malla.load_obj("models/214_izq_posicionado/214_izq_posicionado.obj");
+    malla.export_obj("models/214_izq_posicionado/214_izq_posicionado_reduct.obj");
+
+    // malla.load_obj("models/214_izq_posicionado/cubo.obj");
+    // malla.export_obj("models/214_izq_posicionado/cubo_reduct.obj");
+
 
     // glm::vec3 orig(10,0,0);
     // glm::vec3 dir(-1,0,0);
@@ -39,7 +43,11 @@ int main() {
     //     std::cout << "No hit" << std::endl;
     // }
 
-    malla.calculatePanorama(SDM, X, 1, 4);
+    malla.calculatePanorama(SDM, X, 0.5, 4);
+    malla.calculatePanorama(SDM, Y, 0.5, 4);
+    malla.calculatePanorama(SDM, Z, 0.5, 4);
+
+    malla.export_obj("models/214_izq_posicionado/214_izq_posicionado_reduct.obj");
 
     
 
