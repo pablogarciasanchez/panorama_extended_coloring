@@ -267,7 +267,7 @@ float Malla3D::get_height(Axis axis, float v, float precision){
     return h;
 }
 
-glm::vec3 Malla3D::get_orig(Axis axis, float v, float angle, float precision){
+glm::vec3 Malla3D::get_orig(Axis axis, float v, float precision){
     glm::vec3 orig;
 
     switch (axis)
@@ -417,7 +417,7 @@ int Malla3D::point_face(glm::vec3 p){
             }
             
             if(facesIndex_height_temp.size() > 0){
-                std::cout << v*precision << " " << v_height << " Filtrado de caras (alt): " << facesIndex_height_temp.size() << std::endl;
+                std::cout << v*precision << " " << v_height << "\t Filtrado de caras: " << facesIndex_height_temp.size() << std::endl;
             }
 
             facesIndex_filter_mesh.push_back(facesIndex_height_temp);
@@ -425,8 +425,58 @@ int Malla3D::point_face(glm::vec3 p){
         }
     }
 
+float Malla3D::feature_map(Map map, Axis axis, float precision, float v, int power, glm::vec3 origin, 
+                            std::vector<glm::vec3> &colisiones){
+
+    int n_colisiones = colisiones.size();
+
+    float feature_value = 0.0;
+
+    float dist;
+    float dist_max = -1;
+    float ind_max = -1;
+
+    glm::vec3 ray;
+    glm::vec3 normal;
+
+    if(n_colisiones > 0){
+        for(int c = 0; c < colisiones.size(); c++){ 
+            dist = glm::distance(colisiones[c],origin); 
+            if((dist > dist_max) && (dist > 0)){
+                ind_max = c;
+                dist_max = dist;
+            }
+        }
+
+        switch (map)
+        {
+        case SDM:
+            assert(dist_max > 0);
+            feature_value = dist_max;
+            
+            break;
+
+        case NDM:
+            ray = colisiones[ind_max] - get_orig(axis,v,precision);
+            ray = glm::normalize(ray);
+            normal = normals[point_face(colisiones[ind_max])];
+            feature_value = glm::angle(ray,normal);
+            feature_value = cos(feature_value);
+            feature_value = std::abs(feature_value);
+            feature_value = std::pow(feature_value,power);
+            // feature_value = 1.0 - feature_value;
+            break;
+        }
+    }
+
+    assert(feature_value >= 0 && feature_value <= 1.0);
+    return feature_value;
+}
+
+
 void Malla3D::calculatePanorama(Map map, Axis axis, float precision, int power){
     std::vector<std::vector<float>> panorama;
+    std::vector<std::vector<float>> panorama_extended;
 
     glm::vec3 direction;
     glm::vec3 origin;
@@ -438,47 +488,22 @@ void Malla3D::calculatePanorama(Map map, Axis axis, float precision, int power){
 
     std::vector<glm::vec3> colisiones;
 
-    std::vector<std::vector<int>> facesIndex_height_filter;
-
-    std::vector<std::vector<int>> facesIndex_control;
-
-    std::ofstream file, control, origfile;
-
-    float dist_max;
-    int ind_max;
-
-    switch (axis)
-    {
-    case X:
-        file.open("models/logX.obj");
-        break;
-    
-    case Y:
-        file.open("models/logY.obj");
-        break;
-    
-    case Z:
-        file.open("models/logZ.obj");
-        break;
-    }
-
-    origfile.open("models/control/origin.obj");
-
-
     filter_faces(axis, precision);
 
     for(float i = 0; i < (B/precision); i++){
         std::vector<float> row(2*(B/precision), 0.0);
+        std::vector<float> row_ext(2*(B/precision)*1.5, 0.0);
         panorama.push_back(row);
+        panorama_extended.push_back(row_ext);
     }
 
-
     for(float v = 0; v < (B/precision); v++){
+        std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 
         for(float u = 0; u < 2*(B/precision); u++){
             float angle = u*2*M_PI / (2*(B/precision));
 
-            origin = get_orig(axis,v,angle,precision);
+            origin = get_orig(axis,v,precision);
             direction = get_dir(axis,v,angle);
 
             for(int j = 0; j < facesIndex_filter_mesh[v].size(); j++){
@@ -498,68 +523,83 @@ void Malla3D::calculatePanorama(Map map, Axis axis, float precision, int power){
                 } 
             }
             
-            std::cout << "Colisiones: " << v*precision << " " << u*precision << " " << n_colisiones << std::endl;
+            //std::cout << "Colisiones: " << v*precision << " " << u*precision << " " << n_colisiones << std::endl;
             
-            dist_max = -1;
-            ind_max = -1;
-            if(n_colisiones > 0){
-                for(int c = 0; c < colisiones.size(); c++){ 
-                    float dist = glm::distance(colisiones[c],origin); 
-                    //dist = dist / radius;
-                    if((dist > dist_max) && (dist > 0)){
-                        ind_max = c;
-                        dist_max = dist;
-                    }
-                }
-                if((dist_max > 0) && (ind_max != -1)){
-                    file << "v " << colisiones[ind_max].x << " " << colisiones[ind_max].y << " " << colisiones[ind_max].z << std::endl;
-                    panorama[v][u] = dist_max;
-                }
-            }
+            panorama[v][u] = feature_map(map, axis, precision, v, power, origin, colisiones);
             
             n_colisiones = 0;
             colisiones.clear();
         }
+        
+        std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+        std::cout << "Altura: " <<  v*precision
+        << "\t Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "[ms]" << std::endl;
     }
 
-    for(float i = 0; i < (B/precision); i++){
-        for(float j = 0; j < 2*(B/precision); j++){
+    for(int i = 0; i < panorama.size(); i++){
+        for(int j = 0; j < panorama[i].size(); j++){
             panorama[i][j] = (panorama[i][j] * 255);
             assert(panorama[i][j] <= 255.0 && panorama[i][j] >= 0.0);
         }
     }
 
+    int max = 2*(B/precision);
+    for(int i = 0; i < panorama_extended.size(); i++){
+        for(int j = 0; j < panorama_extended[i].size(); j++){
+            panorama_extended[i][j] = panorama[i][j%max];
+        }
+    }
+
     std::cout << "Colisiones: " << n_colisiones_total << std::endl;
 
-    cv::Mat panorama_cv(0, panorama[0].size(), CV_32F);
+    cv::Mat panorama_cv(0, panorama_extended[0].size(), CV_32F);
 
-    for(int i = 0; i < panorama.size(); i++){
-        cv::Mat row(1, panorama[i].size(), CV_32F, panorama[i].data());
+    for(int i = panorama_extended.size()-1; i >= 0; i--){
+        cv::Mat row(1, panorama_extended[i].size(), CV_32F, panorama_extended[i].data());
         panorama_cv.push_back(row);
     }
 
-    std::string sdm_name;
-    switch (axis)
+    std::string feature_map_name, laplacian_name;
+
+    switch (map)
     {
-    case X:
-        sdm_name = "png/SDMX.png";
+    case SDM:
+        feature_map_name = "png/SDM";
         break;
-    case Y:
-        sdm_name = "png/SDMY.png";
-        break;
-    case Z:
-        sdm_name = "png/SDMZ.png";
+    case NDM:
+        feature_map_name = "png/NDM";
+        laplacian_name = "png/GNDM";
         break;
     }
 
-    cv::imwrite(sdm_name, panorama_cv);
+    switch (axis)
+    {
+    case X:
+        feature_map_name += "_X.png";
+        laplacian_name += "_X.png";
+        break;
+    case Y:
+        feature_map_name += "_Y.png";
+        laplacian_name += "_Y.png";
+        break;
+    case Z:
+        feature_map_name += "_Z.png";
+        laplacian_name += "_Z.png";
+        break;
+    }
 
-    // cv::Mat I = cv::imread("png/SDM.png", 0);
+    if(map == NDM){
+        cv::Mat laplace;
+        cv::Laplacian(panorama_cv, laplace, CV_32F, 1);
+        cv::imwrite(laplacian_name, laplace);
+    } 
+        
+    cv::imwrite(feature_map_name, panorama_cv);
+    
 
+    // cv::Mat I = cv::imread(feature_map_name, 0);
     // cv::namedWindow( "Display window", CV_WINDOW_NORMAL );// Create a window for display.
     // cv::imshow( "Display window", I ); 
     // cv::waitKey(0);
-
-    // cv::imwrite("png/SDM_norm.png", panorama_norm);
 }
 

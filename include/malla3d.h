@@ -8,6 +8,7 @@
 #include <fstream>
 #include <cmath>
 #include <glm/gtx/intersect.hpp>
+#include <glm/gtx/vector_angle.hpp>
 #include <omp.h>
 #include <set>
 #include <opencv2/core.hpp>
@@ -16,6 +17,7 @@
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/highgui/highgui_c.h>
+#include <opencv2/imgproc.hpp>
 
 enum Axis {X, Y, Z};
 enum Map {SDM, NDM};
@@ -56,14 +58,13 @@ private:
                               std::vector<glm::vec3> inTriangle,
                               glm::vec3& outIntersectionPoint);
 
-   glm::vec3 get_orig(Axis axis, float v, float angle, float precision);
+   glm::vec3 get_orig(Axis axis, float v, float precision);
    glm::vec3 get_dir(Axis axis, float v, float angle);
 
    float get_height(Axis axis, float v, float precision);
 
-   std::vector<float> feature_map(Map map, Axis axis, 
-                                 std::vector<glm::vec3> directions, 
-                                 std::vector<glm::vec3> origins);
+ float feature_map(Map map, Axis axis, float precision, float v, int power, 
+                  glm::vec3 origin, std::vector<glm::vec3> &colisiones);
 } ;
 
 
