@@ -49,10 +49,6 @@ private:
 
    int point_face(glm::vec3 p);
 
-   void filter_faces_height(Axis axis, float v, float threshold);
-
-   void filter_faces_angle(Axis axis, float angle, float threshold);
-
    void filter_faces(Axis axis, float precision);
 
    bool RayIntersectsTriangle(glm::vec3 rayOrigin, 
@@ -64,9 +60,6 @@ private:
    glm::vec3 get_dir(Axis axis, float v, float angle);
 
    float get_height(Axis axis, float v, float precision);
-
-   glm::vec2 get_start_end(bool start, float angle, float threshold);
-   bool inside_sector(Axis axis, glm::vec2 p, float angle, float threshold);
 
    std::vector<float> feature_map(Map map, Axis axis, 
                                  std::vector<glm::vec3> directions, 
