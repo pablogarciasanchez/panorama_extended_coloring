@@ -246,27 +246,6 @@ bool Malla3D::RayIntersectsTriangle(glm::vec3 rayOrigin,
 		
 }
 
-float Malla3D::get_height(Axis axis, float v, float precision){
-	float h;
-
-	switch (axis)
-	{
-	case X:
-		h = centroid.x - height/2 + v * height/(B/precision);
-		break;
-
-	case Y:
-		h = centroid.y - height/2 + v * height/(B/precision);
-		break;
-
-	case Z:
-		h = centroid.z - height/2 + v * height/(B/precision);
-		break;
-	}
-
-	return h;
-}
-
 glm::vec3 Malla3D::get_orig(Axis axis, float v, float precision){
 	glm::vec3 orig;
 
@@ -321,6 +300,62 @@ glm::vec3 Malla3D::get_dir(Axis axis, float v, float angle){
 	return glm::normalize(dir);
 }
 
+float Malla3D::get_height(Axis axis, float v, float precision){
+	float h;
+
+	switch (axis)
+	{
+	case X:
+		h = centroid.x - height/2 + v * height/(B/precision);
+		break;
+
+	case Y:
+		h = centroid.y - height/2 + v * height/(B/precision);
+		break;
+
+	case Z:
+		h = centroid.z - height/2 + v * height/(B/precision);
+		break;
+	}
+
+	return h;
+}
+
+int Malla3D::get_sector(glm::vec2 point){
+	int sector = -1;
+	float x = point.x;
+	float y = point.y;
+
+	if(x >= 0 && y >= 0){
+		sector = 1;
+	} else if(x < 0 && y >= 0){
+		sector = 2;
+	} else if(x < 0 && y < 0){
+		sector = 3;
+	} else if(x >= 0 && y < 0){
+		sector = 4;
+	}
+
+	return sector;
+}
+
+int Malla3D::get_sector(float angle){
+	int sector = -1;
+	float x = radius * cos(angle);
+	float y = radius * sin(angle);
+
+	if(x >= 0 && y >= 0){
+		sector = 1;
+	} else if(x < 0 && y >= 0){
+		sector = 2;
+	} else if(x < 0 && y < 0){
+		sector = 3;
+	} else if(x >= 0 && y < 0){
+		sector = 4;
+	}
+
+	return sector;
+}
 
 bool Malla3D::point_in_triangle(glm::vec3 p, glm::vec3 f1, glm::vec3 f2, glm::vec3 f3){
 	bool point_in = true;
@@ -373,20 +408,23 @@ int Malla3D::point_face(glm::vec3 p){
 
 		float angle;
 
-		 glm::vec2 point_sector;
+		glm::vec2 point_sector;
+		glm::vec2 point_angle;
 
-		std::vector<std::vector<int>> facesIndex_height_temp;
-		std::vector<std::vector<std::vector<int>>> facesIndex_height;
-		std::vector<std::vector<int>> facesIndex_ang_temp;
+		std::vector<int> facesIndex_height_temp;
+		std::vector<int> facesIndex_ang_temp;
+		std::vector<std::vector<int>> facesIndex_height;
 
-		facesIndex_filter_mesh.clear();
+		facesIndex_filter.clear();
 
 		for(float v = 0; v < (B/precision); v++){
 
 			v_height = get_height(axis,v,precision);
 
 			v_length = height/(B/precision);
+			//v_length = height/B;
 
+			facesIndex_height.clear();
 			facesIndex_height_temp.clear();
 			
 			for(int i = 0; i < facesIndex.size(); i++){
@@ -409,26 +447,61 @@ int Malla3D::point_face(glm::vec3 p){
 					
 					if((coord_axis >= (v_height - threshold*v_length)) &&
 						(coord_axis <= (v_height + threshold*v_length))){
-						facesIndex_height_temp.push_back(facesIndex[i]);
+						facesIndex_height_temp.push_back(i);
 						salir = true;
 					}
-
 				}
 			}
-			
-			if(facesIndex_height_temp.size() > 0){
-				std::cout << v*precision << " " << v_height << "\t Filtrado de caras: " << facesIndex_height_temp.size() << std::endl;
+
+			for(int sector = 1; sector <= 4; sector++){
+				facesIndex_ang_temp.clear();
+
+				for(int i = 0; i < facesIndex_height_temp.size(); i++){
+					salir = false;
+					for(int j = 0; j < facesIndex[facesIndex_height_temp[i]].size() && !salir; j++){
+						switch (axis)
+						{
+						case X:
+							point_sector.x = vertexs[facesIndex[facesIndex_height_temp[i]][j]].y;
+							point_sector.y = vertexs[facesIndex[facesIndex_height_temp[i]][j]].z;
+							break;
+
+						case Y:
+							point_sector.x = vertexs[facesIndex[facesIndex_height_temp[i]][j]].x;
+							point_sector.y = vertexs[facesIndex[facesIndex_height_temp[i]][j]].z;
+							break;
+
+						case Z:
+							point_sector.x = vertexs[facesIndex[facesIndex_height_temp[i]][j]].x;
+							point_sector.y = vertexs[facesIndex[facesIndex_height_temp[i]][j]].y;
+							break;  
+						}
+
+						if(get_sector(point_sector) == sector){
+							facesIndex_ang_temp.push_back(facesIndex_height_temp[i]);
+							salir = true;
+						}
+					}
+				}
+
+				facesIndex_height.push_back(facesIndex_ang_temp);
+				// if(facesIndex_ang_temp.size() > 0){
+				// 	std::cout << sector << " " << v*precision << " " << v_height  
+				// 	<< "    \t Filtrado de caras (sec): " << facesIndex_ang_temp.size() << std::endl;
+				// }
 			}
 
-			facesIndex_filter_mesh.push_back(facesIndex_height_temp);
-			facesIndex_height.clear();
+			
+			// if(facesIndex_height_temp.size() > 0){
+			// 	std::cout << v*precision << " " << v_height << "\t Filtrado de caras: " << facesIndex_height_temp.size() << std::endl;
+			// }
+
+			facesIndex_filter.push_back(facesIndex_height);
 		}
 	}
 
 float Malla3D::feature_map(Map map, Axis axis, float precision, float v, int power, glm::vec3 origin, 
 							std::vector<glm::vec3> &colisiones){
-
-	int n_colisiones = colisiones.size();
 
 	float feature_value = 0.0;
 
@@ -439,35 +512,34 @@ float Malla3D::feature_map(Map map, Axis axis, float precision, float v, int pow
 	glm::vec3 ray;
 	glm::vec3 normal;
 
-	if(n_colisiones > 0){
-		for(int c = 0; c < colisiones.size(); c++){ 
-			dist = glm::distance(colisiones[c],origin); 
-			if((dist > dist_max) && (dist > 0)){
-				ind_max = c;
-				dist_max = dist;
-			}
-		}
-
-		switch (map)
-		{
-		case SDM:
-			assert(dist_max > 0);
-			feature_value = dist_max;
-			
-			break;
-
-		case NDM:
-			ray = colisiones[ind_max] - get_orig(axis,v,precision);
-			ray = glm::normalize(ray);
-			normal = normals[point_face(colisiones[ind_max])];
-			feature_value = glm::angle(ray,normal);
-			feature_value = cos(feature_value);
-			feature_value = std::abs(feature_value);
-			feature_value = std::pow(feature_value,power);
-			// feature_value = 1.0 - feature_value;
-			break;
+	for(int c = 0; c < colisiones.size(); c++){ 
+		dist = glm::distance(colisiones[c],origin); 
+		if((dist > dist_max) && (dist > 0)){
+			ind_max = c;
+			dist_max = dist;
 		}
 	}
+
+	switch (map)
+	{
+	case SDM:
+		assert(dist_max >= 0);
+		feature_value = dist_max;
+		
+		break;
+
+	case NDM:
+		ray = colisiones[ind_max] - get_orig(axis,v,precision);
+		ray = glm::normalize(ray);
+		normal = normals[point_face(colisiones[ind_max])];
+		feature_value = glm::angle(ray,normal);
+		feature_value = cos(feature_value);
+		feature_value = std::abs(feature_value);
+		feature_value = std::pow(feature_value,power);
+		// feature_value = 1.0 - feature_value;
+		break;
+	}
+	
 
 	assert(feature_value >= 0 && feature_value <= 1.0);
 	return feature_value;
@@ -475,6 +547,10 @@ float Malla3D::feature_map(Map map, Axis axis, float precision, float v, int pow
 
 
 void Malla3D::calculatePanorama(Map map, Axis axis, float precision, int power){
+	std::chrono::steady_clock::time_point begin;
+	std::chrono::steady_clock::time_point end;
+	begin = std::chrono::steady_clock::now();
+
 	std::vector<std::vector<float>> panorama;
 	std::vector<std::vector<float>> panorama_extended;
 
@@ -490,6 +566,12 @@ void Malla3D::calculatePanorama(Map map, Axis axis, float precision, int power){
 
 	filter_faces(axis, precision);
 
+	end = std::chrono::steady_clock::now();
+	std::cout << "Filtrado de caras"
+	<< "\t Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "[ms]" << std::endl;
+
+	begin = std::chrono::steady_clock::now();
+
 	for(float i = 0; i < (B/precision); i++){
 		std::vector<float> row(2*(B/precision), 0.0);
 		std::vector<float> row_ext(2*(B/precision)*1.5, 0.0);
@@ -498,22 +580,22 @@ void Malla3D::calculatePanorama(Map map, Axis axis, float precision, int power){
 	}
 
 	for(float v = 0; v < (B/precision); v++){
-		std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 
 		for(float u = 0; u < 2*(B/precision); u++){
 			float angle = u*2*M_PI / (2*(B/precision));
+			int s = get_sector(angle) - 1;
 
 			origin = get_orig(axis,v,precision);
 			direction = get_dir(axis,v,angle);
 
-			for(int j = 0; j < facesIndex_filter_mesh[v].size(); j++){
+			for(int j = 0; j < facesIndex_filter[v][s].size(); j++){
 				glm::vec3 hit_point;
 				glm::vec2 hit;
 				float dist;
 				std::vector<glm::vec3> triangle_points;
 				
-				for(int k = 0; k < facesIndex_filter_mesh[v][j].size(); k++){
-					triangle_points.push_back(vertexs[facesIndex_filter_mesh[v][j][k]]);  
+				for(int k = 0; k < facesIndex[facesIndex_filter[v][s][j]].size(); k++){
+					triangle_points.push_back(vertexs[facesIndex[facesIndex_filter[v][s][j]][k]]);  
 				}
 				
 				if(RayIntersectsTriangle(origin, direction, triangle_points, hit_point)){
@@ -524,16 +606,14 @@ void Malla3D::calculatePanorama(Map map, Axis axis, float precision, int power){
 			}
 			
 			//std::cout << "Colisiones: " << v*precision << " " << u*precision << " " << n_colisiones << std::endl;
-			
-			panorama[v][u] = feature_map(map, axis, precision, v, power, origin, colisiones);
+			if(n_colisiones > 0){
+				panorama[v][u] = feature_map(map, axis, precision, v, power, origin, colisiones);
+			}
 			
 			n_colisiones = 0;
 			colisiones.clear();
 		}
 		
-		std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-		std::cout << "Altura: " <<  v*precision
-		<< "\t Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "[ms]" << std::endl;
 	}
 
 	for(int i = 0; i < panorama.size(); i++){
@@ -596,6 +676,9 @@ void Malla3D::calculatePanorama(Map map, Axis axis, float precision, int power){
 		
 	cv::imwrite(feature_map_name, panorama_cv);
 	
+	end = std::chrono::steady_clock::now();
+	std::cout << "Mapa: " <<  feature_map_name
+	<< "\t Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "[ms]" << std::endl;
 
 	// cv::Mat I = cv::imread(feature_map_name, 0);
 	// cv::namedWindow( "Display window", CV_WINDOW_NORMAL );// Create a window for display.
