@@ -27,12 +27,15 @@ public:
 	bool load_obj(const std::string path);
 	void export_obj(const std::string path, bool filter = false);
 	void rotate_mesh(float angle);
-	void calculatePanorama(Map map, Axis axis, float precision, int power);
+	void calculate_panorama(Map map, Axis axis, float precision, int power);
+	void export_panorama(Map map, Axis axis);
 
 private:
 	std::vector<glm::vec3> vertexs;
 	std::vector<std::vector<int>> facesIndex;
 	std::vector<std::vector<std::vector<int>>> facesIndex_filter;
+
+	std::vector<std::vector<float>> panorama_extended;
 
 	std::vector<glm::vec3> normals;
 	glm::vec3 centroid;

@@ -546,14 +546,13 @@ float Malla3D::feature_map(Map map, Axis axis, float precision, float v, int pow
 }
 
 
-void Malla3D::calculatePanorama(Map map, Axis axis, float precision, int power){
+void Malla3D::calculate_panorama(Map map, Axis axis, float precision, int power){
 	std::chrono::steady_clock::time_point begin;
 	std::chrono::steady_clock::time_point end;
 	begin = std::chrono::steady_clock::now();
 
 	std::vector<std::vector<float>> panorama;
-	std::vector<std::vector<float>> panorama_extended;
-
+	
 	glm::vec3 direction;
 	glm::vec3 origin;
 
@@ -632,6 +631,12 @@ void Malla3D::calculatePanorama(Map map, Axis axis, float precision, int power){
 
 	std::cout << "Colisiones: " << n_colisiones_total << std::endl;
 
+	end = std::chrono::steady_clock::now();
+	std::cout << "Mapa: " <<  map_to_string(map)
+	<< "\t Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "[ms]" << std::endl;
+}
+
+void Malla3D::export_panorama(Map map, Axis axis){
 	cv::Mat panorama_cv(0, panorama_extended[0].size(), CV_32F);
 
 	for(int i = panorama_extended.size()-1; i >= 0; i--){
@@ -676,10 +681,7 @@ void Malla3D::calculatePanorama(Map map, Axis axis, float precision, int power){
 		
 	cv::imwrite(feature_map_name, panorama_cv);
 	
-	end = std::chrono::steady_clock::now();
-	std::cout << "Mapa: " <<  feature_map_name
-	<< "\t Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "[ms]" << std::endl;
-
+	
 	// cv::Mat I = cv::imread(feature_map_name, 0);
 	// cv::namedWindow( "Display window", CV_WINDOW_NORMAL );// Create a window for display.
 	// cv::imshow( "Display window", I ); 

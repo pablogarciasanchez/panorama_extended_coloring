@@ -20,16 +20,22 @@ int main() {
 	// malla.load_obj("models/214_izq_posicionado/cube.obj");
 	// malla.export_obj("models/214_izq_posicionado/cube_reduct.obj");
 
-	malla.calculatePanorama(SDM, X, 0.5, 4);
-	malla.calculatePanorama(NDM, X, 0.5, 4);
+	malla.calculate_panorama(SDM, X, 0.5, 4);
+	malla.export_panorama(SDM,X);
+	malla.calculate_panorama(NDM, X, 0.5, 4);
+	malla.export_panorama(NDM,X);
 	combine_panorama(X);
 
-	malla.calculatePanorama(SDM, Y, 0.5, 4);
-	malla.calculatePanorama(NDM, Y, 0.5, 4);
+	malla.calculate_panorama(SDM, Y, 0.5, 4);
+	malla.export_panorama(SDM,Y);
+	malla.calculate_panorama(NDM, Y, 0.5, 4);
+	malla.export_panorama(NDM,Y);
 	combine_panorama(Y);
 
-	malla.calculatePanorama(SDM, Z, 0.5, 4);
-	malla.calculatePanorama(NDM, Z, 0.5, 4);
+	malla.calculate_panorama(SDM, Z, 0.5, 4);
+	malla.export_panorama(SDM,Z);
+	malla.calculate_panorama(NDM, Z, 0.5, 4);
+	malla.export_panorama(NDM,Z);
 	combine_panorama(Z);
 	
 
