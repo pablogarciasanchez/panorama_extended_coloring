@@ -17,10 +17,10 @@ int main() {
 	// malla.load_obj("models/214_izq_posicionado/214_izq_posicionado_simple.obj");
 	// malla.export_obj("models/214_izq_posicionado/214_izq_posicionado_simple_reduct.obj");
 	
-	// malla.load_obj("models/214_izq_posicionado/cube.obj");
-	// malla.export_obj("models/214_izq_posicionado/cube_reduct.obj");
+	// malla.load_obj("models/214_izq_posicionado/moto_simple_1.obj");
+	// malla.export_obj("models/214_izq_posicionado/moto_simple_1_reduct.obj");
 
-	malla.calculate_panorama(SDM, X, 0.5, 4);
+	malla.calculate_panorama(SDM, X, 1, 4);
 	malla.export_panorama(SDM,X);
 	malla.calculate_panorama(NDM, X, 0.5, 4);
 	malla.export_panorama(NDM,X);
@@ -38,6 +38,7 @@ int main() {
 	malla.export_panorama(NDM,Z);
 	combine_panorama(Z);
 	
+	malla.mesh_pose_norm(SDM,X,1);
 
 	return 0;
 }

@@ -551,7 +551,8 @@ void Malla3D::calculate_panorama(Map map, Axis axis, float precision, int power)
 	std::chrono::steady_clock::time_point end;
 	begin = std::chrono::steady_clock::now();
 
-	std::vector<std::vector<float>> panorama;
+	panorama.clear();
+	panorama_extended.clear();
 	
 	glm::vec3 direction;
 	glm::vec3 origin;
@@ -636,13 +637,25 @@ void Malla3D::calculate_panorama(Map map, Axis axis, float precision, int power)
 	<< "\t Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "[ms]" << std::endl;
 }
 
-void Malla3D::export_panorama(Map map, Axis axis){
-	cv::Mat panorama_cv(0, panorama_extended[0].size(), CV_32F);
+void Malla3D::export_panorama(Map map, Axis axis, bool extended){
+	cv::Mat panorama_cv;
 
-	for(int i = panorama_extended.size()-1; i >= 0; i--){
-		cv::Mat row(1, panorama_extended[i].size(), CV_32F, panorama_extended[i].data());
-		panorama_cv.push_back(row);
+	if(extended){
+		panorama_cv = cv::Mat(0, panorama_extended[0].size(), CV_32F);
+
+		for(int i = panorama_extended.size()-1; i >= 0; i--){
+			cv::Mat row(1, panorama_extended[i].size(), CV_32F, panorama_extended[i].data());
+			panorama_cv.push_back(row);
+		}
+	} else {
+		panorama_cv = cv::Mat(0, panorama[0].size(), CV_32F);
+
+		for(int i = panorama.size()-1; i >= 0; i--){
+			cv::Mat row(1, panorama[i].size(), CV_32F, panorama[i].data());
+			panorama_cv.push_back(row);
+		}
 	}
+	
 
 	std::string feature_map_name, laplacian_name;
 
@@ -686,5 +699,69 @@ void Malla3D::export_panorama(Map map, Axis axis){
 	// cv::namedWindow( "Display window", CV_WINDOW_NORMAL );// Create a window for display.
 	// cv::imshow( "Display window", I ); 
 	// cv::waitKey(0);
+}
+
+float Malla3D::compute_panorama_symetry(){
+	float height_sym = panorama.size();
+	float width_sym = panorama[0].size();
+	float m = 0.4 * height_sym;
+	float n = 0.1 * width_sym;
+	// std::cout << "m,n: " << m << "," << n << std::endl;
+	// std::cout << "0.4,0.1: " << height_sym << "," << width_sym << std::endl;
+
+	float suma = 0;
+	int index_up, index_down;
+
+	std::vector<float> sumas;
+	
+	for(int w = 0; w < width_sym; w++){
+		suma = 0;
+		for(int h = (height_sym/2 - m); h <= (height_sym/2 + m); h++){
+			for(int x = 1; x <= n; x++){
+				index_up = w+x;
+				index_down = w-x;
+				if(index_down < 0){
+					index_down = (int)(width_sym + index_down);
+				}
+				if(index_up > (int)width_sym){
+					index_up = index_up % (int)width_sym;
+				}
+
+				// std::cout << "w-x,h,w+x: " << w << "-" << x << "," << h << "," << w << "+" << x << std::endl;
+				// std::cout << "w-x,h,w+x: " << index_down << "," << h << "," << index_up << std::endl;
+				// std::cout <<  panorama[h][index_down] << " " << panorama[h][index_up] << std::endl;
+				suma += abs(panorama[h][index_down] - panorama[h][index_up]);
+				// std::cout << x << " " << abs(panorama[h][index_down] - panorama[h][index_up]) << "->" << suma << std::endl;
+			}
+			suma = (1/n) * suma;
+		}
+		std::cout << "Suma: " << suma << std::endl;
+		suma = (1/(2*m)) * suma;
+		std::cout << "Suma: " << suma << std::endl;
+		suma = 1.0 - suma;
+		std::cout << w << "\tSuma: " << suma << std::endl;
+		sumas.push_back(suma);
+	}
+
+	float max = -10.0;
+	for(int i = 0; i < sumas.size(); i++){
+		if(max < sumas[i]){
+			max = sumas[i];
+		}
+	}
+	return max;
+}
+
+void Malla3D::mesh_pose_norm(Map map, Axis axis, float precision, int power){
+	float angle;
+	for(float i = 0; i <= 180; i++){
+		angle = i * (M_PI/180.0);
+		std::cout << "Rotation angle: " << i << " " << angle << std::endl;
+		rotate_mesh(angle);
+		calculate_panorama(map,axis,precision,power);
+		float sym_max = compute_panorama_symetry();
+		std::cout << "Simetria maxima: " << sym_max << std::endl; 
+		export_panorama(map,axis,false);
+	}
 }
 

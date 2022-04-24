@@ -27,14 +27,16 @@ public:
 	bool load_obj(const std::string path);
 	void export_obj(const std::string path, bool filter = false);
 	void rotate_mesh(float angle);
-	void calculate_panorama(Map map, Axis axis, float precision, int power);
-	void export_panorama(Map map, Axis axis);
+	void calculate_panorama(Map map, Axis axis, float precision, int power = 4);
+	void export_panorama(Map map, Axis axis, bool extended = true);
+	void mesh_pose_norm(Map map, Axis axis, float precision, int power = 4);
 
 private:
 	std::vector<glm::vec3> vertexs;
 	std::vector<std::vector<int>> facesIndex;
 	std::vector<std::vector<std::vector<int>>> facesIndex_filter;
 
+	std::vector<std::vector<float>> panorama;
 	std::vector<std::vector<float>> panorama_extended;
 
 	std::vector<glm::vec3> normals;
@@ -68,6 +70,8 @@ private:
 
 	float feature_map(Map map, Axis axis, float precision, float v, int power, 
 						glm::vec3 origin, std::vector<glm::vec3> &colisiones);
+
+	float compute_panorama_symetry();
 } ;
 
 
