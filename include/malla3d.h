@@ -26,11 +26,12 @@ public:
 	Malla3D();
 	bool load_obj(const std::string path);
 	void export_obj(const std::string path, bool filter = false);
-	void rotate_mesh(float angle);
+	void rotate_mesh(Axis axis_rot, float angle);
 	void calculate_panorama(Map map, Axis axis, float precision, int power = 4);
 	void export_panorama(Map map, Axis axis, bool extended = true);
-	void mesh_pose_norm(Map map, Axis axis, float precision, int power = 4);
-
+	void mesh_pose_norm(Axis rot, Map map, Axis axis, int angle_pass = 1,
+						float precision = 1, int power = 4);
+						
 private:
 	std::vector<glm::vec3> vertexs;
 	std::vector<std::vector<int>> facesIndex;

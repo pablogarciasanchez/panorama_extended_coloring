@@ -6,7 +6,7 @@ void combine_panorama(Axis axis){
 
 	std::vector<cv::Mat> channels;
 
-	cv::Mat sdm, ndm, gndm, panorama_extended;
+	cv::Mat sdm, ndm, gndm, panorama_extended, panorama_resize;
 
 	sdm = cv::imread(folder + "SDM_" + axis_to_string(axis) + extension, 0);
 	ndm = cv::imread(folder + "NDM_" + axis_to_string(axis) + extension, 0);
@@ -17,5 +17,11 @@ void combine_panorama(Axis axis){
 	channels.push_back(ndm);
 
 	cv::merge(channels, panorama_extended);
+
+	int r = (int) (panorama_extended.rows * 0.1);
+	int c = (int) (panorama_extended.cols * 0.1);
+	
+	cv::resize(panorama_extended, panorama_resize, cv::Size(c,r), CV_INTER_CUBIC);
 	cv::imwrite(folder + "panorama_ext_" + axis_to_string(axis) + extension , panorama_extended);
+	cv::imwrite(folder + "panorama_ext_" + axis_to_string(axis) + "_10" + extension , panorama_resize);
 }
