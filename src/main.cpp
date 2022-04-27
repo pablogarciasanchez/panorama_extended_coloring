@@ -6,43 +6,39 @@
 #include "malla3d.h"
 #include "panorama.h"
 
-int main() {
-	std::cout << "OpenCV version: " << CV_VERSION << std::endl;
+int main(int argc, char * argv[]) {
+
+	if(argc != 2){
+		std::cout << "Wrong parameters" << std::endl;
+		std::cout << "bin/panorama_extended [relive route to 3D model] [output folder]" << std::endl;
+		exit(-1);
+	}
 
 	Malla3D malla;
 
-	malla.load_obj("models/214_izq_posicionado/214_izq_posicionado.obj");
-	malla.export_obj("models/214_izq_posicionado/214_izq_posicionado_reduct.obj");
+	malla.load_obj(argv[1]);
 
-	// malla.load_obj("models/214_izq_posicionado/214_izq_posicionado_simple.obj");
-	// malla.export_obj("models/214_izq_posicionado/214_izq_posicionado_simple_reduct.obj");
-	
-	// malla.load_obj("models/214_izq_posicionado/moto_simple_1.obj");
-	// malla.export_obj("models/214_izq_posicionado/moto_simple_1_reduct.obj");
+	std::string output_folder = argv[2];
 
-	//malla.rotate_mesh(Z,45);
-	malla.mesh_pose_norm(X,SDM,Z,5);
-	malla.export_obj("models/214_izq_posicionado/214_izq_posicionado_reduct.obj");
+	malla.mesh_pose_norm(X,SDM,Z,output_folder,5);
 
 	malla.calculate_panorama(SDM, X, 0.5, 4);
-	malla.export_panorama(SDM,X);
+	malla.export_panorama(SDM,X,output_folder);
 	malla.calculate_panorama(NDM, X, 0.5, 4);
-	malla.export_panorama(NDM,X);
+	malla.export_panorama(NDM,X,output_folder);
 	combine_panorama(X);
 
 	malla.calculate_panorama(SDM, Y, 0.5, 4);
-	malla.export_panorama(SDM,Y);
+	malla.export_panorama(SDM,Y,output_folder);
 	malla.calculate_panorama(NDM, Y, 0.5, 4);
-	malla.export_panorama(NDM,Y);
+	malla.export_panorama(NDM,Y,output_folder);
 	combine_panorama(Y);
 
 	malla.calculate_panorama(SDM, Z, 0.5, 4);
-	malla.export_panorama(SDM,Z);
+	malla.export_panorama(SDM,Z,output_folder);
 	malla.calculate_panorama(NDM, Z, 0.5, 4);
-	malla.export_panorama(NDM,Z);
+	malla.export_panorama(NDM,Z,output_folder);
 	combine_panorama(Z);
 	
-
-
 	return 0;
 }

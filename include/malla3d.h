@@ -28,8 +28,8 @@ public:
 	void export_obj(const std::string path, bool filter = false);
 	void rotate_mesh(Axis axis_rot, float angle);
 	void calculate_panorama(Map map, Axis axis, float precision, int power = 4);
-	void export_panorama(Map map, Axis axis, bool extended = true);
-	void mesh_pose_norm(Axis rot, Map map, Axis axis, int angle_pass = 1,
+	void export_panorama(Map map, Axis axis, std::string output, bool extended = true);
+	void mesh_pose_norm(Axis rot, Map map, Axis axis, std::string output, int angle_pass = 1,
 						float precision = 1, int power = 4);
 						
 private:

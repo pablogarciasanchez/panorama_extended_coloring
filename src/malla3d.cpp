@@ -592,7 +592,7 @@ void Malla3D::calculate_panorama(Map map, Axis axis, float precision, int power)
 	filter_faces(axis, precision);
 
 	end = std::chrono::steady_clock::now();
-	std::cout << "Filtrado de caras"
+	std::cout << "Face filtering"
 	<< "\t Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "[ms]" << std::endl;
 
 	begin = std::chrono::steady_clock::now();
@@ -661,11 +661,11 @@ void Malla3D::calculate_panorama(Map map, Axis axis, float precision, int power)
 	}
 
 	end = std::chrono::steady_clock::now();
-	std::cout << "Mapa: " <<  map_to_string(map)
+	std::cout << "Map: " <<  map_to_string(map)
 	<< "\t Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "[ms]" << std::endl;
 }
 
-void Malla3D::export_panorama(Map map, Axis axis, bool extended){
+void Malla3D::export_panorama(Map map, Axis axis, std::string output, bool extended){
 	cv::Mat panorama_cv;
 
 	if(extended){
@@ -690,11 +690,11 @@ void Malla3D::export_panorama(Map map, Axis axis, bool extended){
 	switch (map)
 	{
 	case SDM:
-		feature_map_name = "png/SDM";
+		feature_map_name = map_to_string(SDM);
 		break;
 	case NDM:
-		feature_map_name = "png/NDM";
-		laplacian_name = "png/GNDM";
+		feature_map_name = map_to_string(NDM);
+		laplacian_name = "GNDM";
 		break;
 	}
 
@@ -717,10 +717,10 @@ void Malla3D::export_panorama(Map map, Axis axis, bool extended){
 	if(map == NDM){
 		cv::Mat laplace;
 		cv::Laplacian(panorama_cv, laplace, CV_32F, 1);
-		cv::imwrite(laplacian_name, laplace);
+		cv::imwrite(output + laplacian_name, laplace);
 	} 
 		
-	cv::imwrite(feature_map_name, panorama_cv);
+	cv::imwrite(output + feature_map_name, panorama_cv);
 	
 	
 	// cv::Mat I = cv::imread(feature_map_name, 0);
@@ -782,8 +782,8 @@ float Malla3D::compute_panorama_symetry(){
 	return max;
 }
 
-void Malla3D::mesh_pose_norm(Axis rot, Map map, Axis axis, int angle_pass,
-							float precision, int power){
+void Malla3D::mesh_pose_norm(Axis rot, Map map, Axis axis, std::string output, 
+							int angle_pass, float precision, int power){
 	assert(angle_pass != 0);
 	float angle = angle_pass * (M_PI/180.0);;
 	std::vector<float> syms;
@@ -799,9 +799,8 @@ void Malla3D::mesh_pose_norm(Axis rot, Map map, Axis axis, int angle_pass,
 		syms.push_back(sym);
 		std::cout << "Symmetry value: " << sym << std::endl;
 		std::cout << "-----------------------------------------------" << std::endl;
-		export_panorama(map,axis,false);
+		export_panorama(map,axis,output,false);
 		rotate_mesh(rot,angle);
-		//export_obj("models/214_izq_posicionado/214_izq_posicionado_reduct.obj");
 	}
 
 	for(int j = 0; j < syms.size(); j++){
