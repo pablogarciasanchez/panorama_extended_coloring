@@ -8,7 +8,7 @@
 
 int main(int argc, char * argv[]) {
 
-	if(argc != 2){
+	if(argc != 3){
 		std::cout << "Wrong parameters" << std::endl;
 		std::cout << "bin/panorama_extended [relive route to 3D model] [output folder]" << std::endl;
 		exit(-1);
