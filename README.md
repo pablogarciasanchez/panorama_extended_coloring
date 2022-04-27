@@ -9,13 +9,14 @@ This repository is the implementation of the preprocessor of 3D models to 2D ima
 This code is part of the Final Degree Project of Alejandro Manzanares Lemus for the Degree in Computer Science at the University of Granada.
 
 ## Uso
-
-`mkdir bin`
-`make`
-`bin/panorama_extended [ruta relativa al modelo 3D] [carpeta de salida]`
-
+```bash
+mkdir bin
+make
+bin/panorama_extended [ruta relativa al modelo 3D] [carpeta de salida]
+```
 ## Usage
-
-`mkdir bin`
-`make`
-`bin/panorama_extended [relive route to 3D model] [output folder]`
+```bash
+mkdir bin
+make
+bin/panorama_extended [relive route to 3D model] [output folder]
+```
