@@ -7,3 +7,6 @@ png/*
 .stversions/*
 .stfolder/*
 .vscode/*
+gmon.out
+prof.*
+perf.*
