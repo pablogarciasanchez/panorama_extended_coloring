@@ -736,6 +736,7 @@ float Malla3D::compute_panorama_symetry(){
 	float sym = 0;
 	float sym_diff = 0;
 	int index_up, index_down;
+	float up, down;
 
 	std::vector<float> sumas;
 	
@@ -753,17 +754,20 @@ float Malla3D::compute_panorama_symetry(){
 					index_up = index_up % (int)width_sym;
 				}
 
+				up = panorama[h][index_up] / 255.0;
+				down = panorama[h][index_down] / 255.0;
+
 				// std::cout << "w-x,h,w+x: " << w << "-" << x << "," << h << "," << w << "+" << x << std::endl;
 				// std::cout << "w-x,h,w+x: " << index_down << "," << h << "," << index_up << std::endl;
 				// std::cout <<  panorama[h][index_down] << " " << panorama[h][index_up] << std::endl;
-				sym_diff += abs(panorama[h][index_down] - panorama[h][index_up]);
-				// std::cout << x << " " << abs(panorama[h][index_down] - panorama[h][index_up]) << "->" << suma << std::endl;
+				sym_diff += abs(down - up);
+				// std::cout << x << " " << panorama[h][index_down] << " " << panorama[h][index_up] << std::endl;
 			}
-			sym_diff = (1/n) * sym_diff;
+			sym_diff = sym_diff / n;
 			sym += sym_diff;
 		}
 		
-		sym = (1/(2*m)) * sym;
+		sym = sym / (2*m);
 		sym = 1.0 - sym;
 		//std::cout << w << "\tSuma: " << sym << std::endl;
 		sumas.push_back(sym);
