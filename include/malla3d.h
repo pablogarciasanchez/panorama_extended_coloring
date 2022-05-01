@@ -52,12 +52,6 @@ private:
 	void calc_distance();
 	void scale_to_unit();
 
-	bool point_in_triangle(glm::vec3 p, glm::vec3 f1, glm::vec3 f2, glm::vec3 f3);
-
-	int point_face(glm::vec3 p);
-
-	void filter_faces(Axis axis, float precision);
-
 	bool RayIntersectsTriangle(glm::vec3 rayOrigin, 
 								glm::vec3 rayVector, 
 								glm::vec3 vertex0,
@@ -71,6 +65,7 @@ private:
 	int get_sector(glm::vec2 point);
 	int get_sector(float angle);
 
+	void filter_faces(Axis axis, float precision);
 	float feature_map(Map map, Axis axis, float precision, float v, int power, 
 						glm::vec3 origin, std::vector<glm::vec3> &colisiones,
 						std::vector<int> &faces_hit);

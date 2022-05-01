@@ -345,138 +345,100 @@ int Malla3D::get_sector(float angle){
 	return sector;
 }
 
-bool Malla3D::point_in_triangle(glm::vec3 p, glm::vec3 f1, glm::vec3 f2, glm::vec3 f3){
-	bool point_in = true;
+void Malla3D::filter_faces(Axis axis, float precision){
+	float v_height;
 
-	f1 -= p;
-	f2 -= p;
-	f3 -= p;
+	float threshold = 0.5;
 
-	glm::vec3 u = glm::cross(f2,f3);
-	glm::vec3 v = glm::cross(f3,f1);
-	glm::vec3 w = glm::cross(f1,f2);
+	float v_length;
 
-	if(glm::dot(u,v) < 0.0){
-		point_in = false;
-	}
-
-	if(glm::dot(u,w) < 0.0){
-		point_in = false;
-	}
-
-	return point_in;
-}
-
-int Malla3D::point_face(glm::vec3 p){
-	int face = -1;
 	bool salir = false;
-	for(int i = 0; i < facesIndex.size() && !salir; i++){
-		glm::vec3 f1 = vertexs[facesIndex[i][0]];
-		glm::vec3 f2 = vertexs[facesIndex[i][1]];
-		glm::vec3 f3 = vertexs[facesIndex[i][2]];
-		if(point_in_triangle(p,f1,f2,f3)){
-			salir = true;
-			face = i;
+
+	float coord_axis;
+
+	float angle;
+
+	glm::vec2 point_sector;
+	glm::vec2 point_angle;
+
+	std::vector<int> facesIndex_height_temp;
+	std::vector<int> facesIndex_ang_temp;
+	std::vector<std::vector<int>> facesIndex_height;
+
+	facesIndex_filter.clear();
+
+	for(float v = 0; v < (B/precision); v++){
+
+		v_height = get_height(axis,v,precision);
+
+		v_length = height/(B/precision);
+
+		facesIndex_height.clear();
+		facesIndex_height_temp.clear();
+		
+		for(int i = 0; i < facesIndex.size(); i++){
+			salir = false;
+			for(int j = 0; j < facesIndex[i].size() && !salir; j++){
+				switch (axis)
+				{
+				case X:
+					coord_axis = vertexs[facesIndex[i][j]].x;
+					break;
+
+				case Y:
+					coord_axis = vertexs[facesIndex[i][j]].y;
+					break;
+
+				case Z:
+					coord_axis = vertexs[facesIndex[i][j]].z;
+					break;  
+				}
+				
+				if((coord_axis >= (v_height - threshold*v_length)) &&
+					(coord_axis <= (v_height + threshold*v_length))){
+					facesIndex_height_temp.push_back(i);
+					salir = true;
+				}
+			}
 		}
-	}
 
-	return face;
-}
+		for(int sector = 1; sector <= 4; sector++){
+			facesIndex_ang_temp.clear();
 
-	void Malla3D::filter_faces(Axis axis, float precision){
-		float v_height;
-
-		float threshold = 0.5;
-
-		float v_length;
-
-		bool salir = false;
-
-		float coord_axis;
-
-		float angle;
-
-		glm::vec2 point_sector;
-		glm::vec2 point_angle;
-
-		std::vector<int> facesIndex_height_temp;
-		std::vector<int> facesIndex_ang_temp;
-		std::vector<std::vector<int>> facesIndex_height;
-
-		facesIndex_filter.clear();
-
-		for(float v = 0; v < (B/precision); v++){
-
-			v_height = get_height(axis,v,precision);
-
-			v_length = height/(B/precision);
-
-			facesIndex_height.clear();
-			facesIndex_height_temp.clear();
-			
-			for(int i = 0; i < facesIndex.size(); i++){
+			for(int i = 0; i < facesIndex_height_temp.size(); i++){
 				salir = false;
-				for(int j = 0; j < facesIndex[i].size() && !salir; j++){
+				for(int j = 0; j < facesIndex[facesIndex_height_temp[i]].size() && !salir; j++){
 					switch (axis)
 					{
 					case X:
-						coord_axis = vertexs[facesIndex[i][j]].x;
+						point_sector.x = vertexs[facesIndex[facesIndex_height_temp[i]][j]].y;
+						point_sector.y = vertexs[facesIndex[facesIndex_height_temp[i]][j]].z;
 						break;
 
 					case Y:
-						coord_axis = vertexs[facesIndex[i][j]].y;
+						point_sector.x = vertexs[facesIndex[facesIndex_height_temp[i]][j]].x;
+						point_sector.y = vertexs[facesIndex[facesIndex_height_temp[i]][j]].z;
 						break;
 
 					case Z:
-						coord_axis = vertexs[facesIndex[i][j]].z;
+						point_sector.x = vertexs[facesIndex[facesIndex_height_temp[i]][j]].x;
+						point_sector.y = vertexs[facesIndex[facesIndex_height_temp[i]][j]].y;
 						break;  
 					}
-					
-					if((coord_axis >= (v_height - threshold*v_length)) &&
-						(coord_axis <= (v_height + threshold*v_length))){
-						facesIndex_height_temp.push_back(i);
+
+					if(get_sector(point_sector) == sector){
+						facesIndex_ang_temp.push_back(facesIndex_height_temp[i]);
 						salir = true;
 					}
 				}
 			}
 
-			for(int sector = 1; sector <= 4; sector++){
-				facesIndex_ang_temp.clear();
-
-				for(int i = 0; i < facesIndex_height_temp.size(); i++){
-					salir = false;
-					for(int j = 0; j < facesIndex[facesIndex_height_temp[i]].size() && !salir; j++){
-						switch (axis)
-						{
-						case X:
-							point_sector.x = vertexs[facesIndex[facesIndex_height_temp[i]][j]].y;
-							point_sector.y = vertexs[facesIndex[facesIndex_height_temp[i]][j]].z;
-							break;
-
-						case Y:
-							point_sector.x = vertexs[facesIndex[facesIndex_height_temp[i]][j]].x;
-							point_sector.y = vertexs[facesIndex[facesIndex_height_temp[i]][j]].z;
-							break;
-
-						case Z:
-							point_sector.x = vertexs[facesIndex[facesIndex_height_temp[i]][j]].x;
-							point_sector.y = vertexs[facesIndex[facesIndex_height_temp[i]][j]].y;
-							break;  
-						}
-
-						if(get_sector(point_sector) == sector){
-							facesIndex_ang_temp.push_back(facesIndex_height_temp[i]);
-							salir = true;
-						}
-					}
-				}
-
-				facesIndex_height.push_back(facesIndex_ang_temp);
-			}
-
-			facesIndex_filter.push_back(facesIndex_height);
+			facesIndex_height.push_back(facesIndex_ang_temp);
 		}
+
+		facesIndex_filter.push_back(facesIndex_height);
 	}
+}
 
 float Malla3D::feature_map(Map map, Axis axis, float precision, float v, int power, glm::vec3 origin, 
 							std::vector<glm::vec3> &colisiones, std::vector<int> &faces_hit){
