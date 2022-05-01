@@ -25,7 +25,7 @@ class Malla3D{
 public:
 	Malla3D();
 	bool load_obj(const std::string path);
-	void export_obj(const std::string path, bool filter = false);
+	void export_obj(const std::string path);
 	void rotate_mesh(Axis axis_rot, float angle);
 	void calculate_panorama(Map map, Axis axis, float precision, int power = 4);
 	void export_panorama(Map map, Axis axis, std::string output, bool extended = true);

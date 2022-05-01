@@ -73,12 +73,6 @@ void Malla3D::scale_to_unit(){
 	centroid.z = 0.0;
 	calc_normals();
 	calc_distance();
-
-	std::cout << vertexs.size() << std::endl;
-	std::cout << facesIndex.size() << std::endl;
-	// std::cout << normals.size() << std::endl;
-	// std::cout << centroid.x << ", " << centroid.y << ", " << centroid.z << std::endl;
-	// std::cout << d_max << std::endl;
 }
 
 void Malla3D::rotate_mesh(Axis axis_rot, float angle){
@@ -140,11 +134,8 @@ bool Malla3D::load_obj(const std::string path){
 	}
 
 	while(std::getline(file,line)){
-		//std::cout << line << std::endl;
 		file >> header;
-		//std::cout << header << std::endl;
 		if(header == "v"){
-			// std::cout << header << line << std::endl;
 			glm::vec3 vertex;
 			file >> vertex.x;
 			file >> vertex.y;
@@ -169,37 +160,19 @@ bool Malla3D::load_obj(const std::string path){
 		}
 	}
 
-	// for(int i = 0; i < vertexIndices.size(); i++){
-	//     unsigned int vertexIndex = vertexIndices[i];
-	//     //std::cout << vertexIndices[i] << std::endl;
-	//     glm::vec3 vertex = temp_vertices[ vertexIndex-1 ];
-	//     vertexs.push_back(vertex);
-	// }
-
-	// for(int i = 0; i < vertexs.size(); i++){
-	//     std::cout << vertexs[i].x << ", " << vertexs[i].y << ", " << vertexs[i].z << std::endl;
-	// }
-
-	// for(int i = 0; i < facesIndex.size(); i++){
-	//     std::cout << facesIndex[i][0] << ", " << facesIndex[i][1] << ", " << facesIndex[i][2] << std::endl;
-	// }
-
 	calc_centroid();
 	calc_normals();
 	calc_distance();
 
-	std::cout << vertexs.size() << std::endl;
-	std::cout << facesIndex.size() << std::endl;
-	// std::cout << normals.size() << std::endl;
-	// std::cout << centroid.x << ", " << centroid.y << ", " << centroid.z << std::endl;
-	// std::cout << d_max << std::endl;
+	std::cout << "Number of vertexs: " << vertexs.size() << std::endl;
+	std::cout << "Number of faces: " << facesIndex.size() << std::endl;
 
 	scale_to_unit();
 
 	return true;
 }
 
-void Malla3D::export_obj(const std::string path, bool filter){
+void Malla3D::export_obj(const std::string path){
 	std::ofstream file;
 	file.open(path);
 
@@ -207,21 +180,12 @@ void Malla3D::export_obj(const std::string path, bool filter){
 		file << "v " << vertexs[i][0] << " " << vertexs[i][1] << " " << vertexs[i][2] << std::endl;
 	}
 
-	if(filter){
-		// for(int j = 0; j < facesIndex_filter.size(); j++){
-		//     file << "f " << facesIndex_filter[j][0]+1 << " " 
-		//     << facesIndex_filter[j][1]+1 << " " << facesIndex_filter[j][2]+1 
-		//     << std::endl;
-		// }
-	} else {
-		for(int j = 0; j < facesIndex.size(); j++){
-			file << "f " << facesIndex[j][0]+1 << " " 
-			<< facesIndex[j][1]+1 << " " << facesIndex[j][2]+1 
-			<< std::endl;
-		}
+	for(int j = 0; j < facesIndex.size(); j++){
+		file << "f " << facesIndex[j][0]+1 << " " 
+		<< facesIndex[j][1]+1 << " " << facesIndex[j][2]+1 
+		<< std::endl;
 	}
 	
-
 	file.close();
 }
 
@@ -446,7 +410,6 @@ int Malla3D::point_face(glm::vec3 p){
 			v_height = get_height(axis,v,precision);
 
 			v_length = height/(B/precision);
-			//v_length = height/B;
 
 			facesIndex_height.clear();
 			facesIndex_height_temp.clear();
@@ -509,16 +472,7 @@ int Malla3D::point_face(glm::vec3 p){
 				}
 
 				facesIndex_height.push_back(facesIndex_ang_temp);
-				// if(facesIndex_ang_temp.size() > 0){
-				// 	std::cout << sector << " " << v*precision << " " << v_height  
-				// 	<< "    \t Filtrado de caras (sec): " << facesIndex_ang_temp.size() << std::endl;
-				// }
 			}
-
-			
-			// if(facesIndex_height_temp.size() > 0){
-			// 	std::cout << v*precision << " " << v_height << "\t Filtrado de caras: " << facesIndex_height_temp.size() << std::endl;
-			// }
 
 			facesIndex_filter.push_back(facesIndex_height);
 		}
@@ -615,14 +569,10 @@ void Malla3D::calculate_panorama(Map map, Axis axis, float precision, int power)
 				glm::vec3 hit_point;
 				glm::vec2 hit;
 				float dist;
-				// std::vector<glm::vec3> triangle_points;
+
 				glm::vec3 t1 = vertexs[facesIndex[facesIndex_filter[v][s][j]][0]];
 				glm::vec3 t2 = vertexs[facesIndex[facesIndex_filter[v][s][j]][1]];
 				glm::vec3 t3 = vertexs[facesIndex[facesIndex_filter[v][s][j]][2]];
-				
-				// for(int k = 0; k < facesIndex[facesIndex_filter[v][s][j]].size(); k++){
-				// 	triangle_points.push_back(vertexs[facesIndex[facesIndex_filter[v][s][j]][k]]);  
-				// }
 
 				if(RayIntersectsTriangle(origin, direction, t1, t2, t3, hit_point)){
 					n_colisiones++;
@@ -718,7 +668,6 @@ void Malla3D::export_panorama(Map map, Axis axis, std::string output, bool exten
 		
 	cv::imwrite(output + feature_map_name, panorama_cv);
 	
-	
 	// cv::Mat I = cv::imread(feature_map_name, 0);
 	// cv::namedWindow( "Display window", CV_WINDOW_NORMAL );// Create a window for display.
 	// cv::imshow( "Display window", I ); 
@@ -730,8 +679,6 @@ float Malla3D::compute_panorama_symetry(){
 	float width_sym = panorama[0].size();
 	float m = 0.4 * height_sym;
 	float n = 0.1 * width_sym;
-	// std::cout << "m,n: " << m << "," << n << std::endl;
-	// std::cout << "0.4,0.1: " << height_sym << "," << width_sym << std::endl;
 
 	float sym = 0;
 	float sym_diff = 0;
@@ -756,12 +703,7 @@ float Malla3D::compute_panorama_symetry(){
 
 				up = panorama[h][index_up] / 255.0;
 				down = panorama[h][index_down] / 255.0;
-
-				// std::cout << "w-x,h,w+x: " << w << "-" << x << "," << h << "," << w << "+" << x << std::endl;
-				// std::cout << "w-x,h,w+x: " << index_down << "," << h << "," << index_up << std::endl;
-				// std::cout <<  panorama[h][index_down] << " " << panorama[h][index_up] << std::endl;
 				sym_diff += abs(down - up);
-				// std::cout << x << " " << panorama[h][index_down] << " " << panorama[h][index_up] << std::endl;
 			}
 			sym_diff = sym_diff / n;
 			sym += sym_diff;
@@ -769,7 +711,6 @@ float Malla3D::compute_panorama_symetry(){
 		
 		sym = sym / (2*m);
 		sym = 1.0 - sym;
-		//std::cout << w << "\tSuma: " << sym << std::endl;
 		sumas.push_back(sym);
 	}
 
