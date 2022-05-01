@@ -70,7 +70,8 @@ private:
 	int get_sector(float angle);
 
 	float feature_map(Map map, Axis axis, float precision, float v, int power, 
-						glm::vec3 origin, std::vector<glm::vec3> &colisiones);
+						glm::vec3 origin, std::vector<glm::vec3> &colisiones,
+						std::vector<int> &faces_hit);
 
 	float compute_panorama_symetry();
 } ;

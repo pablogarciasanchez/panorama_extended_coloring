@@ -229,7 +229,7 @@ bool Malla3D::RayIntersectsTriangle(glm::vec3 rayOrigin,
 									glm::vec3 rayVector, 
 									std::vector<glm::vec3> inTridegree,
 									glm::vec3& outIntersectionPoint){
-	const float EPSILON = 0.0;
+	const float EPSILON = 0.00000001;
 	glm::vec3 vertex0 = inTridegree[0];
 	glm::vec3 vertex1 = inTridegree[1];
 	glm::vec3 vertex2 = inTridegree[2];
@@ -526,7 +526,7 @@ int Malla3D::point_face(glm::vec3 p){
 	}
 
 float Malla3D::feature_map(Map map, Axis axis, float precision, float v, int power, glm::vec3 origin, 
-							std::vector<glm::vec3> &colisiones){
+							std::vector<glm::vec3> &colisiones, std::vector<int> &faces_hit){
 
 	float feature_value = 0.0;
 
@@ -545,6 +545,8 @@ float Malla3D::feature_map(Map map, Axis axis, float precision, float v, int pow
 		}
 	}
 
+	assert(ind_max != -1);
+
 	switch (map)
 	{
 	case SDM:
@@ -556,12 +558,11 @@ float Malla3D::feature_map(Map map, Axis axis, float precision, float v, int pow
 	case NDM:
 		ray = colisiones[ind_max] - get_orig(axis,v,precision);
 		ray = glm::normalize(ray);
-		normal = normals[point_face(colisiones[ind_max])];
+		normal = normals[faces_hit[ind_max]];
 		feature_value = glm::angle(ray,normal);
 		feature_value = cos(feature_value);
 		feature_value = std::abs(feature_value);
 		feature_value = std::pow(feature_value,power);
-		// feature_value = 1.0 - feature_value;
 		break;
 	}
 	
@@ -582,12 +583,10 @@ void Malla3D::calculate_panorama(Map map, Axis axis, float precision, int power)
 	glm::vec3 direction;
 	glm::vec3 origin;
 
-	float v_height;
-
 	int n_colisiones = 0;
-	int n_colisiones_total = 0;
 
 	std::vector<glm::vec3> colisiones;
+	std::vector<int> face_hit;
 
 	filter_faces(axis, precision);
 
@@ -614,7 +613,6 @@ void Malla3D::calculate_panorama(Map map, Axis axis, float precision, int power)
 			direction = get_dir(axis,v,angle);
 
 			for(int j = 0; j < facesIndex_filter[v][s].size(); j++){
-			// for(int j = 0; j < facesIndex.size(); j++){
 				glm::vec3 hit_point;
 				glm::vec2 hit;
 				float dist;
@@ -624,24 +622,20 @@ void Malla3D::calculate_panorama(Map map, Axis axis, float precision, int power)
 					triangle_points.push_back(vertexs[facesIndex[facesIndex_filter[v][s][j]][k]]);  
 				}
 
-				// for(int k = 0; k < facesIndex[j].size(); k++){
-				// 	triangle_points.push_back(vertexs[facesIndex[j][k]]);  
-				// }
-				
 				if(RayIntersectsTriangle(origin, direction, triangle_points, hit_point)){
 					n_colisiones++;
-					n_colisiones_total++;
 					colisiones.push_back(hit_point);
+					face_hit.push_back(facesIndex_filter[v][s][j]);
 				} 
 			}
 			
-			//std::cout << "Colisiones: " << v*precision << " " << u*precision << " " << n_colisiones << std::endl;
 			if(n_colisiones > 0){
-				panorama[v][u] = feature_map(map, axis, precision, v, power, origin, colisiones);
+				panorama[v][u] = feature_map(map, axis, precision, v, power, origin, colisiones, face_hit);
 			}
 			
 			n_colisiones = 0;
 			colisiones.clear();
+			face_hit.clear();
 		}
 		
 	}
