@@ -23,4 +23,4 @@ $(units_cpp) : $(headers)
 	touch $(units_cpp)
 
 clean:
-	rm -rf obj/*.o bin/*_exe
+	rm -rf obj/*.o bin/*
