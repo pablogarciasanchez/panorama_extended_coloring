@@ -20,7 +20,7 @@ int main(int argc, char * argv[]) {
 
 	std::string output_folder = argv[2];
 
-	malla.mesh_pose_norm(X,SDM,Z,output_folder,5);
+	malla.mesh_pose_norm(X,SDM,Z,output_folder,15);
 
 	malla.calculate_panorama(SDM, X, 0.5, 4);
 	malla.export_panorama(SDM,X,output_folder);
