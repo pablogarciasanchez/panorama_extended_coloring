@@ -60,7 +60,9 @@ private:
 
 	bool RayIntersectsTriangle(glm::vec3 rayOrigin, 
 								glm::vec3 rayVector, 
-								std::vector<glm::vec3> inTriangle,
+								glm::vec3 vertex0,
+								glm::vec3 vertex1,
+								glm::vec3 vertex2,
 								glm::vec3& outIntersectionPoint);
 
 	glm::vec3 get_orig(Axis axis, float v, float precision);

@@ -227,12 +227,11 @@ void Malla3D::export_obj(const std::string path, bool filter){
 
 bool Malla3D::RayIntersectsTriangle(glm::vec3 rayOrigin, 
 									glm::vec3 rayVector, 
-									std::vector<glm::vec3> inTridegree,
+									glm::vec3 vertex0,
+									glm::vec3 vertex1,
+									glm::vec3 vertex2,
 									glm::vec3& outIntersectionPoint){
 	const float EPSILON = 0.00000001;
-	glm::vec3 vertex0 = inTridegree[0];
-	glm::vec3 vertex1 = inTridegree[1];
-	glm::vec3 vertex2 = inTridegree[2];
 	glm::vec3 edge1, edge2, h, s, q;
 	float a,f,u,v;
 	edge1 = vertex1 - vertex0;
@@ -616,13 +615,16 @@ void Malla3D::calculate_panorama(Map map, Axis axis, float precision, int power)
 				glm::vec3 hit_point;
 				glm::vec2 hit;
 				float dist;
-				std::vector<glm::vec3> triangle_points;
+				// std::vector<glm::vec3> triangle_points;
+				glm::vec3 t1 = vertexs[facesIndex[facesIndex_filter[v][s][j]][0]];
+				glm::vec3 t2 = vertexs[facesIndex[facesIndex_filter[v][s][j]][1]];
+				glm::vec3 t3 = vertexs[facesIndex[facesIndex_filter[v][s][j]][2]];
 				
-				for(int k = 0; k < facesIndex[facesIndex_filter[v][s][j]].size(); k++){
-					triangle_points.push_back(vertexs[facesIndex[facesIndex_filter[v][s][j]][k]]);  
-				}
+				// for(int k = 0; k < facesIndex[facesIndex_filter[v][s][j]].size(); k++){
+				// 	triangle_points.push_back(vertexs[facesIndex[facesIndex_filter[v][s][j]][k]]);  
+				// }
 
-				if(RayIntersectsTriangle(origin, direction, triangle_points, hit_point)){
+				if(RayIntersectsTriangle(origin, direction, t1, t2, t3, hit_point)){
 					n_colisiones++;
 					colisiones.push_back(hit_point);
 					face_hit.push_back(facesIndex_filter[v][s][j]);
