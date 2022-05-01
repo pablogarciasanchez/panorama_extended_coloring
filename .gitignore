@@ -10,3 +10,4 @@ png/*
 gmon.out
 prof.*
 perf.*
+graph*
