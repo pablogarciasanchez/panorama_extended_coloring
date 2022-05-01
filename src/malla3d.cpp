@@ -725,6 +725,10 @@ float Malla3D::compute_panorama_symetry(){
 
 void Malla3D::mesh_pose_norm(Axis rot, Map map, Axis axis, std::string output, 
 							int angle_pass, float precision, int power){
+	std::chrono::steady_clock::time_point begin;
+	std::chrono::steady_clock::time_point end;
+	begin = std::chrono::steady_clock::now();
+
 	assert(angle_pass != 0);
 	float angle = angle_pass * (M_PI/180.0);;
 	std::vector<float> syms;
@@ -733,6 +737,7 @@ void Malla3D::mesh_pose_norm(Axis rot, Map map, Axis axis, std::string output,
 	std::vector<glm::vec3> vertexs_aux(vertexs);
 
 	int ind = 0;
+	std::cout << std::endl;
 	for(float i = 0; i <= 180; i+=angle_pass, ind++){
 		std::cout << "Rotation angle: " << i << " " << ind * angle << std::endl;
 		calculate_panorama(map,axis,precision,power);
@@ -752,6 +757,8 @@ void Malla3D::mesh_pose_norm(Axis rot, Map map, Axis axis, std::string output,
 	}
 
 	std::cout << "Max sym rot angle: " << ind_max*angle_pass << std::endl;
+	end = std::chrono::steady_clock::now();
+	std::cout << "Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "[ms]" << std::endl;
 	std::cout << "-----------------------------------------------" << std::endl;
 	vertexs = vertexs_aux;
 	if(ind_max*angle_pass != 0){
