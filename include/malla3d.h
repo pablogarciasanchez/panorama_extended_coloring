@@ -20,6 +20,9 @@
 #include <opencv2/imgproc.hpp>
 #include "aux.h"
 
+/** @file 
+ *  Esta clase contiene la información referente al modelo 3D
+ */
 
 class Malla3D{
 public:
@@ -33,19 +36,19 @@ public:
 						float precision = 1, int power = 4);
 						
 private:
-	std::vector<glm::vec3> vertexs;
-	std::vector<std::vector<int>> facesIndex;
-	std::vector<std::vector<std::vector<int>>> facesIndex_filter;
+	std::vector<glm::vec3> vertexs; /**< doc template */
+	std::vector<std::vector<int>> facesIndex; /**< doc template */
+	std::vector<std::vector<std::vector<int>>> facesIndex_filter; /**< doc template */
 
-	std::vector<std::vector<float>> panorama;
-	std::vector<std::vector<float>> panorama_extended;
+	std::vector<std::vector<float>> panorama; /**< doc template */
+	std::vector<std::vector<float>> panorama_extended; /**< doc template */
 
-	std::vector<glm::vec3> normals;
-	glm::vec3 centroid;
-	double d_max;
-	double height;
-	double radius;
-	int B = 180;
+	std::vector<glm::vec3> normals; /**< doc template */
+	glm::vec3 centroid; /**< doc template */
+	double d_max; /**< doc template */
+	double height; /**< doc template */
+	double radius; /**< doc template */
+	int B = 180; /**< doc template */
 
 	void calc_normals();
 	void calc_centroid();

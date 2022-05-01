@@ -1,5 +1,8 @@
 #include "aux.h"
 
+/**
+ * doc template
+ */
 std::string axis_to_string(Axis axis){
 	std::string axis_string;
 	switch (axis)
@@ -19,6 +22,9 @@ std::string axis_to_string(Axis axis){
 	return axis_string;
 }
 
+/**
+ * doc template
+ */
 std::string map_to_string(Map map){
 	std::string map_string;
 	switch (map)

@@ -12,6 +12,7 @@ headers := $(wildcard $(addprefix $(INC), *.h*))
 
 x: $(exe)
 	@echo Compilando $(exe)
+	@doxygen Doxyfile
 
 $(exe): $(units_o) makefile
 	$(COMPILER) -o $(exe) $(units_o)
@@ -23,4 +24,4 @@ $(units_cpp) : $(headers)
 	touch $(units_cpp)
 
 clean:
-	rm -rf obj/*.o bin/*
+	rm -rf obj/*.o bin/* doc/*

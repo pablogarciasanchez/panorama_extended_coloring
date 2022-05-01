@@ -1,5 +1,8 @@
 #include "panorama.h"
 
+/**
+ * doc template
+ */
 void combine_panorama(Axis axis){
 	std::string folder = "png/";
 	std::string extension = ".png";

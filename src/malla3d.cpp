@@ -1,9 +1,14 @@
 #include "malla3d.h"
 
-
+/**
+ * doc template
+ */
 Malla3D::Malla3D(){}
 
 
+/**
+ * doc template
+ */
 void Malla3D::calc_centroid(){
 	float sum_x, sum_y, sum_z;
 	sum_x = sum_y = sum_z = 0.0;
@@ -23,6 +28,9 @@ void Malla3D::calc_centroid(){
 	centroid.z = sum_z;
 }
 
+/**
+ * doc template
+ */
 void Malla3D::calc_normals(){
 	normals.clear();
 	glm::vec3 v1, v2, v3;
@@ -39,6 +47,9 @@ void Malla3D::calc_normals(){
 	}
 }
 
+/**
+ * doc template
+ */
 void Malla3D::calc_distance(){
 	float dist;
 	float max = glm::distance(vertexs[0],centroid);
@@ -54,6 +65,9 @@ void Malla3D::calc_distance(){
 	height = 2*radius;
 }
 
+/**
+ * doc template
+ */
 void Malla3D::scale_to_unit(){
 	std::vector<glm::vec3> v_unit;
 
@@ -75,6 +89,9 @@ void Malla3D::scale_to_unit(){
 	calc_distance();
 }
 
+/**
+ * doc template
+ */
 void Malla3D::rotate_mesh(Axis axis_rot, float angle){
 	std::vector<glm::vec3> mesh_rotate;
 	glm::vec3 rotate_vertex;
@@ -117,6 +134,9 @@ void Malla3D::rotate_mesh(Axis axis_rot, float angle){
 	calc_distance();
 }
 
+/**
+ * doc template
+ */
 bool Malla3D::load_obj(const std::string path){
 	std::vector< unsigned int > vertexIndices;
 	std::vector< glm::vec3 > temp_vertices;
@@ -172,6 +192,9 @@ bool Malla3D::load_obj(const std::string path){
 	return true;
 }
 
+/**
+ * doc template
+ */
 void Malla3D::export_obj(const std::string path){
 	std::ofstream file;
 	file.open(path);
@@ -189,6 +212,9 @@ void Malla3D::export_obj(const std::string path){
 	file.close();
 }
 
+/**
+ * doc template
+ */
 bool Malla3D::RayIntersectsTriangle(glm::vec3 rayOrigin, 
 									glm::vec3 rayVector, 
 									glm::vec3 vertex0,
@@ -234,6 +260,9 @@ bool Malla3D::RayIntersectsTriangle(glm::vec3 rayOrigin,
 		
 }
 
+/**
+ * doc template
+ */
 glm::vec3 Malla3D::get_orig(Axis axis, float v, float precision){
 	glm::vec3 orig;
 
@@ -261,6 +290,9 @@ glm::vec3 Malla3D::get_orig(Axis axis, float v, float precision){
 	return orig;
 }
 
+/**
+ * doc template
+ */
 glm::vec3 Malla3D::get_dir(Axis axis, float v, float angle){
 	glm::vec3 dir;
 	
@@ -288,6 +320,9 @@ glm::vec3 Malla3D::get_dir(Axis axis, float v, float angle){
 	return glm::normalize(dir);
 }
 
+/**
+ * doc template
+ */
 float Malla3D::get_height(Axis axis, float v, float precision){
 	float h;
 
@@ -309,6 +344,9 @@ float Malla3D::get_height(Axis axis, float v, float precision){
 	return h;
 }
 
+/**
+ * doc template
+ */
 int Malla3D::get_sector(glm::vec2 point){
 	int sector = -1;
 	float x = point.x;
@@ -327,6 +365,9 @@ int Malla3D::get_sector(glm::vec2 point){
 	return sector;
 }
 
+/**
+ * doc template
+ */
 int Malla3D::get_sector(float angle){
 	int sector = -1;
 	float x = radius * cos(angle);
@@ -345,6 +386,9 @@ int Malla3D::get_sector(float angle){
 	return sector;
 }
 
+/**
+ * doc template
+ */
 void Malla3D::filter_faces(Axis axis, float precision){
 	float v_height;
 
@@ -440,6 +484,9 @@ void Malla3D::filter_faces(Axis axis, float precision){
 	}
 }
 
+/**
+ * doc template
+ */
 float Malla3D::feature_map(Map map, Axis axis, float precision, float v, int power, glm::vec3 origin, 
 							std::vector<glm::vec3> &colisiones, std::vector<int> &faces_hit){
 
@@ -486,7 +533,9 @@ float Malla3D::feature_map(Map map, Axis axis, float precision, float v, int pow
 	return feature_value;
 }
 
-
+/**
+ * doc template
+ */
 void Malla3D::calculate_panorama(Map map, Axis axis, float precision, int power){
 	std::chrono::steady_clock::time_point begin;
 	std::chrono::steady_clock::time_point end;
@@ -573,6 +622,9 @@ void Malla3D::calculate_panorama(Map map, Axis axis, float precision, int power)
 	<< "\t Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "[ms]" << std::endl;
 }
 
+/**
+ * doc template
+ */
 void Malla3D::export_panorama(Map map, Axis axis, std::string output, bool extended){
 	cv::Mat panorama_cv;
 
@@ -636,6 +688,9 @@ void Malla3D::export_panorama(Map map, Axis axis, std::string output, bool exten
 	// cv::waitKey(0);
 }
 
+/**
+ * doc template
+ */
 float Malla3D::compute_panorama_symetry(){
 	float height_sym = panorama.size();
 	float width_sym = panorama[0].size();
@@ -685,6 +740,9 @@ float Malla3D::compute_panorama_symetry(){
 	return max;
 }
 
+/**
+ * doc template
+ */
 void Malla3D::mesh_pose_norm(Axis rot, Map map, Axis axis, std::string output, 
 							int angle_pass, float precision, int power){
 	std::chrono::steady_clock::time_point begin;

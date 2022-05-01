@@ -11,6 +11,10 @@
 #include <opencv2/imgproc.hpp>
 #include "aux.h"
 
+
+/** @file
+ * doc template
+ */
 void combine_panorama(Axis axis);
 
 #endif
