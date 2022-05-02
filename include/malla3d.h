@@ -1,23 +1,13 @@
 #ifndef MALLA3D_H_INCLUDED
 #define MALLA3D_H_INCLUDED
-#include <vector>
-#include <glm/glm.hpp>
+#include <fstream>
 #include <cstdio>
 #include <stdio.h>
-#include <iostream>
-#include <fstream>
 #include <cmath>
+#include <glm/glm.hpp>
 #include <glm/gtx/intersect.hpp>
 #include <glm/gtx/vector_angle.hpp>
-#include <omp.h>
-#include <set>
-#include <opencv2/core.hpp>
-#include <opencv2/core/mat.hpp>
-#include <opencv2/core/base.hpp>
-#include <opencv2/imgcodecs.hpp>
-#include <opencv2/highgui.hpp>
-#include <opencv2/highgui/highgui_c.h>
-#include <opencv2/imgproc.hpp>
+#include "panorama.h"
 #include "aux.h"
 
 /** @file malla3d.h

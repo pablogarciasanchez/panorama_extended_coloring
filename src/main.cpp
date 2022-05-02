@@ -1,7 +1,4 @@
-#include <iostream> 
-#include <string>   
-#include <cmath>    
-#include <cstdlib>
+#include "aux.h"
 #include "malla3d.h"
 #include "panorama.h"
 
