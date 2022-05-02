@@ -1,3 +1,0 @@
-\_form#0=199x14:$ S(I) = max\{Sym(w) | w \in 1:width\} $
-\_form#1=271x26:$ Sym(w) = 1 - \frac{1}{2m} \sum_{h=\frac{height}{2}-m}^{h=\frac{height}{2}-+m} SymDiff(w,h) $
-\_form#2=278x16:$ SymDiff(w,h) = \frac{1}{n} \sum_{x=1}^n |(w-x,h) - (w+x,h)| $
