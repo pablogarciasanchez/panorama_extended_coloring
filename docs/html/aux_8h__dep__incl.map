@@ -1,9 +1,9 @@
 <map id="include/aux.h" name="include/aux.h">
-<area shape="rect" id="node1" title="Auxiliar enums definitions and functions related." alt="" coords="223,5,321,32"/>
-<area shape="rect" id="node2" href="$malla3d_8h.html" title="Implementation of class Malla3D." alt="" coords="57,80,180,107"/>
-<area shape="rect" id="node5" href="$panorama_8h.html" title="PANORAMA utilities external to Malla3D." alt="" coords="205,80,339,107"/>
-<area shape="rect" id="node7" href="$aux_8cpp.html" title="Auxiliar enums definitions and functions related." alt="" coords="364,80,455,107"/>
-<area shape="rect" id="node3" href="$main_8cpp.html" title="Example of use of Malla3D." alt="" coords="145,155,242,181"/>
-<area shape="rect" id="node4" href="$malla3d_8cpp.html" title="Implementation of class Malla3D." alt="" coords="5,155,120,181"/>
-<area shape="rect" id="node6" href="$panorama_8cpp.html" title="PANORAMA utilities external to Malla3D." alt="" coords="266,155,393,181"/>
+<area shape="rect" id="node1" title="Auxiliar enums definitions and functions related." alt="" coords="158,5,257,32"/>
+<area shape="rect" id="node2" href="$malla3d_8h.html" title="Implementation of class Malla3D." alt="" coords="243,155,366,181"/>
+<area shape="rect" id="node3" href="$main_8cpp.html" title="Example of use of Malla3D." alt="" coords="5,229,103,256"/>
+<area shape="rect" id="node5" href="$panorama_8h.html" title="PANORAMA utilities external to Malla3D." alt="" coords="88,80,223,107"/>
+<area shape="rect" id="node7" href="$aux_8cpp.html" title="Auxiliar enums definitions and functions related." alt="" coords="298,80,389,107"/>
+<area shape="rect" id="node4" href="$malla3d_8cpp.html" title="Implementation of class Malla3D." alt="" coords="247,229,362,256"/>
+<area shape="rect" id="node6" href="$panorama_8cpp.html" title="PANORAMA utilities external to Malla3D." alt="" coords="92,155,219,181"/>
 </map>
