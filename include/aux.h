@@ -3,19 +3,30 @@
 #include <string>
 
 
-/** @file
- * doc template
+/** @file aux.h
+ *  @brief Auxiliar enums definitions and functions related
+ * 	@author [Alejandro Manzanares Lemus](https://github.com/Alexmnzlms)
+ * 
  */
 
 /**
- * doc template
-*/
-enum Axis {X = 0, Y = 1, Z = 2};
+ * @brief Represents the three axis of euclidean geometry.
+ * 
+ */
+enum Axis {
+    X = 0, /**< Axis X */
+    Y = 1, /**< Axis Y */
+    Z = 2  /**< Axis Z */
+};
 
 /**
- * doc template
-*/
-enum Map {SDM = 0, NDM = 1};
+ * @brief Represents the two possible feature maps PANORAMA is composed
+ * 
+ */
+enum Map {
+    SDM = 0, /**< Spatial Distribution Map */
+    NDM = 1  /**< Normal's Derivation Map */
+};
 
 std::string axis_to_string(Axis axis);
 std::string map_to_string(Map map);

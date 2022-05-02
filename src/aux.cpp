@@ -1,7 +1,17 @@
 #include "aux.h"
 
+/** @file aux.cpp
+ *  @brief Auxiliar enums definitions and functions related
+ * 	@author [Alejandro Manzanares Lemus](https://github.com/Alexmnzlms)
+ * 
+ */
+
 /**
- * doc template
+ * @brief Convert enum Axis to std::string c++ type.
+ * 
+ * @param axis enum value to convert
+ * @return std::string value of enum
+ * @see [std::string](https://en.cppreference.com/w/cpp/string/basic_string)
  */
 std::string axis_to_string(Axis axis){
 	std::string axis_string;
@@ -21,9 +31,12 @@ std::string axis_to_string(Axis axis){
 	}
 	return axis_string;
 }
-
 /**
- * doc template
+ * @brief Convert enum Map to std::string c++ type.
+ * 
+ * @param map enum value to convert
+ * @return std::string value of enum
+ * @see [std::string](https://en.cppreference.com/w/cpp/string/basic_string)
  */
 std::string map_to_string(Map map){
 	std::string map_string;
