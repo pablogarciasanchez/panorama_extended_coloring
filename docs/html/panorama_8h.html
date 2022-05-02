@@ -134,9 +134,9 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ab9cb7d9782435f87679108334063f75d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="panorama_8h.html#ab9cb7d9782435f87679108334063f75d">combine_panorama</a> (<a class="el" href="aux_8h.html#ae3996976d8ffb3e58d88f58227473f8e">Axis</a> axis, std::string output)</td></tr>
-<tr class="memdesc:ab9cb7d9782435f87679108334063f75d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Combine PANORAMA feature maps SDM, NDM and GNDM in PANORAMA extended representation.  <a href="panorama_8h.html#ab9cb7d9782435f87679108334063f75d">More...</a><br /></td></tr>
-<tr class="separator:ab9cb7d9782435f87679108334063f75d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace676f23339f0c1f6559a487f81ae353"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="panorama_8h.html#ace676f23339f0c1f6559a487f81ae353">combine_panorama</a> (<a class="el" href="aux_8h.html#ae3996976d8ffb3e58d88f58227473f8e">Axis</a> axis, std::string input, std::string output)</td></tr>
+<tr class="memdesc:ace676f23339f0c1f6559a487f81ae353"><td class="mdescLeft">&#160;</td><td class="mdescRight">Combine PANORAMA feature maps SDM, NDM and GNDM in PANORAMA extended representation.  <a href="panorama_8h.html#ace676f23339f0c1f6559a487f81ae353">More...</a><br /></td></tr>
+<tr class="separator:ace676f23339f0c1f6559a487f81ae353"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >PANORAMA utilities external to <a class="el" href="classMalla3D.html" title="This class contains the information about the 3D model.">Malla3D</a>. </p>
@@ -144,8 +144,8 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition in file <a class="el" href="panorama_8h_source.html">panorama.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="ab9cb7d9782435f87679108334063f75d" name="ab9cb7d9782435f87679108334063f75d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab9cb7d9782435f87679108334063f75d">&#9670;&nbsp;</a></span>combine_panorama()</h2>
+<a id="ace676f23339f0c1f6559a487f81ae353" name="ace676f23339f0c1f6559a487f81ae353"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace676f23339f0c1f6559a487f81ae353">&#9670;&nbsp;</a></span>combine_panorama()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -155,6 +155,12 @@ Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype"><a class="el" href="aux_8h.html#ae3996976d8ffb3e58d88f58227473f8e">Axis</a>&#160;</td>
           <td class="paramname"><em>axis</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -176,18 +182,19 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">axis</td><td>Axis of feature maps </td></tr>
+    <tr><td class="paramname">input</td><td>Relative path to feature maps images contaning folder </td></tr>
     <tr><td class="paramname">output</td><td>Relative path to img export folder</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a href="https://docs.opencv.org/3.4/da/d54/group__imgproc__transform.html#ga47a974309e9102f5f08231edc7e7529d">cv::resize</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="panorama_8cpp_source.html#l00025">25</a> of file <a class="el" href="panorama_8cpp_source.html">panorama.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="panorama_8cpp_source.html#l00026">26</a> of file <a class="el" href="panorama_8cpp_source.html">panorama.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="panorama_8h_ab9cb7d9782435f87679108334063f75d_cgraph.png" border="0" usemap="#apanorama_8h_ab9cb7d9782435f87679108334063f75d_cgraph" alt=""/></div>
-<map name="apanorama_8h_ab9cb7d9782435f87679108334063f75d_cgraph" id="apanorama_8h_ab9cb7d9782435f87679108334063f75d_cgraph">
+<div class="center"><img src="panorama_8h_ace676f23339f0c1f6559a487f81ae353_cgraph.png" border="0" usemap="#apanorama_8h_ace676f23339f0c1f6559a487f81ae353_cgraph" alt=""/></div>
+<map name="apanorama_8h_ace676f23339f0c1f6559a487f81ae353_cgraph" id="apanorama_8h_ace676f23339f0c1f6559a487f81ae353_cgraph">
 <area shape="rect" title="Combine PANORAMA feature maps SDM, NDM and GNDM in PANORAMA extended representation." alt="" coords="5,5,140,32"/>
 <area shape="rect" href="aux_8cpp.html#afc31f23e1de37e57949b88b2da006122" title="Convert enum Axis to std::string c++ type." alt="" coords="188,5,291,32"/>
 </map>
@@ -195,8 +202,8 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="panorama_8h_ab9cb7d9782435f87679108334063f75d_icgraph.png" border="0" usemap="#apanorama_8h_ab9cb7d9782435f87679108334063f75d_icgraph" alt=""/></div>
-<map name="apanorama_8h_ab9cb7d9782435f87679108334063f75d_icgraph" id="apanorama_8h_ab9cb7d9782435f87679108334063f75d_icgraph">
+<div class="center"><img src="panorama_8h_ace676f23339f0c1f6559a487f81ae353_icgraph.png" border="0" usemap="#apanorama_8h_ace676f23339f0c1f6559a487f81ae353_icgraph" alt=""/></div>
+<map name="apanorama_8h_ace676f23339f0c1f6559a487f81ae353_icgraph" id="apanorama_8h_ace676f23339f0c1f6559a487f81ae353_icgraph">
 <area shape="rect" title="Combine PANORAMA feature maps SDM, NDM and GNDM in PANORAMA extended representation." alt="" coords="104,5,239,32"/>
 <area shape="rect" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,56,32"/>
 </map>
