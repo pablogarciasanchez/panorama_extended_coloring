@@ -18,20 +18,21 @@
  * by OpenCV.
  * 
  * @param axis Axis of feature maps
+ * @param input Relative path to feature maps images contaning folder
  * @param output Relative path to img export folder
  * 
  * @see [cv::resize](https://docs.opencv.org/3.4/da/d54/group__imgproc__transform.html#ga47a974309e9102f5f08231edc7e7529d)
  */
-void combine_panorama(Axis axis, std::string output){
+void combine_panorama(Axis axis, std::string input, std::string output){
 	std::string extension = ".png";
 
 	std::vector<cv::Mat> channels;
 
 	cv::Mat sdm, ndm, gndm, panorama_extended, panorama_resize;
 
-	sdm = cv::imread(output + "SDM_" + axis_to_string(axis) + extension, 0);
-	ndm = cv::imread(output + "NDM_" + axis_to_string(axis) + extension, 0);
-	gndm = cv::imread(output + "GNDM_" + axis_to_string(axis) + extension, 0);
+	sdm = cv::imread(input + "SDM_" + axis_to_string(axis) + extension, 0);
+	ndm = cv::imread(input + "NDM_" + axis_to_string(axis) + extension, 0);
+	gndm = cv::imread(input + "GNDM_" + axis_to_string(axis) + extension, 0);
 
 	channels.push_back(gndm);
 	channels.push_back(sdm);

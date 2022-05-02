@@ -18,6 +18,6 @@
  * 
  */
 
-void combine_panorama(Axis axis, std::string output);
+void combine_panorama(Axis axis, std::string input, std::string output);
 
 #endif

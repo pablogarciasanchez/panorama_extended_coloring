@@ -14,11 +14,11 @@ Documentation is avaliable in: [https://alexmnzlms.github.io/panorama_extended/]
 ```bash
 mkdir bin
 make
-bin/panorama_extended [ruta relativa al modelo 3D] [carpeta de salida]
+bin/panorama_extended [ruta relativa al modelo 3D] [carpeta de salida del mapa de caracteristicas] [carpeta de salida de PANORAMA extendido]
 ```
 ## Usage
 ```bash
 mkdir bin
 make
-bin/panorama_extended [relive route to 3D model] [output folder]
+bin/panorama_extended [relive route to 3D model] [output folder feature map] [output folder PANORAMA extended]
 ```
