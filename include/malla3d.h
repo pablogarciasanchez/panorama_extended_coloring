@@ -20,14 +20,40 @@
 #include <opencv2/imgproc.hpp>
 #include "aux.h"
 
-/** @file 
- *  Esta clase contiene la información referente al modelo 3D
+/** @file malla3d.h
+ * 	@author [Alejandro Manzanares Lemus](https://github.com/Alexmnzlms)
+ * 
+ */
+
+/** @brief This class contains the information about the 3D model
+ * 
+ * This class implements the functions related to the PANORAMA representation 
+ * (extended version) and the SYNPAN pose estimation algorithm.
+ * 
+ * It provides the methods for loading and exporting models, as well as the 
+ * necessary transformations on the 3D mesh.
+ * 
+ * Main functionality is described in @link calculate_panorama() @endlink and
+ * @link mesh_pose_norm() @endlink
+ * 
+ * @note PANORAMA extended method is extended by the use of the NDM gradient. 
+ * However, for simplicity in the documentation and implementation we use an 
+ * attribute \link panorama_extended \endlink that contains the 
+ * PANORAMA representation extended 1.5 times. Any reference to the 
+ * PANORAMA or PANORAMA extended representation is understood to mean 
+ * PANORAMA extended in the sense of the use of the GNDM feature map
+ * regardless of whether the size is extended or not..
+ *  
+ * 
+ * @see Ensemble of PANORAMA-based convolutional neural networks for 3D model 
+ * classification and retrieval @cite SFIKAS2018208
  */
 
 class Malla3D{
 public:
 	Malla3D();
-	bool load_obj(const std::string path);
+	Malla3D(const std::string path);
+	~Malla3D();
 	void export_obj(const std::string path);
 	void rotate_mesh(Axis axis_rot, float angle);
 	void calculate_panorama(Map map, Axis axis, float precision, int power = 4);
@@ -36,24 +62,40 @@ public:
 						float precision = 1, int power = 4);
 						
 private:
-	std::vector<glm::vec3> vertexs; /**< doc template */
-	std::vector<std::vector<int>> facesIndex; /**< doc template */
-	std::vector<std::vector<std::vector<int>>> facesIndex_filter; /**< doc template */
+	/** @brief Vertexs of the mesh */
+	std::vector<glm::vec3> vertexs; 
+	/** @brief Faces of the mesh */
+	std::vector<std::vector<int>> facesIndex; 
+	/** @brief Mesh faces divided according to height and sector to which they belong */
+	std::vector<std::vector<std::vector<int>>> facesIndex_filter; 
 
-	std::vector<std::vector<float>> panorama; /**< doc template */
-	std::vector<std::vector<float>> panorama_extended; /**< doc template */
+	/** @brief PANORAMA representation of loaded mesh */
+	std::vector<std::vector<float>> panorama; 
+	/** @brief Extended PANORAMA representation of loaded mesh */
+	std::vector<std::vector<float>> panorama_extended; 
 
-	std::vector<glm::vec3> normals; /**< doc template */
-	glm::vec3 centroid; /**< doc template */
-	double d_max; /**< doc template */
-	double height; /**< doc template */
-	double radius; /**< doc template */
-	int B = 180; /**< doc template */
+	/** @brief Normals of mesh faces */
+	std::vector<glm::vec3> normals; 
+	/** @brief Centroid of the mesh */
+	glm::vec3 centroid; 
+	/** @brief Max distance from centroid to mesh */
+	double d_max; 
+	/** @brief Height of the cylinder */
+	double height; 
+	/** @brief Radius of the cylinder */
+	double radius; 
+	/** @brief Number of divisions of the cylinder height
+	 * 
+	 * Is set by default to 180 divisions
+	 */
+	int B = 180;
 
 	void calc_normals();
 	void calc_centroid();
 	void calc_distance();
 	void scale_to_unit();
+
+	bool load_obj(const std::string path);
 
 	bool RayIntersectsTriangle(glm::vec3 rayOrigin, 
 								glm::vec3 rayVector, 
@@ -63,7 +105,7 @@ private:
 								glm::vec3& outIntersectionPoint);
 
 	glm::vec3 get_orig(Axis axis, float v, float precision);
-	glm::vec3 get_dir(Axis axis, float v, float angle);
+	glm::vec3 get_dir(Axis axis, float angle);
 	float get_height(Axis axis, float v, float precision);
 	int get_sector(glm::vec2 point);
 	int get_sector(float angle);

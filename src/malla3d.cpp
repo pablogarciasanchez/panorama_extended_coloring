@@ -1,13 +1,34 @@
 #include "malla3d.h"
 
+/** @file malla3d.cpp
+ *  Class documentation in @link Malla3D @endlink 
+ * 	@author [Alejandro Manzanares Lemus](https://github.com/Alexmnzlms)
+ * 
+ */
+
 /**
- * doc template
+ * @brief Default constructor
  */
 Malla3D::Malla3D(){}
 
+/**
+ * @brief Constructor with one parameter
+ * 
+ * Constructor calls load_obj() function to load de mesh data.
+ * @param path string containing the relative path to the 3D model to be loaded
+ * @see load_obj()
+ */
+Malla3D::Malla3D(const std::string path){
+	load_obj(path);
+}
 
 /**
- * doc template
+ * @brief Default destructor
+ */
+Malla3D::~Malla3D(){}
+
+/**
+ * @brief Calculate centroid of mesh
  */
 void Malla3D::calc_centroid(){
 	float sum_x, sum_y, sum_z;
@@ -29,7 +50,7 @@ void Malla3D::calc_centroid(){
 }
 
 /**
- * doc template
+ * @brief Calculate normals of mesh faces
  */
 void Malla3D::calc_normals(){
 	normals.clear();
@@ -48,7 +69,7 @@ void Malla3D::calc_normals(){
 }
 
 /**
- * doc template
+ * @brief Calculate maximun distance from centroid
  */
 void Malla3D::calc_distance(){
 	float dist;
@@ -66,7 +87,7 @@ void Malla3D::calc_distance(){
 }
 
 /**
- * doc template
+ * @brief Scale the mesh to the unit sphere
  */
 void Malla3D::scale_to_unit(){
 	std::vector<glm::vec3> v_unit;
@@ -90,7 +111,9 @@ void Malla3D::scale_to_unit(){
 }
 
 /**
- * doc template
+ * @brief Rotate the mesh
+ * @param axis_rot Axis of rotation
+ * @param angle Angles desired to rotate de mesh
  */
 void Malla3D::rotate_mesh(Axis axis_rot, float angle){
 	std::vector<glm::vec3> mesh_rotate;
@@ -135,7 +158,10 @@ void Malla3D::rotate_mesh(Axis axis_rot, float angle){
 }
 
 /**
- * doc template
+ * @brief Load data of the mesh from an OBJ Wavefront file
+ * @param path string containing the relative path to the 3D model to be loaded
+ * @return bool Indicates whether the read was successful (true) or unsuccessful (false)
+ * @see [OBJ Wavefront specification](http://paulbourke.net/dataformats/obj/)
  */
 bool Malla3D::load_obj(const std::string path){
 	std::vector< unsigned int > vertexIndices;
@@ -193,7 +219,8 @@ bool Malla3D::load_obj(const std::string path){
 }
 
 /**
- * doc template
+ * @brief Export mesh data to OBJ Wavefront file
+ * @param path string containing the path where you will export the model to
  */
 void Malla3D::export_obj(const std::string path){
 	std::ofstream file;
@@ -213,7 +240,23 @@ void Malla3D::export_obj(const std::string path){
 }
 
 /**
- * doc template
+ * @brief Compute Ray-Triangle Intersection using Möller-Trumbore algorithm
+ * 
+ * This function compute the Intersection of a ray represented by rayOrigin 
+ * and rayVector and a triangle represented by vertex0, vertex1 and vertex2.
+ * @note The faces of the 3D mesh are made up of triangles.
+ * @note Triangle is represented by three separated params in order to archive better 
+ * times of execution.
+ * @param rayOrigin Origin of ray
+ * @param rayVector Direction of ray
+ * @param vertex0 Point of triangle
+ * @param vertex1 Point of triangle
+ * @param vertex2 Point of triangle
+ * @param outIntersectionPoint Hit point of ray in triangle (face)
+ * @return bool Represents whether the ray hits the triangle (true) or not (false)
+ * @see [Möller–Trumbore intersection algorithm](https://en.wikipedia.org/wiki/M%C3%B6ller%E2%80%93Trumbore_intersection_algorithm)
+ * @see [Fast, Minimum Storage Ray/Triangle Intersection](https://cadxfem.org/inf/Fast%20MinimumStorage%20RayTriangle%20Intersection.pdf)
+ * @cite Moller97
  */
 bool Malla3D::RayIntersectsTriangle(glm::vec3 rayOrigin, 
 									glm::vec3 rayVector, 
@@ -261,7 +304,12 @@ bool Malla3D::RayIntersectsTriangle(glm::vec3 rayOrigin,
 }
 
 /**
- * doc template
+ * @brief Get origin of ray based on axis and height
+ * @param axis Axis of ray
+ * @param v Height of ray
+ * @param precision Precision of heights division
+ * @see calculate_panorama()
+ * @return vec3 Point of origin
  */
 glm::vec3 Malla3D::get_orig(Axis axis, float v, float precision){
 	glm::vec3 orig;
@@ -291,9 +339,13 @@ glm::vec3 Malla3D::get_orig(Axis axis, float v, float precision){
 }
 
 /**
- * doc template
+ * @brief Get direction of ray based on axis and angle
+ * @param axis Axis of ray
+ * @param angle Angle of ray
+ * @see calculate_panorama()
+ * @return vec3 Vector of ray
  */
-glm::vec3 Malla3D::get_dir(Axis axis, float v, float angle){
+glm::vec3 Malla3D::get_dir(Axis axis, float angle){
 	glm::vec3 dir;
 	
 	switch (axis)
@@ -321,7 +373,12 @@ glm::vec3 Malla3D::get_dir(Axis axis, float v, float angle){
 }
 
 /**
- * doc template
+ * @brief Get height of a division of the cylinder
+ * @param axis Axis of cylinder
+ * @param v Height division
+ * @param precision Precision of heights division
+ * @see calculate_panorama()
+ * @return float Height of v division of the cylinder
  */
 float Malla3D::get_height(Axis axis, float v, float precision){
 	float h;
@@ -345,7 +402,9 @@ float Malla3D::get_height(Axis axis, float v, float precision){
 }
 
 /**
- * doc template
+ * @brief Get sector of a point
+ * @param point Point coordinates
+ * @return int Sector of point point
  */
 int Malla3D::get_sector(glm::vec2 point){
 	int sector = -1;
@@ -366,7 +425,9 @@ int Malla3D::get_sector(glm::vec2 point){
 }
 
 /**
- * doc template
+ * @brief Get sector of a vector represented by angle
+ * @param angle Angle of vector
+ * @return int Sector of vector represented by angle
  */
 int Malla3D::get_sector(float angle){
 	int sector = -1;
@@ -387,7 +448,27 @@ int Malla3D::get_sector(float angle){
 }
 
 /**
- * doc template
+ * @brief Separates the faces of the mesh according to their height and sector
+ * 
+ * The aim of this method is to separate the faces of the mesh to avoid checking 
+ * all the faces of the model when shooting the ray.
+ * 
+ * If the ray has a height V and its direction belongs to sector S, 
+ * it can only hit the faces that are at height V (or close to it) 
+ * and in the sector S.
+ * 
+ * In this way, the faces are filtered out to reduce the number of checks and 
+ * to make the calculation of the ray-triangle collisions easier.
+ * 
+ * For the estimation of the height, a theshold is established, so that if 
+ * at least one point of each face belongs to the range 
+ * [v - threshold, v+threshold] then this face belongs to the division v.
+ * 
+ * @note It takes time to perform this process, but it is only performed once 
+ * for each feature map, so the gain in execution time is remarkable
+ * @param axis Axis of feature map
+ * @param precision Precsion used in the PANORAMA computation
+ * @see calculate_panorama()
  */
 void Malla3D::filter_faces(Axis axis, float precision){
 	float v_height;
@@ -485,7 +566,35 @@ void Malla3D::filter_faces(Axis axis, float precision){
 }
 
 /**
- * doc template
+ * @brief Compute the feature map specified \cite SFIKAS2018208
+ * 
+ * There are two posible feature map:
+ * - Spatial Distribution Map (SDM)
+ * - Normal's Derivation Map (NDM)
+ * 
+ * For a collision vector, it is calculated which of all intersections 
+ * has a maximum distance to the origin (since all rays emerge from the 
+ * origin) in order to establish the last collision in case the ray crosses 
+ * the mesh in several places.
+ * 
+ * Once the farthest collision is obtained, the feature maps are calculated.
+ * - For the SDM the value is simply the distance from the origin to the 
+ * intersection.
+ * - For the NDM, the calculated value is the absolute value raised to a 
+ * number of the angle between the ray that caused the collision and the 
+ * normal vector to the intercepted face.
+
+
+ * @param map Feature map
+ * @param axis Axis of feature map
+ * @param precision Precsion used in the PANORAMA computation
+ * @param v Height division
+ * @param power Number to raise absolute value in NDM computation
+ * @param colisiones Vector of ray colision with mesh
+ * @param faces_hit Vector of faces intercepted by ray
+ * @see @link Description @endlink 
+ * @see calculate_panorama()
+ * @return float Value of feature map
  */
 float Malla3D::feature_map(Map map, Axis axis, float precision, float v, int power, glm::vec3 origin, 
 							std::vector<glm::vec3> &colisiones, std::vector<int> &faces_hit){
@@ -534,7 +643,41 @@ float Malla3D::feature_map(Map map, Axis axis, float precision, float v, int pow
 }
 
 /**
- * doc template
+ * @brief Calculate PANORAMA [extended] representation of the 3D mesh
+ * 
+ * The calculation of the PANORAMA [extended] representation is 
+ * based on the projection of the 3D model on a cylinder. 
+ * This cylinder has a radius of 2 times the furthest distance from 
+ * the mesh centroid to the mesh and a height twice the radius.
+ * 
+ * Once the cylinder has been defined, based on the axis (X, Y or Z) chosen, 
+ * the cylinder shall be divided into 180 sections (along the longitudinal axis). 
+ * For each section a ray will be fired in 360 degrees around the origin and 
+ * it will be calculated if the ray collides with the mesh. Once the collisions 
+ * are calculated the feature maps are calculated based on what is specified in 
+ * @link feature_map() @endlink.
+ * 
+ * @note A precision value is included. 
+ * The number of divisions of the cylinder height is divided by the accuracy, 
+ * so that if it is less than 0, the accuracy increases 
+ * (0.5 means double the accuracy) and if it is greater, 
+ * the accuracy decreases. This also applies to the accuracy of the ray angle.
+ * 
+ * The representation is extended, because the calculated 
+ * representation is extended by a factor of 1.5. 
+ * The first half of the representation is added at the end 
+ * so that the first third of the PANORAMA and the last third are identical.
+ * 
+ * The final result is a PANORAMA representation of 
+ * 540x180 pixels (depending on accuracy).
+ * 
+ * @param map Feature map
+ * @param axis Axis of feature map
+ * @param precision Precsion used in the PANORAMA computation
+ * @param power Number to raise absolute value in NDM computation
+ * @see feature_map()
+ * @see Ensemble of PANORAMA-based convolutional neural networks for 3D model 
+ * classification and retrieval @cite SFIKAS2018208
  */
 void Malla3D::calculate_panorama(Map map, Axis axis, float precision, int power){
 	std::chrono::steady_clock::time_point begin;
@@ -574,7 +717,7 @@ void Malla3D::calculate_panorama(Map map, Axis axis, float precision, int power)
 			int s = get_sector(angle) - 1;
 
 			origin = get_orig(axis,v,precision);
-			direction = get_dir(axis,v,angle);
+			direction = get_dir(axis,angle);
 
 			for(int j = 0; j < facesIndex_filter[v][s].size(); j++){
 				glm::vec3 hit_point;
@@ -623,7 +766,20 @@ void Malla3D::calculate_panorama(Map map, Axis axis, float precision, int power)
 }
 
 /**
- * doc template
+ * @brief Export PANORAMA representation to a png image
+ * 
+ * Exportation also computes GNDM (Gradient NDM). 
+ * The Gradient is compute using Laplacian function provided by OpenCV. 
+ * 
+ * OpenCV functions are used to export the PANORAMA representation.
+ * 
+ * @param map Feature map
+ * @param axis Axis of feature map
+ * @param output Relative path to img export folder
+ * @param extended Exportation of extended representation or regular PANORAMA
+ * 
+ * @see [cv::imwrite()](https://docs.opencv.org/4.x/d4/da8/group__imgcodecs.html#gabbc7ef1aa2edfaa87772f1202d67e0ce)
+ * @see [cv::Laplacian()](https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html#gad78703e4c8fe703d479c1860d76429e6)
  */
 void Malla3D::export_panorama(Map map, Axis axis, std::string output, bool extended){
 	cv::Mat panorama_cv;
@@ -689,7 +845,15 @@ void Malla3D::export_panorama(Map map, Axis axis, std::string output, bool exten
 }
 
 /**
- * doc template
+ * @brief Computes symetry function of PANORAMA representation
+ * 
+ * Symetry of image is defined as following \cite sfikas2014pose :
+ * 
+ * - \f$ S(I) = max\{Sym(w) | w \in 1:width\} \f$
+ * - \f$ Sym(w) = 1 - \frac{1}{2m} \sum_{h=\frac{height}{2}-m}^{h=\frac{height}{2}-+m} SymDiff(w,h) \f$
+ * - \f$ SymDiff(w,h) = \frac{1}{n} \sum_{x=1}^n |(w-x,h) - (w+x,h)| \f$
+ * 
+ * @return float Symetry of panorma representation
  */
 float Malla3D::compute_panorama_symetry(){
 	float height_sym = panorama.size();
@@ -741,7 +905,20 @@ float Malla3D::compute_panorama_symetry(){
 }
 
 /**
- * doc template
+ * @brief Compute the angle that normalize pose of 3d mesh
+ * 
+ * The normalization angle of the pose is the one that produces 
+ * a PANORAMA representation of maximum symmetry.
+ * 
+ * Rotate the mesh to normalize its pose.
+ * 
+ * @param rot Axis of rotation
+ * @param map Feature map to calculate rotation
+ * @param axis Axis of PANORAMA calculation
+ * @param output Relative path to img export folder
+ * @param angle_pass Increment of angle to normalize pose
+ * @param precision Precsion used in the PANORAMA computation
+ * @param power Number to raise absolute value in NDM computation
  */
 void Malla3D::mesh_pose_norm(Axis rot, Map map, Axis axis, std::string output, 
 							int angle_pass, float precision, int power){
