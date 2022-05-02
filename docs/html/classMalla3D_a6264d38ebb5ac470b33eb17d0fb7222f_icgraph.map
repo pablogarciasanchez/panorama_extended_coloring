@@ -1,0 +1,4 @@
+<map id="Malla3D::load_obj" name="Malla3D::load_obj">
+<area shape="rect" id="node1" title="Load data of the mesh from an OBJ Wavefront file." alt="" coords="180,5,307,32"/>
+<area shape="rect" id="node2" href="$classMalla3D.html#ad7ea7a077c63eed770df6b0c07a8087d" title="Constructor with one parameter." alt="" coords="5,5,132,32"/>
+</map>

@@ -1,0 +1,20 @@
+<map id="main" name="main">
+<area shape="rect" id="node1" title=" " alt="" coords="5,335,56,361"/>
+<area shape="rect" id="node2" href="$classMalla3D.html#a62a468f594ed9248bfb756207d79bca9" title="Calculate PANORAMA [extended] representation of the 3D mesh." alt="" coords="364,201,495,242"/>
+<area shape="rect" id="node11" href="$panorama_8cpp.html#ab9cb7d9782435f87679108334063f75d" title="Combine PANORAMA feature maps SDM, NDM and GNDM in PANORAMA extended representation." alt="" coords="127,444,262,471"/>
+<area shape="rect" id="node13" href="$classMalla3D.html#a5be50fdc0d9130648c05451abdae00fb" title="Export PANORAMA representation to a png image." alt="" coords="340,309,519,336"/>
+<area shape="rect" id="node14" href="$classMalla3D.html#a2aecb9ccfffa78afc377bae14adbea83" title="Compute the angle that normalize pose of 3d mesh." alt="" coords="104,360,285,387"/>
+<area shape="rect" id="node3" href="$classMalla3D.html#a53eb9ced89bed71cde349000139cecda" title="Compute the feature map specified ." alt="" coords="601,5,752,32"/>
+<area shape="rect" id="node4" href="$classMalla3D.html#ac1801ab429f5d4531a48016d8629efce" title="Get origin of ray based on axis and height." alt="" coords="835,81,959,108"/>
+<area shape="rect" id="node5" href="$classMalla3D.html#a7ea87c0adeb5a82ff56d04088c78688b" title="Separates the faces of the mesh according to their height and sector." alt="" coords="605,208,748,235"/>
+<area shape="rect" id="node7" href="$classMalla3D.html#a1bce49b0d0ef934299b68cd8f29626f6" title="Get sector of a point." alt="" coords="828,259,967,285"/>
+<area shape="rect" id="node8" href="$classMalla3D.html#a6316e6fd15009373da175d7e8a7dd978" title="Get direction of ray based on axis and angle." alt="" coords="618,56,735,83"/>
+<area shape="rect" id="node9" href="$aux_8cpp.html#aee40fe119b557ef2e8c1b596fd28c0b5" title="Convert enum Map to std::string c++ type." alt="" coords="625,309,729,336"/>
+<area shape="rect" id="node10" href="$classMalla3D.html#a16cfe88c11a5a9ab468833cc412b4ba3" title="Compute Ray&#45;Triangle Intersection using Möller&#45;Trumbore algorithm." alt="" coords="573,107,780,133"/>
+<area shape="rect" id="node6" href="$classMalla3D.html#a01febaaa4fb630d6c3b62590ff740e51" title="Get height of a division of the cylinder." alt="" coords="828,208,967,235"/>
+<area shape="rect" id="node12" href="$aux_8cpp.html#afc31f23e1de37e57949b88b2da006122" title="Convert enum Axis to std::string c++ type." alt="" coords="378,477,481,504"/>
+<area shape="rect" id="node15" href="$classMalla3D.html#ac01f122da2498b91c843ae328f557ea1" title="Computes symetry function of PANORAMA representation." alt="" coords="333,411,525,453"/>
+<area shape="rect" id="node16" href="$classMalla3D.html#a16fdfd8b127a8f5795a8d2b5f9bd996d" title="Rotate the mesh." alt="" coords="354,360,505,387"/>
+<area shape="rect" id="node17" href="$classMalla3D.html#aa737de641d8f52b3e5e764bbade4aa98" title="Calculate maximun distance from centroid." alt="" coords="597,411,756,437"/>
+<area shape="rect" id="node18" href="$classMalla3D.html#a5e89df2d0021683c8815b42d3219fe26" title="Calculate normals of mesh faces." alt="" coords="599,360,754,387"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="Malla3D::export_panorama" name="Malla3D::export_panorama">
+<area shape="rect" id="node1" title="Export PANORAMA representation to a png image." alt="" coords="333,5,512,32"/>
+<area shape="rect" id="node2" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,56,32"/>
+<area shape="rect" id="node3" href="$classMalla3D.html#a2aecb9ccfffa78afc377bae14adbea83" title="Compute the angle that normalize pose of 3d mesh." alt="" coords="104,31,285,57"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="Malla3D::Malla3D" name="Malla3D::Malla3D">
+<area shape="rect" id="node1" title="Constructor with one parameter." alt="" coords="5,81,132,108"/>
+<area shape="rect" id="node2" href="$classMalla3D.html#a6264d38ebb5ac470b33eb17d0fb7222f" title="Load data of the mesh from an OBJ Wavefront file." alt="" coords="180,81,307,108"/>
+<area shape="rect" id="node3" href="$classMalla3D.html#a818657957f0d56667383137acd5714e8" title="Calculate centroid of mesh." alt="" coords="355,5,509,32"/>
+<area shape="rect" id="node4" href="$classMalla3D.html#aa737de641d8f52b3e5e764bbade4aa98" title="Calculate maximun distance from centroid." alt="" coords="557,81,716,108"/>
+<area shape="rect" id="node5" href="$classMalla3D.html#a5e89df2d0021683c8815b42d3219fe26" title="Calculate normals of mesh faces." alt="" coords="559,144,714,171"/>
+<area shape="rect" id="node6" href="$classMalla3D.html#ae9fd766758c7a3a259cbff6262355006" title="Scale the mesh to the unit sphere." alt="" coords="355,107,509,133"/>
+</map>

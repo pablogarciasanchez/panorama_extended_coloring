@@ -1,0 +1,11 @@
+<map id="Malla3D::calculate_panorama" name="Malla3D::calculate_panorama">
+<area shape="rect" id="node1" title="Calculate PANORAMA [extended] representation of the 3D mesh." alt="" coords="5,150,136,191"/>
+<area shape="rect" id="node2" href="$classMalla3D.html#a53eb9ced89bed71cde349000139cecda" title="Compute the feature map specified ." alt="" coords="212,5,363,32"/>
+<area shape="rect" id="node3" href="$classMalla3D.html#ac1801ab429f5d4531a48016d8629efce" title="Get origin of ray based on axis and height." alt="" coords="446,31,570,57"/>
+<area shape="rect" id="node4" href="$classMalla3D.html#a7ea87c0adeb5a82ff56d04088c78688b" title="Separates the faces of the mesh according to their height and sector." alt="" coords="216,107,359,133"/>
+<area shape="rect" id="node6" href="$classMalla3D.html#a1bce49b0d0ef934299b68cd8f29626f6" title="Get sector of a point." alt="" coords="439,157,577,184"/>
+<area shape="rect" id="node7" href="$classMalla3D.html#a6316e6fd15009373da175d7e8a7dd978" title="Get direction of ray based on axis and angle." alt="" coords="229,208,346,235"/>
+<area shape="rect" id="node8" href="$aux_8cpp.html#aee40fe119b557ef2e8c1b596fd28c0b5" title="Convert enum Map to std::string c++ type." alt="" coords="235,259,339,285"/>
+<area shape="rect" id="node9" href="$classMalla3D.html#a16cfe88c11a5a9ab468833cc412b4ba3" title="Compute Ray&#45;Triangle Intersection using Möller&#45;Trumbore algorithm." alt="" coords="184,309,391,336"/>
+<area shape="rect" id="node5" href="$classMalla3D.html#a01febaaa4fb630d6c3b62590ff740e51" title="Get height of a division of the cylinder." alt="" coords="439,107,577,133"/>
+</map>

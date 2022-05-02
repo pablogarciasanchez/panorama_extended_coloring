@@ -1,0 +1,5 @@
+<map id="Malla3D::rotate_mesh" name="Malla3D::rotate_mesh">
+<area shape="rect" id="node1" title="Rotate the mesh." alt="" coords="5,31,156,57"/>
+<area shape="rect" id="node2" href="$classMalla3D.html#aa737de641d8f52b3e5e764bbade4aa98" title="Calculate maximun distance from centroid." alt="" coords="204,5,363,32"/>
+<area shape="rect" id="node3" href="$classMalla3D.html#a5e89df2d0021683c8815b42d3219fe26" title="Calculate normals of mesh faces." alt="" coords="206,56,361,83"/>
+</map>

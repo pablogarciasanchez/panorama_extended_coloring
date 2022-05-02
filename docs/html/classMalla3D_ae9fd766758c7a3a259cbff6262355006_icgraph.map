@@ -1,0 +1,5 @@
+<map id="Malla3D::scale_to_unit" name="Malla3D::scale_to_unit">
+<area shape="rect" id="node1" title="Scale the mesh to the unit sphere." alt="" coords="355,5,509,32"/>
+<area shape="rect" id="node2" href="$classMalla3D.html#a6264d38ebb5ac470b33eb17d0fb7222f" title="Load data of the mesh from an OBJ Wavefront file." alt="" coords="180,5,307,32"/>
+<area shape="rect" id="node3" href="$classMalla3D.html#ad7ea7a077c63eed770df6b0c07a8087d" title="Constructor with one parameter." alt="" coords="5,5,132,32"/>
+</map>
