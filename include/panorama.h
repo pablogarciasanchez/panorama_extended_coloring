@@ -12,9 +12,12 @@
 #include "aux.h"
 
 
-/** @file
- * doc template
+/** @file panorama.h
+ *  @brief PANORAMA utilities external to Malla3D
+ * 	@author [Alejandro Manzanares Lemus](https://github.com/Alexmnzlms)
+ * 
  */
-void combine_panorama(Axis axis);
+
+void combine_panorama(Axis axis, std::string output);
 
 #endif
