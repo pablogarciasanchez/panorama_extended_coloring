@@ -25,7 +25,8 @@ enum Axis {
  */
 enum Map {
     SDM = 0, /**< Spatial Distribution Map */
-    NDM = 1  /**< Normal's Derivation Map */
+    NDM = 1,  /**< Normal's Derivation Map */
+    GNDM = 2 /**< Gradient Normal's Derivation Map */
 };
 
 std::string axis_to_string(Axis axis);

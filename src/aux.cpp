@@ -49,6 +49,10 @@ std::string map_to_string(Map map){
 	case NDM:
 		map_string = "NDM";
 		break;
+	
+	case GNDM:
+		map_string = "GNDM";
+		break;
 	}
 	return map_string;
 }

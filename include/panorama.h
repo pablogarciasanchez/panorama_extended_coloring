@@ -19,5 +19,7 @@
  */
 
 void combine_panorama(Axis axis, std::string input, std::string output);
+void concat_panorama(Axis axis, std::string input, std::string output);
+void concat_panorama(Map map, std::string input, std::string output);
 
 #endif

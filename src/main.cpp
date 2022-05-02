@@ -45,6 +45,10 @@ int main(int argc, char * argv[]) {
 	malla.calculate_panorama(NDM, Z, 0.5, 4);
 	malla.export_panorama(NDM,Z,output_folder_fm);
 	combine_panorama(Z,output_folder_fm,output_folder_pe);
+
+	concat_panorama(SDM,output_folder_fm,output_folder_pe);
+	concat_panorama(NDM,output_folder_fm,output_folder_pe);
+	concat_panorama(GNDM,output_folder_fm,output_folder_pe);
 	
 	return 0;
 }
