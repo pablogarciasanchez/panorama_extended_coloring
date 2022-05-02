@@ -7,7 +7,8 @@ var aux_8h =
     ] ],
     [ "Map", "aux_8h.html#afdfce14f0d12266a9956f9fe5e4fe1fd", [
       [ "SDM", "aux_8h.html#afdfce14f0d12266a9956f9fe5e4fe1fda6c7ba6ac22d8b9db7a1c292a1c59caa8", null ],
-      [ "NDM", "aux_8h.html#afdfce14f0d12266a9956f9fe5e4fe1fda6a4e36e17bf32e90454c2613b016ebd1", null ]
+      [ "NDM", "aux_8h.html#afdfce14f0d12266a9956f9fe5e4fe1fda6a4e36e17bf32e90454c2613b016ebd1", null ],
+      [ "GNDM", "aux_8h.html#afdfce14f0d12266a9956f9fe5e4fe1fda3bbf6966faa6caa4c82cecafe9cb76f2", null ]
     ] ],
     [ "axis_to_string", "aux_8h.html#afc31f23e1de37e57949b88b2da006122", null ],
     [ "map_to_string", "aux_8h.html#aee40fe119b557ef2e8c1b596fd28c0b5", null ]

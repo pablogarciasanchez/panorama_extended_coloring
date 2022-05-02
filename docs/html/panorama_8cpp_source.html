@@ -111,9 +111,58 @@ $(document).ready(function(){initNavTree('panorama_8cpp_source.html',''); initRe
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    cv::imwrite(output + <span class="stringliteral">&quot;panorama_ext_&quot;</span> + <a class="code hl_function" href="aux_8h.html#afc31f23e1de37e57949b88b2da006122">axis_to_string</a>(axis) + extension , panorama_extended);</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    cv::imwrite(output + <span class="stringliteral">&quot;panorama_ext_&quot;</span> + <a class="code hl_function" href="aux_8h.html#afc31f23e1de37e57949b88b2da006122">axis_to_string</a>(axis) + <span class="stringliteral">&quot;_10&quot;</span> + extension , panorama_resize);</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>}</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="panorama_8h.html#ad78b7169176c7d2dcd074d78f4afe1e9">   67</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="panorama_8cpp.html#ad78b7169176c7d2dcd074d78f4afe1e9">concat_panorama</a>(<a class="code hl_enumeration" href="aux_8h.html#ae3996976d8ffb3e58d88f58227473f8e">Axis</a> axis, std::string input, std::string output){</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    std::string extension = <span class="stringliteral">&quot;.png&quot;</span>;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    std::vector&lt;cv::Mat&gt; channels;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    cv::Mat sdm, ndm, gndm, panorama, panorama_resize;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    sdm = cv::imread(input + <span class="stringliteral">&quot;SDM_&quot;</span> + <a class="code hl_function" href="aux_8h.html#afc31f23e1de37e57949b88b2da006122">axis_to_string</a>(axis) + extension, 0);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    ndm = cv::imread(input + <span class="stringliteral">&quot;NDM_&quot;</span> + <a class="code hl_function" href="aux_8h.html#afc31f23e1de37e57949b88b2da006122">axis_to_string</a>(axis) + extension, 0);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    cv::Mat feature_array[2] = {sdm,ndm};</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    cv::vconcat(feature_array,2,panorama);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordtype">int</span> r = (int) (panorama.rows * 0.1);</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keywordtype">int</span> c = (int) (panorama.cols * 0.1);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    cv::resize(panorama, panorama_resize, cv::Size(c,r), CV_INTER_CUBIC);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    cv::imwrite(output + <span class="stringliteral">&quot;panorama_&quot;</span> + <a class="code hl_function" href="aux_8h.html#afc31f23e1de37e57949b88b2da006122">axis_to_string</a>(axis) + extension , panorama);</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    cv::imwrite(output + <span class="stringliteral">&quot;panorama_&quot;</span> + <a class="code hl_function" href="aux_8h.html#afc31f23e1de37e57949b88b2da006122">axis_to_string</a>(axis) + <span class="stringliteral">&quot;_10&quot;</span> + extension , panorama_resize);</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>}</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="panorama_8h.html#a0c3f58041ae2c657938a221f0456ff2b">  105</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="panorama_8cpp.html#ad78b7169176c7d2dcd074d78f4afe1e9">concat_panorama</a>(<a class="code hl_enumeration" href="aux_8h.html#afdfce14f0d12266a9956f9fe5e4fe1fd">Map</a> map, std::string input, std::string output){</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    std::string extension = <span class="stringliteral">&quot;.png&quot;</span>;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    std::vector&lt;cv::Mat&gt; channels;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    cv::Mat map_x, map_y, map_z, panorama, panorama_resize;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    map_x = cv::imread(input + <a class="code hl_function" href="aux_8h.html#aee40fe119b557ef2e8c1b596fd28c0b5">map_to_string</a>(map) + <span class="stringliteral">&quot;_X&quot;</span> + extension, 0);</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    map_y = cv::imread(input + <a class="code hl_function" href="aux_8h.html#aee40fe119b557ef2e8c1b596fd28c0b5">map_to_string</a>(map) + <span class="stringliteral">&quot;_Y&quot;</span> + extension, 0);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    map_z = cv::imread(input + <a class="code hl_function" href="aux_8h.html#aee40fe119b557ef2e8c1b596fd28c0b5">map_to_string</a>(map) + <span class="stringliteral">&quot;_Z&quot;</span> + extension, 0);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    cv::Mat feature_array[3] = {map_x, map_y, map_z};</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    cv::vconcat(feature_array,3,panorama);</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="keywordtype">int</span> r = (int) (panorama.rows * 0.1);</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="keywordtype">int</span> c = (int) (panorama.cols * 0.1);</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    cv::resize(panorama, panorama_resize, cv::Size(c,r), CV_INTER_CUBIC);</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    cv::imwrite(output + <span class="stringliteral">&quot;panorama_&quot;</span> + <a class="code hl_function" href="aux_8h.html#aee40fe119b557ef2e8c1b596fd28c0b5">map_to_string</a>(map) + extension , panorama);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    cv::imwrite(output + <span class="stringliteral">&quot;panorama_&quot;</span> + <a class="code hl_function" href="aux_8h.html#aee40fe119b557ef2e8c1b596fd28c0b5">map_to_string</a>(map) + <span class="stringliteral">&quot;_10&quot;</span> + extension , panorama_resize);</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>}</div>
 <div class="ttc" id="aaux_8h_html_ae3996976d8ffb3e58d88f58227473f8e"><div class="ttname"><a href="aux_8h.html#ae3996976d8ffb3e58d88f58227473f8e">Axis</a></div><div class="ttdeci">Axis</div><div class="ttdoc">Represents the three axis of euclidean geometry.</div><div class="ttdef"><b>Definition:</b> <a href="aux_8h_source.html#l00016">aux.h:16</a></div></div>
+<div class="ttc" id="aaux_8h_html_aee40fe119b557ef2e8c1b596fd28c0b5"><div class="ttname"><a href="aux_8h.html#aee40fe119b557ef2e8c1b596fd28c0b5">map_to_string</a></div><div class="ttdeci">std::string map_to_string(Map map)</div><div class="ttdoc">Convert enum Map to std::string c++ type.</div><div class="ttdef"><b>Definition:</b> <a href="aux_8cpp_source.html#l00041">aux.cpp:41</a></div></div>
 <div class="ttc" id="aaux_8h_html_afc31f23e1de37e57949b88b2da006122"><div class="ttname"><a href="aux_8h.html#afc31f23e1de37e57949b88b2da006122">axis_to_string</a></div><div class="ttdeci">std::string axis_to_string(Axis axis)</div><div class="ttdoc">Convert enum Axis to std::string c++ type.</div><div class="ttdef"><b>Definition:</b> <a href="aux_8cpp_source.html#l00016">aux.cpp:16</a></div></div>
+<div class="ttc" id="aaux_8h_html_afdfce14f0d12266a9956f9fe5e4fe1fd"><div class="ttname"><a href="aux_8h.html#afdfce14f0d12266a9956f9fe5e4fe1fd">Map</a></div><div class="ttdeci">Map</div><div class="ttdoc">Represents the two possible feature maps PANORAMA is composed.</div><div class="ttdef"><b>Definition:</b> <a href="aux_8h_source.html#l00026">aux.h:26</a></div></div>
 <div class="ttc" id="apanorama_8cpp_html_ace676f23339f0c1f6559a487f81ae353"><div class="ttname"><a href="panorama_8cpp.html#ace676f23339f0c1f6559a487f81ae353">combine_panorama</a></div><div class="ttdeci">void combine_panorama(Axis axis, std::string input, std::string output)</div><div class="ttdoc">Combine PANORAMA feature maps SDM, NDM and GNDM in PANORAMA extended representation.</div><div class="ttdef"><b>Definition:</b> <a href="panorama_8cpp_source.html#l00026">panorama.cpp:26</a></div></div>
+<div class="ttc" id="apanorama_8cpp_html_ad78b7169176c7d2dcd074d78f4afe1e9"><div class="ttname"><a href="panorama_8cpp.html#ad78b7169176c7d2dcd074d78f4afe1e9">concat_panorama</a></div><div class="ttdeci">void concat_panorama(Axis axis, std::string input, std::string output)</div><div class="ttdoc">Concatenation PANORAMA feature maps SDM and NDM.</div><div class="ttdef"><b>Definition:</b> <a href="panorama_8cpp_source.html#l00067">panorama.cpp:67</a></div></div>
 <div class="ttc" id="apanorama_8h_html"><div class="ttname"><a href="panorama_8h.html">panorama.h</a></div><div class="ttdoc">PANORAMA utilities external to Malla3D.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

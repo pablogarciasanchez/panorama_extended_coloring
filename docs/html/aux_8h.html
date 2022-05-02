@@ -128,6 +128,7 @@ Enumerations</h2></td></tr>
 <tr class="separator:ae3996976d8ffb3e58d88f58227473f8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afdfce14f0d12266a9956f9fe5e4fe1fd"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aux_8h.html#afdfce14f0d12266a9956f9fe5e4fe1fd">Map</a> { <a class="el" href="aux_8h.html#afdfce14f0d12266a9956f9fe5e4fe1fda6c7ba6ac22d8b9db7a1c292a1c59caa8">SDM</a> = 0
 , <a class="el" href="aux_8h.html#afdfce14f0d12266a9956f9fe5e4fe1fda6a4e36e17bf32e90454c2613b016ebd1">NDM</a> = 1
+, <a class="el" href="aux_8h.html#afdfce14f0d12266a9956f9fe5e4fe1fda3bbf6966faa6caa4c82cecafe9cb76f2">GNDM</a> = 2
  }</td></tr>
 <tr class="memdesc:afdfce14f0d12266a9956f9fe5e4fe1fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the two possible feature maps PANORAMA is composed.  <a href="aux_8h.html#afdfce14f0d12266a9956f9fe5e4fe1fd">More...</a><br /></td></tr>
 <tr class="separator:afdfce14f0d12266a9956f9fe5e4fe1fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -191,6 +192,8 @@ Functions</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="afdfce14f0d12266a9956f9fe5e4fe1fda6a4e36e17bf32e90454c2613b016ebd1" name="afdfce14f0d12266a9956f9fe5e4fe1fda6a4e36e17bf32e90454c2613b016ebd1"></a>NDM&#160;</td><td class="fielddoc"><p >Normal's Derivation Map </p>
 </td></tr>
+<tr><td class="fieldname"><a id="afdfce14f0d12266a9956f9fe5e4fe1fda3bbf6966faa6caa4c82cecafe9cb76f2" name="afdfce14f0d12266a9956f9fe5e4fe1fda3bbf6966faa6caa4c82cecafe9cb76f2"></a>GNDM&#160;</td><td class="fielddoc"><p >Gradient Normal's Derivation Map </p>
+</td></tr>
 </table>
 
 <p class="definition">Definition at line <a class="el" href="aux_8h_source.html#l00026">26</a> of file <a class="el" href="aux_8h_source.html">aux.h</a>.</p>
@@ -230,9 +233,10 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="aux_8h_afc31f23e1de37e57949b88b2da006122_icgraph.png" border="0" usemap="#aaux_8h_afc31f23e1de37e57949b88b2da006122_icgraph" alt=""/></div>
 <map name="aaux_8h_afc31f23e1de37e57949b88b2da006122_icgraph" id="aaux_8h_afc31f23e1de37e57949b88b2da006122_icgraph">
-<area shape="rect" title="Convert enum Axis to std::string c++ type." alt="" coords="287,5,389,32"/>
+<area shape="rect" title="Convert enum Axis to std::string c++ type." alt="" coords="287,31,389,57"/>
 <area shape="rect" href="panorama_8cpp.html#ace676f23339f0c1f6559a487f81ae353" title="Combine PANORAMA feature maps SDM, NDM and GNDM in PANORAMA extended representation." alt="" coords="104,5,239,32"/>
-<area shape="rect" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,56,32"/>
+<area shape="rect" href="panorama_8cpp.html#ad78b7169176c7d2dcd074d78f4afe1e9" title="Concatenation PANORAMA feature maps SDM and NDM." alt="" coords="109,56,234,83"/>
+<area shape="rect" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,31,56,57"/>
 </map>
 </div>
 
@@ -270,11 +274,12 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="aux_8h_aee40fe119b557ef2e8c1b596fd28c0b5_icgraph.png" border="0" usemap="#aaux_8h_aee40fe119b557ef2e8c1b596fd28c0b5_icgraph" alt=""/></div>
 <map name="aaux_8h_aee40fe119b557ef2e8c1b596fd28c0b5_icgraph" id="aaux_8h_aee40fe119b557ef2e8c1b596fd28c0b5_icgraph">
-<area shape="rect" title="Convert enum Map to std::string c++ type." alt="" coords="560,42,664,69"/>
+<area shape="rect" title="Convert enum Map to std::string c++ type." alt="" coords="560,71,664,98"/>
 <area shape="rect" href="classMalla3D.html#a62a468f594ed9248bfb756207d79bca9" title="Calculate PANORAMA [extended] representation of the 3D mesh." alt="" coords="357,5,488,47"/>
-<area shape="rect" href="classMalla3D.html#a5be50fdc0d9130648c05451abdae00fb" title="Export PANORAMA representation to a png image." alt="" coords="333,71,512,98"/>
-<area shape="rect" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,42,56,69"/>
-<area shape="rect" href="classMalla3D.html#a2aecb9ccfffa78afc377bae14adbea83" title="Compute the angle that normalize pose of 3d mesh." alt="" coords="104,42,285,69"/>
+<area shape="rect" href="panorama_8cpp.html#a0c3f58041ae2c657938a221f0456ff2b" title="Concatenation PANORAMA feature maps SDM and NDM." alt="" coords="360,71,485,98"/>
+<area shape="rect" href="classMalla3D.html#a5be50fdc0d9130648c05451abdae00fb" title="Export PANORAMA representation to a png image." alt="" coords="333,122,512,149"/>
+<area shape="rect" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,66,56,93"/>
+<area shape="rect" href="classMalla3D.html#a2aecb9ccfffa78afc377bae14adbea83" title="Compute the angle that normalize pose of 3d mesh." alt="" coords="104,66,285,93"/>
 </map>
 </div>
 

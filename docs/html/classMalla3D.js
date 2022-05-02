@@ -10,7 +10,7 @@ var classMalla3D =
     [ "compute_panorama_symetry", "classMalla3D.html#ac01f122da2498b91c843ae328f557ea1", null ],
     [ "export_obj", "classMalla3D.html#af1d830dee58ca6fb130c61a71a46ef31", null ],
     [ "export_panorama", "classMalla3D.html#a5be50fdc0d9130648c05451abdae00fb", null ],
-    [ "feature_map", "classMalla3D.html#a53eb9ced89bed71cde349000139cecda", null ],
+    [ "feature_map", "classMalla3D.html#af31e0135d4e38023e1cb13784247c7d3", null ],
     [ "filter_faces", "classMalla3D.html#a7ea87c0adeb5a82ff56d04088c78688b", null ],
     [ "get_dir", "classMalla3D.html#a6316e6fd15009373da175d7e8a7dd978", null ],
     [ "get_height", "classMalla3D.html#a01febaaa4fb630d6c3b62590ff740e51", null ],
