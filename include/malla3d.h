@@ -8,7 +8,6 @@
 #include <glm/gtx/intersect.hpp>
 #include <glm/gtx/vector_angle.hpp>
 #include "panorama.h"
-#include "aux.h"
 
 /** @file malla3d.h
  *  @brief Implementation of class Malla3D

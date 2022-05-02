@@ -1,6 +1,4 @@
-#include "aux.h"
 #include "malla3d.h"
-#include "panorama.h"
 
 /** @file main.cpp
  *  @brief Example of use of Malla3D
