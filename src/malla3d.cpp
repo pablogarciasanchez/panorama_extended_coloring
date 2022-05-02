@@ -588,17 +588,18 @@ void Malla3D::filter_faces(Axis axis, float precision){
  * @param map Feature map
  * @param axis Axis of feature map
  * @param precision Precsion used in the PANORAMA computation
- * @param v Height division
  * @param power Number to raise absolute value in NDM computation
  * @param origin Origin of ray
+ * @param direction Direction of ray
  * @param colisiones Vector of ray colision with mesh
  * @param faces_hit Vector of faces intercepted by ray
  * @see @link Description @endlink 
  * @see calculate_panorama()
  * @return float Value of feature map
  */
-float Malla3D::feature_map(Map map, Axis axis, float precision, float v, int power, glm::vec3 origin, 
-							std::vector<glm::vec3> &colisiones, std::vector<int> &faces_hit){
+float Malla3D::feature_map(Map map, Axis axis, float precision, int power, glm::vec3 origin, 
+							glm::vec3 direction, std::vector<glm::vec3> &colisiones, 
+							std::vector<int> &faces_hit){
 
 	float feature_value = 0.0;
 
@@ -628,7 +629,7 @@ float Malla3D::feature_map(Map map, Axis axis, float precision, float v, int pow
 		break;
 
 	case NDM:
-		ray = colisiones[ind_max] - get_orig(axis,v,precision);
+		ray = origin + direction;
 		ray = glm::normalize(ray);
 		normal = normals[faces_hit[ind_max]];
 		feature_value = glm::angle(ray,normal);
@@ -737,7 +738,7 @@ void Malla3D::calculate_panorama(Map map, Axis axis, float precision, int power)
 			}
 			
 			if(n_colisiones > 0){
-				panorama[v][u] = feature_map(map, axis, precision, v, power, origin, colisiones, face_hit);
+				panorama[v][u] = feature_map(map, axis, precision, power, origin, direction, colisiones, face_hit);
 			}
 			
 			n_colisiones = 0;
@@ -961,6 +962,8 @@ void Malla3D::mesh_pose_norm(Axis rot, Map map, Axis axis, std::string output,
 	vertexs = vertexs_aux;
 	if(ind_max*angle_pass != 0){
 		rotate_mesh(rot,ind_max*angle_pass*(M_PI/180.0));
+	} else{
+		calc_normals();
 	}
 }
 

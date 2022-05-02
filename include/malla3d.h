@@ -112,8 +112,8 @@ private:
 	int get_sector(float angle);
 
 	void filter_faces(Axis axis, float precision);
-	float feature_map(Map map, Axis axis, float precision, float v, int power, 
-						glm::vec3 origin, std::vector<glm::vec3> &colisiones,
+	float feature_map(Map map, Axis axis, float precision, int power, glm::vec3 origin,
+						glm::vec3 direction, std::vector<glm::vec3> &colisiones,
 						std::vector<int> &faces_hit);
 
 	float compute_panorama_symetry();
