@@ -8,6 +8,8 @@ This repository is the implementation of the preprocessor of 3D models to 2D ima
 
 This code is part of the Final Degree Project of Alejandro Manzanares Lemus for the Degree in Computer Science at the University of Granada.
 
+Documentation is avaliable in: [https://alexmnzlms.github.io/panorama_extended/](https://alexmnzlms.github.io/panorama_extended/)
+
 ## Uso
 ```bash
 mkdir bin
