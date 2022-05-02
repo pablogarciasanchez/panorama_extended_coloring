@@ -24,7 +24,7 @@ int main(int argc, char * argv[]) {
 	Malla3D malla(argv[1]);
 
 	std::string output_folder_fm = argv[2];
-	std::string output_folder_pe = argv[2];
+	std::string output_folder_pe = argv[3];
 
 	malla.mesh_pose_norm(X,SDM,Z,output_folder_fm,15);
 
