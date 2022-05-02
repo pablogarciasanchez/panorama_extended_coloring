@@ -21,6 +21,7 @@
 #include "aux.h"
 
 /** @file malla3d.h
+ *  @brief Implementation of class Malla3D
  * 	@author [Alejandro Manzanares Lemus](https://github.com/Alexmnzlms)
  * 
  */

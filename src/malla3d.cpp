@@ -1,7 +1,7 @@
 #include "malla3d.h"
 
 /** @file malla3d.cpp
- *  Class documentation in @link Malla3D @endlink 
+ *  @brief Implementation of class Malla3D
  * 	@author [Alejandro Manzanares Lemus](https://github.com/Alexmnzlms)
  * 
  */
@@ -590,6 +590,7 @@ void Malla3D::filter_faces(Axis axis, float precision){
  * @param precision Precsion used in the PANORAMA computation
  * @param v Height division
  * @param power Number to raise absolute value in NDM computation
+ * @param origin Origin of ray
  * @param colisiones Vector of ray colision with mesh
  * @param faces_hit Vector of faces intercepted by ray
  * @see @link Description @endlink 
