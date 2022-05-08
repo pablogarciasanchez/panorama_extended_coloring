@@ -50,7 +50,7 @@
 class Malla3D{
 public:
 	Malla3D();
-	Malla3D(const std::string path);
+	Malla3D(const std::string name, const std::string path);
 	~Malla3D();
 	std::string get_name();
 	void export_obj(const std::string path);

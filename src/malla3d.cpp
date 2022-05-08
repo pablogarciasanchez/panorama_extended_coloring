@@ -21,12 +21,14 @@ Malla3D::Malla3D(){
 
 /**
  * @brief Constructor with one parameter
+ * @todo UPDATE DOC
  * 
  * Constructor calls load_obj() function to load de mesh data.
+ * @param name
  * @param path string containing the relative path to the 3D model to be loaded
  * @see load_obj()
  */
-Malla3D::Malla3D(const std::string path){
+Malla3D::Malla3D(const std::string name, const std::string path){
 	load_obj(path);
 	for(int i = 0; i < 3; i++){
 		cv::Mat aux;
@@ -34,11 +36,7 @@ Malla3D::Malla3D(const std::string path){
 		ndm.push_back(aux);
 		gndm.push_back(aux);
 	}
-	std::string model_path = path;
-	std::vector<std::string> model_vector = split(model_path, '/');
-	std::string model_name = model_vector[model_vector.size()-1];
-	model_vector = split(model_name, '.');
-	name = model_vector[0];
+	this->name = name;
 }
 
 /**
