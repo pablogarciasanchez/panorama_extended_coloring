@@ -4,7 +4,7 @@
 <area shape="rect" id="node3" href="$classMalla3D.html#a62a468f594ed9248bfb756207d79bca9" title="Calculate PANORAMA [extended] representation of the 3D mesh." alt="" coords="265,201,396,242"/>
 <area shape="rect" id="node13" href="$classMalla3D.html#ac01f122da2498b91c843ae328f557ea1" title="Computes symetry function of PANORAMA representation." alt="" coords="235,370,427,411"/>
 <area shape="rect" id="node14" href="$classMalla3D.html#a16fdfd8b127a8f5795a8d2b5f9bd996d" title="Rotate the mesh." alt="" coords="255,436,406,463"/>
-<area shape="rect" id="node4" href="$classMalla3D.html#ad15e8de3e89c77f8dde51dc62084d197" title="Export PANORAMA representation to a png image." alt="" coords="489,107,667,133"/>
+<area shape="rect" id="node4" href="$classMalla3D.html#ad15e8de3e89c77f8dde51dc62084d197" title="Export PANORAMA representation to sdm , ndm or gndm." alt="" coords="489,107,667,133"/>
 <area shape="rect" id="node5" href="$classMalla3D.html#af31e0135d4e38023e1cb13784247c7d3" title="Compute the feature map specified ." alt="" coords="503,157,653,184"/>
 <area shape="rect" id="node6" href="$classMalla3D.html#a7ea87c0adeb5a82ff56d04088c78688b" title="Separates the faces of the mesh according to their height and sector." alt="" coords="507,208,649,235"/>
 <area shape="rect" id="node8" href="$classMalla3D.html#a1bce49b0d0ef934299b68cd8f29626f6" title="Get sector of a point." alt="" coords="729,259,868,285"/>

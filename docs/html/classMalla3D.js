@@ -1,7 +1,7 @@
 var classMalla3D =
 [
     [ "Malla3D", "classMalla3D.html#af68ae35fbf8c31c0f6bc9fe428e8e178", null ],
-    [ "Malla3D", "classMalla3D.html#ad7ea7a077c63eed770df6b0c07a8087d", null ],
+    [ "Malla3D", "classMalla3D.html#a305f03b369ebc34d35433d419798eded", null ],
     [ "~Malla3D", "classMalla3D.html#a62dfcbaaa3fdb632d8238f1355209644", null ],
     [ "calc_centroid", "classMalla3D.html#a818657957f0d56667383137acd5714e8", null ],
     [ "calc_distance", "classMalla3D.html#aa737de641d8f52b3e5e764bbade4aa98", null ],

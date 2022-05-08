@@ -20,22 +20,21 @@ Malla3D::Malla3D(){
 }
 
 /**
- * @brief Constructor with one parameter
- * @todo UPDATE DOC
+ * @brief Constructor with two parameters
  * 
- * Constructor calls load_obj() function to load de mesh data.
- * @param name
+ * Constructor calls load_obj() function to load de mesh data and store model's name.
+ * @param name string containing model's name
  * @param path string containing the relative path to the 3D model to be loaded
  * @see load_obj()
  */
 Malla3D::Malla3D(const std::string name, const std::string path){
-	load_obj(path);
 	for(int i = 0; i < 3; i++){
 		cv::Mat aux;
 		sdm.push_back(aux);
 		ndm.push_back(aux);
 		gndm.push_back(aux);
 	}
+	load_obj(path);
 	this->name = name;
 }
 
@@ -45,10 +44,9 @@ Malla3D::Malla3D(const std::string name, const std::string path){
 Malla3D::~Malla3D(){}
 
 /**
- * @brief 
- * @todo comment
+ * @brief Get model's name
  * 
- * @return std::string 
+ * @return std::string Model's name
  */
 std::string Malla3D::get_name(){
 	return name;
@@ -797,8 +795,7 @@ void Malla3D::calculate_panorama(Map map, Axis axis, float precision, int power)
 }
 
 /**
- * @brief Export PANORAMA representation to a png image
- * @todo UPDATE DOC
+ * @brief Export PANORAMA representation to @link sdm @endlink , @link ndm @endlink or @link gndm @endlink
  * 
  * Exportation also computes GNDM (Gradient NDM). 
  * The Gradient is compute using Laplacian function provided by OpenCV. 
@@ -963,18 +960,17 @@ void Malla3D::mesh_pose_norm(Axis rot, Map map, Axis axis,
 /**
  * @brief Combine PANORAMA feature maps SDM, NDM and GNDM in PANORAMA extended
  * representation
- * @todo UPDATE DOC
  * 
  * SDM, NDM and GNDM are combine in to a single image. One feature map 
  * per color channel.
  * 
- * PANORAMA extended output image is exported as original size and 10% of the
+ * PANORAMA extended output image is exported as original size or 10% of the
  * original size. This reduction is performed by using resize function provided
  * by OpenCV.
  * 
  * @param axis Axis of feature maps
- * @param output Relative path to img export folder
- * @param resize
+ * @param output Relative path to image export folder
+ * @param resize Indicates whether the image is exported in original size or 10%
  * 
  * @see [cv::resize](https://docs.opencv.org/3.4/da/d54/group__imgproc__transform.html#ga47a974309e9102f5f08231edc7e7529d)
  */
@@ -1004,17 +1000,16 @@ void Malla3D::combine_panorama(Axis axis, std::string output, bool resize){
 
 /**
  * @brief Concatenation PANORAMA feature maps SDM and NDM
- * @todo UPDATE DOC
  * 
  * vconcat function is used to compute this concatenation.
  *
- * PANORAMA output image is exported as original size and 10% of the
+ * PANORAMA output image is exported as original size or 10% of the
  * original size. This reduction is performed by using resize function provided
  * by OpenCV.
  * 
  * @param axis Axis of feature maps
- * @param output Relative path to img export folder
- * @param resize
+ * @param output Relative path to image export folder
+ * @param resize Indicates whether the image is exported in original size or 10%
  * 
  * @see [cv::resize](https://docs.opencv.org/3.4/da/d54/group__imgproc__transform.html#ga47a974309e9102f5f08231edc7e7529d)
  * @see [cv::vconcat](https://docs.opencv.org/3.4/d2/de8/group__core__array.html#ga744f53b69f6e4f12156cdde4e76aed27)
@@ -1044,17 +1039,16 @@ void Malla3D::concat_panorama(Axis axis, std::string output, bool resize){
 
 /**
  * @brief Concatenation PANORAMA feature maps SDM and NDM
- * @todo UPDATE DOC
  * 
  * vconcat function is used to compute this concatenation.
  *
- * PANORAMA output image is exported as original size and 10% of the
+ * PANORAMA output image is exported as original size or 10% of the
  * original size. This reduction is performed by using resize function provided
  * by OpenCV.
  * 
  * @param map Axis of feature maps
- * @param output Relative path to img export folder
- * @param resize
+ * @param output Relative path to image export folder
+ * @param resize Indicates whether the image is exported in original size or 10%
  * 
  * @see [cv::resize](https://docs.opencv.org/3.4/da/d54/group__imgproc__transform.html#ga47a974309e9102f5f08231edc7e7529d)
  * @see [cv::vconcat](https://docs.opencv.org/3.4/d2/de8/group__core__array.html#ga744f53b69f6e4f12156cdde4e76aed27)

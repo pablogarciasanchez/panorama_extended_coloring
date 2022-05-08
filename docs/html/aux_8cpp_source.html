@@ -123,18 +123,6 @@ $(document).ready(function(){initNavTree('aux_8cpp_source.html',''); initResizab
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    }</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordflow">return</span> map_string;</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>}</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="aux_8h.html#a0711bc625a1e6944ca62107b5847365f">   67</a></span>std::vector&lt;std::string&gt; <a class="code hl_function" href="aux_8cpp.html#a0711bc625a1e6944ca62107b5847365f">split</a>(<span class="keyword">const</span> std::string &amp;s, <span class="keywordtype">char</span> delim){</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    std::vector&lt;std::string&gt; result;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    std::stringstream ss (s);</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    std::string item;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keywordflow">while</span> (getline (ss, item, delim)) {</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        result.push_back (item);</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    }</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>}</div>
-<div class="ttc" id="aaux_8cpp_html_a0711bc625a1e6944ca62107b5847365f"><div class="ttname"><a href="aux_8cpp.html#a0711bc625a1e6944ca62107b5847365f">split</a></div><div class="ttdeci">std::vector&lt; std::string &gt; split(const std::string &amp;s, char delim)</div><div class="ttdef"><b>Definition:</b> <a href="aux_8cpp_source.html#l00067">aux.cpp:67</a></div></div>
 <div class="ttc" id="aaux_8cpp_html_aee40fe119b557ef2e8c1b596fd28c0b5"><div class="ttname"><a href="aux_8cpp.html#aee40fe119b557ef2e8c1b596fd28c0b5">map_to_string</a></div><div class="ttdeci">std::string map_to_string(Map map)</div><div class="ttdoc">Convert enum Map to std::string c++ type.</div><div class="ttdef"><b>Definition:</b> <a href="aux_8cpp_source.html#l00041">aux.cpp:41</a></div></div>
 <div class="ttc" id="aaux_8cpp_html_afc31f23e1de37e57949b88b2da006122"><div class="ttname"><a href="aux_8cpp.html#afc31f23e1de37e57949b88b2da006122">axis_to_string</a></div><div class="ttdeci">std::string axis_to_string(Axis axis)</div><div class="ttdoc">Convert enum Axis to std::string c++ type.</div><div class="ttdef"><b>Definition:</b> <a href="aux_8cpp_source.html#l00016">aux.cpp:16</a></div></div>
 <div class="ttc" id="aaux_8h_html"><div class="ttname"><a href="aux_8h.html">aux.h</a></div><div class="ttdoc">Auxiliar enums definitions and functions related.</div></div>

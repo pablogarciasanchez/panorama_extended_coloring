@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['vertexs_0',['vertexs',['../classMalla3D.html#a1a4760db838bf4415b8d74c507e9e12f',1,'Malla3D']]]
+  ['x_0',['X',['../aux_8h.html#ae3996976d8ffb3e58d88f58227473f8ea58833a3110c570fb05130d40c365d1e4',1,'aux.h']]]
 ];

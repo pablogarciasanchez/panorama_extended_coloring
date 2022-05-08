@@ -90,23 +90,19 @@ private:
 	 */
 	int B = 180;
 	/**
-	 * @brief 
-	 * @todo comment
+	 * @brief SDM feature map
 	 */
 	std::vector<cv::Mat> sdm;
 	/**
-	 * @brief 
-	 * @todo comment
+	 * @brief NDM feature map
 	 */
 	std::vector<cv::Mat> ndm;
 	/**
-	 * @brief 
-	 * @todo comment
+	 * @brief GNDM feature map
 	 */
 	std::vector<cv::Mat> gndm;
 	/**
-	 * @brief 
-	 * @todo comment
+	 * @brief Model's name
 	 */
 	std::string name;
 

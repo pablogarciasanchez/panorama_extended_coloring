@@ -1,6 +1,6 @@
 <map id="Malla3D::calculate_panorama" name="Malla3D::calculate_panorama">
 <area shape="rect" id="node1" title="Calculate PANORAMA [extended] representation of the 3D mesh." alt="" coords="5,175,136,217"/>
-<area shape="rect" id="node2" href="$classMalla3D.html#ad15e8de3e89c77f8dde51dc62084d197" title="Export PANORAMA representation to a png image." alt="" coords="198,5,377,32"/>
+<area shape="rect" id="node2" href="$classMalla3D.html#ad15e8de3e89c77f8dde51dc62084d197" title="Export PANORAMA representation to sdm , ndm or gndm." alt="" coords="198,5,377,32"/>
 <area shape="rect" id="node3" href="$classMalla3D.html#af31e0135d4e38023e1cb13784247c7d3" title="Compute the feature map specified ." alt="" coords="212,56,363,83"/>
 <area shape="rect" id="node4" href="$classMalla3D.html#a7ea87c0adeb5a82ff56d04088c78688b" title="Separates the faces of the mesh according to their height and sector." alt="" coords="216,107,359,133"/>
 <area shape="rect" id="node6" href="$classMalla3D.html#a1bce49b0d0ef934299b68cd8f29626f6" title="Get sector of a point." alt="" coords="439,157,577,184"/>
