@@ -33,5 +33,4 @@ enum Map {
 
 std::string axis_to_string(Axis axis);
 std::string map_to_string(Map map);
-std::vector<std::string> split(const std::string &s, char delim);
 #endif
