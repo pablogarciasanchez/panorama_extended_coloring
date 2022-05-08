@@ -9,7 +9,15 @@
 /**
  * @brief Default constructor
  */
-Malla3D::Malla3D(){}
+Malla3D::Malla3D(){
+	for(int i = 0; i < 3; i++){
+		cv::Mat aux;
+		sdm.push_back(aux);
+		ndm.push_back(aux);
+		gndm.push_back(aux);
+	}
+	name = "no_name";
+}
 
 /**
  * @brief Constructor with one parameter
@@ -20,12 +28,33 @@ Malla3D::Malla3D(){}
  */
 Malla3D::Malla3D(const std::string path){
 	load_obj(path);
+	for(int i = 0; i < 3; i++){
+		cv::Mat aux;
+		sdm.push_back(aux);
+		ndm.push_back(aux);
+		gndm.push_back(aux);
+	}
+	std::string model_path = path;
+	std::vector<std::string> model_vector = split(model_path, '/');
+	std::string model_name = model_vector[model_vector.size()-1];
+	model_vector = split(model_name, '.');
+	name = model_vector[0];
 }
 
 /**
  * @brief Default destructor
  */
 Malla3D::~Malla3D(){}
+
+/**
+ * @brief 
+ * @todo comment
+ * 
+ * @return std::string 
+ */
+std::string Malla3D::get_name(){
+	return name;
+}
 
 /**
  * @brief Calculate centroid of mesh
@@ -765,10 +794,13 @@ void Malla3D::calculate_panorama(Map map, Axis axis, float precision, int power)
 	end = std::chrono::steady_clock::now();
 	std::cout << "Map: " <<  map_to_string(map)
 	<< "\t Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "[ms]" << std::endl;
+
+	export_panorama(map,axis,"");
 }
 
 /**
  * @brief Export PANORAMA representation to a png image
+ * @todo UPDATE DOC
  * 
  * Exportation also computes GNDM (Gradient NDM). 
  * The Gradient is compute using Laplacian function provided by OpenCV. 
@@ -777,13 +809,12 @@ void Malla3D::calculate_panorama(Map map, Axis axis, float precision, int power)
  * 
  * @param map Feature map
  * @param axis Axis of feature map
- * @param output Relative path to img export folder
  * @param extended Exportation of extended representation or regular PANORAMA
  * 
  * @see [cv::imwrite()](https://docs.opencv.org/4.x/d4/da8/group__imgcodecs.html#gabbc7ef1aa2edfaa87772f1202d67e0ce)
  * @see [cv::Laplacian()](https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html#gad78703e4c8fe703d479c1860d76429e6)
  */
-void Malla3D::export_panorama(Map map, Axis axis, std::string output, bool extended){
+void Malla3D::export_panorama(Map map, Axis axis, bool extended){
 	cv::Mat panorama_cv;
 
 	if(extended){
@@ -801,49 +832,15 @@ void Malla3D::export_panorama(Map map, Axis axis, std::string output, bool exten
 			panorama_cv.push_back(row);
 		}
 	}
-	
-
-	std::string feature_map_name, laplacian_name;
-
-	switch (map)
-	{
-	case SDM:
-		feature_map_name = map_to_string(SDM);
-		break;
-	case NDM:
-		feature_map_name = map_to_string(NDM);
-		laplacian_name = "GNDM";
-		break;
-	}
-
-	switch (axis)
-	{
-	case X:
-		feature_map_name += "_X.png";
-		laplacian_name += "_X.png";
-		break;
-	case Y:
-		feature_map_name += "_Y.png";
-		laplacian_name += "_Y.png";
-		break;
-	case Z:
-		feature_map_name += "_Z.png";
-		laplacian_name += "_Z.png";
-		break;
-	}
 
 	if(map == NDM){
 		cv::Mat laplace;
 		cv::Laplacian(panorama_cv, laplace, CV_32F, 1);
-		cv::imwrite(output + laplacian_name, laplace);
-	} 
-		
-	cv::imwrite(output + feature_map_name, panorama_cv);
-	
-	// cv::Mat I = cv::imread(feature_map_name, 0);
-	// cv::namedWindow( "Display window", CV_WINDOW_NORMAL );// Create a window for display.
-	// cv::imshow( "Display window", I ); 
-	// cv::waitKey(0);
+		gndm[(int)axis] = laplace;
+		ndm[(int)axis] = panorama_cv;
+	} else {
+		sdm[(int)axis] = panorama_cv;
+	}
 }
 
 /**
@@ -917,12 +914,11 @@ float Malla3D::compute_panorama_symetry(){
  * @param rot Axis of rotation
  * @param map Feature map to calculate rotation
  * @param axis Axis of PANORAMA calculation
- * @param output Relative path to img export folder
  * @param angle_pass Increment of angle to normalize pose
  * @param precision Precsion used in the PANORAMA computation
  * @param power Number to raise absolute value in NDM computation
  */
-void Malla3D::mesh_pose_norm(Axis rot, Map map, Axis axis, std::string output, 
+void Malla3D::mesh_pose_norm(Axis rot, Map map, Axis axis, 
 							int angle_pass, float precision, int power){
 	std::chrono::steady_clock::time_point begin;
 	std::chrono::steady_clock::time_point end;
@@ -944,7 +940,6 @@ void Malla3D::mesh_pose_norm(Axis rot, Map map, Axis axis, std::string output,
 		syms.push_back(sym);
 		std::cout << "Symmetry value: " << sym << std::endl;
 		std::cout << "-----------------------------------------------" << std::endl;
-		export_panorama(map,axis,output,false);
 		rotate_mesh(rot,angle);
 	}
 
@@ -967,3 +962,145 @@ void Malla3D::mesh_pose_norm(Axis rot, Map map, Axis axis, std::string output,
 	}
 }
 
+/**
+ * @brief Combine PANORAMA feature maps SDM, NDM and GNDM in PANORAMA extended
+ * representation
+ * @todo UPDATE DOC
+ * 
+ * SDM, NDM and GNDM are combine in to a single image. One feature map 
+ * per color channel.
+ * 
+ * PANORAMA extended output image is exported as original size and 10% of the
+ * original size. This reduction is performed by using resize function provided
+ * by OpenCV.
+ * 
+ * @param axis Axis of feature maps
+ * @param output Relative path to img export folder
+ * @param resize
+ * 
+ * @see [cv::resize](https://docs.opencv.org/3.4/da/d54/group__imgproc__transform.html#ga47a974309e9102f5f08231edc7e7529d)
+ */
+void Malla3D::combine_panorama(Axis axis, std::string output, bool resize){
+	std::string extension = ".png";
+
+	std::vector<cv::Mat> channels;
+
+	cv::Mat panorama_extended, panorama_resize;
+
+	channels.push_back(gndm[(int)axis]);
+	channels.push_back(sdm[(int)axis]);
+	channels.push_back(ndm[(int)axis]);
+
+	cv::merge(channels, panorama_extended);
+
+	int r = (int) (panorama_extended.rows * 0.1);
+	int c = (int) (panorama_extended.cols * 0.1);
+	
+	if(resize){
+		cv::resize(panorama_extended, panorama_resize, cv::Size(c,r), CV_INTER_CUBIC);
+		cv::imwrite(output + name + "_panorama_ext_" + axis_to_string(axis) + extension , panorama_resize);
+	} else {
+		cv::imwrite(output + name + "_panorama_ext_" + axis_to_string(axis) + extension , panorama_extended);
+	}
+}
+
+/**
+ * @brief Concatenation PANORAMA feature maps SDM and NDM
+ * @todo UPDATE DOC
+ * 
+ * vconcat function is used to compute this concatenation.
+ *
+ * PANORAMA output image is exported as original size and 10% of the
+ * original size. This reduction is performed by using resize function provided
+ * by OpenCV.
+ * 
+ * @param axis Axis of feature maps
+ * @param output Relative path to img export folder
+ * @param resize
+ * 
+ * @see [cv::resize](https://docs.opencv.org/3.4/da/d54/group__imgproc__transform.html#ga47a974309e9102f5f08231edc7e7529d)
+ * @see [cv::vconcat](https://docs.opencv.org/3.4/d2/de8/group__core__array.html#ga744f53b69f6e4f12156cdde4e76aed27)
+ */
+void Malla3D::concat_panorama(Axis axis, std::string output, bool resize){
+	std::string extension = ".png";
+
+	std::vector<cv::Mat> channels;
+
+	cv::Mat panorama, panorama_resize;
+
+	cv::Mat feature_array[3] = {sdm[(int)axis],ndm[(int)axis],gndm[(int)axis]};
+
+	cv::vconcat(feature_array,3,panorama);
+
+	int r = (int) (panorama.rows * 0.1);
+	int c = (int) (panorama.cols * 0.1);
+	
+	if(resize) {
+		cv::resize(panorama, panorama_resize, cv::Size(c,r), CV_INTER_CUBIC);
+		cv::imwrite(output + name + "_panorama_" + axis_to_string(axis) + extension , panorama_resize);
+	} else {
+		cv::imwrite(output + name + "_panorama_" + axis_to_string(axis) + extension , panorama);
+	}
+	
+}
+
+/**
+ * @brief Concatenation PANORAMA feature maps SDM and NDM
+ * @todo UPDATE DOC
+ * 
+ * vconcat function is used to compute this concatenation.
+ *
+ * PANORAMA output image is exported as original size and 10% of the
+ * original size. This reduction is performed by using resize function provided
+ * by OpenCV.
+ * 
+ * @param map Axis of feature maps
+ * @param output Relative path to img export folder
+ * @param resize
+ * 
+ * @see [cv::resize](https://docs.opencv.org/3.4/da/d54/group__imgproc__transform.html#ga47a974309e9102f5f08231edc7e7529d)
+ * @see [cv::vconcat](https://docs.opencv.org/3.4/d2/de8/group__core__array.html#ga744f53b69f6e4f12156cdde4e76aed27)
+ */
+void Malla3D::concat_panorama(Map map, std::string output, bool resize){
+	std::string extension = ".png";
+
+	std::vector<cv::Mat> channels;
+
+	cv::Mat map_x, map_y, map_z, panorama, panorama_resize;
+
+	switch (map)
+	{
+	case SDM:
+		map_x = sdm[0];
+		map_y = sdm[1];
+		map_z = sdm[2];
+		break;
+	
+	case NDM:
+		map_x = ndm[0];
+		map_y = ndm[1];
+		map_z = ndm[2];
+		break;
+
+	case GNDM:
+		map_x = gndm[0];
+		map_y = gndm[1];
+		map_z = gndm[2];
+		break;
+	}
+
+	cv::Mat feature_array[3] = {map_x, map_y, map_z};
+
+	cv::vconcat(feature_array,3,panorama);
+
+	int r = (int) (panorama.rows * 0.1);
+	int c = (int) (panorama.cols * 0.1);
+	
+	if(resize){
+		cv::resize(panorama, panorama_resize, cv::Size(c,r), CV_INTER_CUBIC);
+		cv::imwrite(output + name + "_panorama_" + map_to_string(map) + extension , panorama_resize);
+	} else {
+		cv::imwrite(output + name + "_panorama_" + map_to_string(map) + extension , panorama);
+	}
+	
+}

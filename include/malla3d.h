@@ -7,7 +7,15 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/intersect.hpp>
 #include <glm/gtx/vector_angle.hpp>
-#include "panorama.h"
+#include <iostream>
+#include <opencv2/core.hpp>
+#include <opencv2/core/mat.hpp>
+#include <opencv2/core/base.hpp>
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/highgui/highgui_c.h>
+#include <opencv2/imgproc.hpp>
+#include "aux.h"
 
 /** @file malla3d.h
  *  @brief Implementation of class Malla3D
@@ -44,12 +52,15 @@ public:
 	Malla3D();
 	Malla3D(const std::string path);
 	~Malla3D();
+	std::string get_name();
 	void export_obj(const std::string path);
 	void rotate_mesh(Axis axis_rot, float angle);
 	void calculate_panorama(Map map, Axis axis, float precision, int power = 4);
-	void export_panorama(Map map, Axis axis, std::string output, bool extended = true);
-	void mesh_pose_norm(Axis rot, Map map, Axis axis, std::string output, int angle_pass = 1,
+	void mesh_pose_norm(Axis rot, Map map, Axis axis, int angle_pass = 1,
 						float precision = 1, int power = 4);
+	void combine_panorama(Axis axis, std::string output, bool resize = true);
+	void concat_panorama(Axis axis, std::string output, bool resize = true);
+	void concat_panorama(Map map, std::string output,  bool resize = true);
 						
 private:
 	/** @brief Vertexs of the mesh */
@@ -63,7 +74,6 @@ private:
 	std::vector<std::vector<float>> panorama; 
 	/** @brief Extended PANORAMA representation of loaded mesh */
 	std::vector<std::vector<float>> panorama_extended; 
-
 	/** @brief Normals of mesh faces */
 	std::vector<glm::vec3> normals; 
 	/** @brief Centroid of the mesh */
@@ -79,6 +89,26 @@ private:
 	 * Is set by default to 180 divisions
 	 */
 	int B = 180;
+	/**
+	 * @brief 
+	 * @todo comment
+	 */
+	std::vector<cv::Mat> sdm;
+	/**
+	 * @brief 
+	 * @todo comment
+	 */
+	std::vector<cv::Mat> ndm;
+	/**
+	 * @brief 
+	 * @todo comment
+	 */
+	std::vector<cv::Mat> gndm;
+	/**
+	 * @brief 
+	 * @todo comment
+	 */
+	std::string name;
 
 	void calc_normals();
 	void calc_centroid();
@@ -104,7 +134,7 @@ private:
 	float feature_map(Map map, Axis axis, float precision, int power, glm::vec3 origin,
 						glm::vec3 direction, std::vector<glm::vec3> &colisiones,
 						std::vector<int> &faces_hit);
-
+	void export_panorama(Map map, Axis axis, bool extended = true);
 	float compute_panorama_symetry();
 } ;
 
