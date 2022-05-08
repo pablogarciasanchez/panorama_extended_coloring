@@ -56,3 +56,22 @@ std::string map_to_string(Map map){
 	}
 	return map_string;
 }
+/**
+ * @brief 
+ * @todo comment
+ * 
+ * @param s 
+ * @param delim 
+ * @return vector<string> 
+ */
+std::vector<std::string> split(const std::string &s, char delim){
+    std::vector<std::string> result;
+    std::stringstream ss (s);
+    std::string item;
+
+    while (getline (ss, item, delim)) {
+        result.push_back (item);
+    }
+
+    return result;
+}

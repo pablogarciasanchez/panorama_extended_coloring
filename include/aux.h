@@ -1,6 +1,8 @@
 #ifndef AUX_H_INCLUDED
 #define AUX_H_INCLUDED
 #include <string>
+#include <vector>
+#include <sstream>
 
 
 /** @file aux.h
@@ -31,4 +33,5 @@ enum Map {
 
 std::string axis_to_string(Axis axis);
 std::string map_to_string(Map map);
+std::vector<std::string> split(const std::string &s, char delim);
 #endif
