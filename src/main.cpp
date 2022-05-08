@@ -10,21 +10,24 @@
 
 int main(int argc, char * argv[]) {
 
-	if(argc != 3){
+	if(argc != 4){
 		std::cout << "Wrong parameters" << std::endl;
-		std::cout << "bin/panorama_extended [relive route to 3D model] " 
-		<< "[output folder PANORAMA extended]" 
-		<< std::endl;
+		std::cout << "bin/panorama_extended [model name] [relive route to 3D model]"
+		<< " [output folder PANORAMA extended]"  << std::endl;
 		exit(-1);
 	}
 
-	std::cout << "Loading " << argv[1] << "..." << std::endl;
+	std::string name = argv[1];
+	std::string path = argv[2];
+	std::string output_folder_pe = argv[3];
 
-	Malla3D malla(argv[1]);
+	std::cout << "Loading " << name << "\tPath: " << path << "..." << std::endl;
+
+	Malla3D malla(name, path);
 
 	std::cout << "Loaded " << malla.get_name() << std::endl;
 
-	std::string output_folder_pe = argv[2];
+	
 
 	malla.mesh_pose_norm(X,SDM,Z,15);
 
