@@ -1,0 +1,4 @@
+<map id="Malla3D::combine_panorama" name="Malla3D::combine_panorama">
+<area shape="rect" id="node1" title="Combine PANORAMA feature maps SDM, NDM and GNDM in PANORAMA extended representation." alt="" coords="5,5,196,32"/>
+<area shape="rect" id="node2" href="$aux_8cpp.html#afc31f23e1de37e57949b88b2da006122" title="Convert enum Axis to std::string c++ type." alt="" coords="244,5,347,32"/>
+</map>

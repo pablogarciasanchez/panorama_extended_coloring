@@ -1,8 +1,7 @@
 <map id="map_to_string" name="map_to_string">
-<area shape="rect" id="node1" title="Convert enum Map to std::string c++ type." alt="" coords="560,71,664,98"/>
-<area shape="rect" id="node2" href="$classMalla3D.html#a62a468f594ed9248bfb756207d79bca9" title="Calculate PANORAMA [extended] representation of the 3D mesh." alt="" coords="357,5,488,47"/>
-<area shape="rect" id="node5" href="$panorama_8cpp.html#a0c3f58041ae2c657938a221f0456ff2b" title="Concatenation PANORAMA feature maps SDM and NDM." alt="" coords="360,71,485,98"/>
-<area shape="rect" id="node6" href="$classMalla3D.html#a5be50fdc0d9130648c05451abdae00fb" title="Export PANORAMA representation to a png image." alt="" coords="333,122,512,149"/>
-<area shape="rect" id="node3" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,66,56,93"/>
-<area shape="rect" id="node4" href="$classMalla3D.html#a2aecb9ccfffa78afc377bae14adbea83" title="Compute the angle that normalize pose of 3d mesh." alt="" coords="104,66,285,93"/>
+<area shape="rect" id="node1" title="Convert enum Map to std::string c++ type." alt="" coords="563,42,667,69"/>
+<area shape="rect" id="node2" href="$classMalla3D.html#a62a468f594ed9248bfb756207d79bca9" title="Calculate PANORAMA [extended] representation of the 3D mesh." alt="" coords="359,5,489,47"/>
+<area shape="rect" id="node5" href="$classMalla3D.html#acd23c27749083c74f51a61888a9d651d" title="Concatenation PANORAMA feature maps SDM and NDM." alt="" coords="333,71,515,98"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,13,56,39"/>
+<area shape="rect" id="node4" href="$classMalla3D.html#ae5af4cfebe85c90d999a78d5bb95b4ad" title="Compute the angle that normalize pose of 3d mesh." alt="" coords="104,38,285,65"/>
 </map>

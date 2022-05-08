@@ -26,6 +26,7 @@ var NAVTREE =
 [
   [ "Panorama Extended", "index.html", [
     [ "panorama_extended", "index.html#autotoc_md0", null ],
+    [ "Todo List", "todo.html", null ],
     [ "Bibliography", "citelist.html", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],

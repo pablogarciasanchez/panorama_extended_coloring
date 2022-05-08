@@ -1,6 +1,6 @@
 <map id="axis_to_string" name="axis_to_string">
-<area shape="rect" id="node1" title="Convert enum Axis to std::string c++ type." alt="" coords="287,31,389,57"/>
-<area shape="rect" id="node2" href="$panorama_8cpp.html#ace676f23339f0c1f6559a487f81ae353" title="Combine PANORAMA feature maps SDM, NDM and GNDM in PANORAMA extended representation." alt="" coords="104,5,239,32"/>
-<area shape="rect" id="node4" href="$panorama_8cpp.html#ad78b7169176c7d2dcd074d78f4afe1e9" title="Concatenation PANORAMA feature maps SDM and NDM." alt="" coords="109,56,234,83"/>
+<area shape="rect" id="node1" title="Convert enum Axis to std::string c++ type." alt="" coords="343,31,445,57"/>
+<area shape="rect" id="node2" href="$classMalla3D.html#a2ad2058b8df4e1675840a12c298e14bd" title="Combine PANORAMA feature maps SDM, NDM and GNDM in PANORAMA extended representation." alt="" coords="104,5,295,32"/>
+<area shape="rect" id="node4" href="$classMalla3D.html#a9485ecd9e591a9c98f39dd51c94b0970" title="Concatenation PANORAMA feature maps SDM and NDM." alt="" coords="109,56,290,83"/>
 <area shape="rect" id="node3" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,31,56,57"/>
 </map>

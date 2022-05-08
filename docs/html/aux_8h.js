@@ -11,5 +11,6 @@ var aux_8h =
       [ "GNDM", "aux_8h.html#afdfce14f0d12266a9956f9fe5e4fe1fda3bbf6966faa6caa4c82cecafe9cb76f2", null ]
     ] ],
     [ "axis_to_string", "aux_8h.html#afc31f23e1de37e57949b88b2da006122", null ],
-    [ "map_to_string", "aux_8h.html#aee40fe119b557ef2e8c1b596fd28c0b5", null ]
+    [ "map_to_string", "aux_8h.html#aee40fe119b557ef2e8c1b596fd28c0b5", null ],
+    [ "split", "aux_8h.html#a0711bc625a1e6944ca62107b5847365f", null ]
 ];
