@@ -13,8 +13,10 @@ headers := $(wildcard $(addprefix $(INC), *.h*))
 x: $(exe)
 	@echo Compilando $(exe)
 
-init: $(exe)
+mkdir:
 	mkdir bin/ obj/
+
+init: mkdir $(exe)
 	@echo Compilando $(exe)
 
 $(exe): $(units_o) makefile
