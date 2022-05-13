@@ -7,7 +7,7 @@ Este código forma parte del Trabajo de Fin de Grado de Alejandro Manzanares Lem
 ## Uso
 ```bash
 make init
-bin/panorama_extended [ruta relativa al modelo 3D] [carpeta de salida del mapa de caracteristicas] [carpeta de salida de PANORAMA extendido]
+bin/panorama_extended [nombre del modelo] [ruta relativa al modelo 3D] [carpeta de salida PANORAMA extended] [carpeta de salida feature map]
 ```
 
 This repository is the implementation of the preprocessor of 3D models to 2D images by cylindrical projection presented in the paper [Ensemble of PANORAMA-based convolutional neural networks for 3D model classification and retrieval](https://www.sciencedirect.com/science/article/pii/S0097849317301978)
@@ -19,5 +19,5 @@ Documentation is avaliable in: [https://alexmnzlms.github.io/panorama_extended/]
 ## Usage
 ```bash
 make init
-bin/panorama_extended [relive route to 3D model] [output folder feature map] [output folder PANORAMA extended]
+bin/panorama_extended [model name] [relive route to 3D model] [output folder PANORAMA extended] [output folder feature map]
 ```
