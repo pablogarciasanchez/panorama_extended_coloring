@@ -839,15 +839,14 @@ void Malla3D::export_panorama(Map map, Axis axis, bool extended){
 }
 
 /**
- * @brief Computes symetry function of PANORAMA representation
+ * @brief Computes symmetry values for every comlumn w of PANORAMA representation
  * 
- * Symetry of image is defined as following \cite sfikas2014pose :
+ * Symetry of a image column is defined as following \cite sfikas2014pose :
  * 
- * - \f$ S(I) = max\{Sym(w) | w \in 1:width\} \f$
  * - \f$ Sym(w) = 1 - \frac{1}{2m} \sum_{h=\frac{height}{2}-m}^{h=\frac{height}{2}-+m} SymDiff(w,h) \f$
  * - \f$ SymDiff(w,h) = \frac{1}{n} \sum_{x=1}^n |(w-x,h) - (w+x,h)| \f$
  * 
- * @return float Symetry of panorma representation
+ * @return std::vector<float> Vector of symmetry values for every comlumn w
  */
 std::vector<float> Malla3D::compute_panorama_symetry(){
 	float height_sym = panorama.size();
@@ -893,9 +892,13 @@ std::vector<float> Malla3D::compute_panorama_symetry(){
 }
 
 /**
- * @brief 
+ * @brief Return max value of symmetry of PANORAMA representation
  * 
- * @return float 
+ * Symetry of a image is defined as following \cite sfikas2014pose :
+ * 
+ * - \f$ S(I) = max\{Sym(w) | w \in 1:width\} \f$
+ * 
+ * @return float max value of symmetry
  */
 float Malla3D::panorama_symetry_value(){
 	
@@ -911,9 +914,13 @@ float Malla3D::panorama_symetry_value(){
 }
 
 /**
- * @brief 
+ * @brief Return w column where symmetry value of PANORAMA representation is maximun
  * 
- * @return int 
+ * This is defined as following \cite sfikas2014pose :
+ * 
+ * - \f$ S_{index}(I) = argmax\{ Sym(w) | w \in 1:width\} \f$
+ * 
+ * @return int w column where symmetry value is maximun
  */
 int Malla3D::panorama_symetry_column(){
 	
@@ -931,9 +938,14 @@ int Malla3D::panorama_symetry_column(){
 }
 
 /**
- * @brief 
+ * @brief Compute variance of PANORAMA representation
  * 
- * @return float 
+ * Variance of an image is defined as following:
+ * 
+ * - \f$ Var(I) = \sum_{}^{} (I(i,j) - \mu )^2 \f$ where \f$ \mu \f$ is the mean value of the image.
+ * 
+ * @see [Variance](https://en.wikipedia.org/wiki/Variance)
+ * @return float variance of PANORAMA representation
  */
 float Malla3D::variance_of_panorama(){
 	float sum = 0.0;
@@ -963,8 +975,7 @@ float Malla3D::variance_of_panorama(){
 /**
  * @brief Compute the normalized pose of 3d mesh
  * 
- * To be completed
- * 
+ * This algorithm is an adaptation of the one presented in \cite sfikas2014pose
  * 
  * @param angle_pass Increment of angle to normalize pose
  * @param precision Precsion used in the PANORAMA computation
