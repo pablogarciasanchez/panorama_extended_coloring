@@ -56,8 +56,7 @@ public:
 	void export_obj(const std::string path);
 	void rotate_mesh(Axis axis_rot, float angle);
 	void calculate_panorama(Map map, Axis axis, float precision, int power = 4);
-	void mesh_pose_norm(Axis rot, Map map, Axis axis, int angle_pass = 1,
-						float precision = 1, int power = 4);
+	void mesh_pose_norm(int angle_pass = 1, float precision = 1, int power = 4);
 	void combine_panorama(Axis axis, std::string output, bool resize = true);
 	void concat_panorama(Axis axis, std::string output, bool resize = true);
 	void concat_panorama(Map map, std::string output,  bool resize = true);
@@ -131,7 +130,10 @@ private:
 						glm::vec3 direction, std::vector<glm::vec3> &colisiones,
 						std::vector<int> &faces_hit);
 	void export_panorama(Map map, Axis axis, bool extended = true);
-	float compute_panorama_symetry();
+	std::vector<float> compute_panorama_symetry();
+	float panorama_symetry_value();
+	int panorama_symetry_column();
+	float variance_of_panorama();
 } ;
 
 

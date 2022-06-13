@@ -849,7 +849,7 @@ void Malla3D::export_panorama(Map map, Axis axis, bool extended){
  * 
  * @return float Symetry of panorma representation
  */
-float Malla3D::compute_panorama_symetry(){
+std::vector<float> Malla3D::compute_panorama_symetry(){
 	float height_sym = panorama.size();
 	float width_sym = panorama[0].size();
 	float m = 0.4 * height_sym;
@@ -889,6 +889,18 @@ float Malla3D::compute_panorama_symetry(){
 		sumas.push_back(sym);
 	}
 
+	return sumas;
+}
+
+/**
+ * @brief 
+ * 
+ * @return float 
+ */
+float Malla3D::panorama_symetry_value(){
+	
+	std::vector<float> sumas = compute_panorama_symetry();
+
 	float max = -1000000.0;
 	for(int i = 0; i < sumas.size(); i++){
 		if(max < sumas[i]){
@@ -899,62 +911,119 @@ float Malla3D::compute_panorama_symetry(){
 }
 
 /**
- * @brief Compute the angle that normalize pose of 3d mesh
+ * @brief 
  * 
- * The normalization angle of the pose is the one that produces 
- * a PANORAMA representation of maximum symmetry.
+ * @return int 
+ */
+int Malla3D::panorama_symetry_column(){
+	
+	std::vector<float> sumas = compute_panorama_symetry();
+
+	float max = -1000000.0;
+	int pos_max = -1;
+	for(int i = 0; i < sumas.size(); i++){
+		if(max < sumas[i]){
+			max = sumas[i];
+			pos_max = i;
+		}
+	}
+	return pos_max;
+}
+
+/**
+ * @brief 
  * 
- * Rotate the mesh to normalize its pose.
+ * @return float 
+ */
+float Malla3D::variance_of_panorama(){
+	float sum = 0.0;
+	float sq_diff = 0.0;
+
+	float size = (panorama.size()*panorama[0].size());
+
+	for(int i = 0; i < panorama.size(); i++){
+		for(int j = 0; j < panorama[0].size(); j++){
+			sum += panorama[i][j];
+		}
+	}
+
+	float mean = sum / size;
+
+	for(int i = 0; i < panorama.size(); i++){
+		for(int j = 0; j < panorama[0].size(); j++){
+			sq_diff += ((panorama[i][j] - mean) * (panorama[i][j] - mean));
+		}
+	}
+
+	sq_diff = sq_diff / size;
+
+	return sq_diff;
+}
+
+/**
+ * @brief Compute the normalized pose of 3d mesh
  * 
- * @param rot Axis of rotation
- * @param map Feature map to calculate rotation
- * @param axis Axis of PANORAMA calculation
+ * To be completed
+ * 
+ * 
  * @param angle_pass Increment of angle to normalize pose
  * @param precision Precsion used in the PANORAMA computation
  * @param power Number to raise absolute value in NDM computation
  */
-void Malla3D::mesh_pose_norm(Axis rot, Map map, Axis axis, 
-							int angle_pass, float precision, int power){
-	std::chrono::steady_clock::time_point begin;
-	std::chrono::steady_clock::time_point end;
-	begin = std::chrono::steady_clock::now();
-
-	assert(angle_pass != 0);
-	float angle = angle_pass * (M_PI/180.0);;
-	std::vector<float> syms;
-	float sym_max = -1000000;
-	int ind_max = -1;
-	std::vector<glm::vec3> vertexs_aux(vertexs);
-
+void Malla3D::mesh_pose_norm(int angle_pass, float precision, int power){
+	float best_sym = 0;
+	float best_rot = 0;
+	float min_var = 1000000000.0;
+	int pos_sym = 0;
+	float pos_var = 0;
+	Axis cyl_axis = Z;
+	Axis rot_axis = X;
+	float angle = angle_pass * (M_PI/180.0);
 	int ind = 0;
-	std::cout << std::endl;
-	for(float i = 0; i <= 180; i+=angle_pass, ind++){
-		std::cout << "Rotation angle: " << i << " " << ind * angle << std::endl;
-		calculate_panorama(map,axis,precision,power);
-		float sym = compute_panorama_symetry();
-		syms.push_back(sym);
-		std::cout << "Symmetry value: " << sym << std::endl;
-		std::cout << "-----------------------------------------------" << std::endl;
-		rotate_mesh(rot,angle);
-	}
 
-	for(int j = 0; j < syms.size(); j++){
-		if(sym_max < syms[j]){
-			sym_max = syms[j];
-			ind_max = j;
+	std::vector<glm::vec3> vertexs_aux(vertexs);
+	for(float i = 0; i <= 180; i+=angle_pass, ind++){
+		rotate_mesh(rot_axis,angle);
+		calculate_panorama(NDM,cyl_axis,precision,power);
+		// export_panorama(NDM,cyl_axis,false);
+		// cv::imwrite("NDM_cly_axis.png",ndm[(int)cyl_axis]);
+		float sym = panorama_symetry_value();
+		std::cout << "Angle: " << ind*angle*(180.0/M_PI) << std::endl;
+		std::cout << "Symmetry: " << sym << std::endl;
+		if(sym >= best_sym){
+			best_rot = ind*angle;
+			best_sym = sym;
+			pos_sym = panorama_symetry_column();
 		}
 	}
 
-	std::cout << "Max sym rot angle: " << ind_max*angle_pass << std::endl;
-	end = std::chrono::steady_clock::now();
-	std::cout << "Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "[ms]" << std::endl;
-	std::cout << "-----------------------------------------------" << std::endl;
+	std::cout << "Best rotation angle: " << best_rot*(180.0/M_PI) << std::endl;
+
 	vertexs = vertexs_aux;
-	if(ind_max*angle_pass != 0){
-		rotate_mesh(rot,ind_max*angle_pass*(M_PI/180.0));
-	} else{
-		calc_normals();
+	rotate_mesh(rot_axis,best_rot);
+	rotate_mesh(Y,-M_PI/2); // TRANSFORM BASIS
+	vertexs_aux = vertexs;
+
+	ind = 0;
+	for(float i = 0; i <= 180; i+=angle_pass, ind++){
+		rotate_mesh(cyl_axis,angle);
+		calculate_panorama(SDM,rot_axis,precision,power);
+		// export_panorama(SDM,rot_axis,false);
+		// cv::imwrite("SDM_rot_axis.png",sdm[(int)rot_axis]);
+		float var = variance_of_panorama();
+		std::cout << "Angle: " << ind*angle*(180.0/M_PI) << std::endl;
+		std::cout << "Variance: " << var << std::endl;
+		if(var <= min_var){
+			min_var = var;
+			pos_var = ind*angle;
+		}
 	}
+
+	vertexs = vertexs_aux;
+	rotate_mesh(cyl_axis,pos_var);
+	calc_normals();
+
+	std::cout << "Best position angle: " << pos_var*(180.0/M_PI) << std::endl;
 }
 
 /**
