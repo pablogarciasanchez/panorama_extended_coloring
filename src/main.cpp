@@ -30,16 +30,16 @@ int main(int argc, char * argv[]) {
 
 	
 
-	malla.mesh_pose_norm(X,SDM,Z,15);
+	malla.mesh_pose_norm();
 
-	malla.calculate_panorama(SDM, X, 0.5, 4);
-	malla.calculate_panorama(NDM, X, 0.5, 4);
+	malla.calculate_panorama(SDM, X, 1, 4);
+	malla.calculate_panorama(NDM, X, 1, 4);
 
-	malla.calculate_panorama(SDM, Y, 0.5, 4);
-	malla.calculate_panorama(NDM, Y, 0.5, 4);
+	malla.calculate_panorama(SDM, Y, 1, 4);
+	malla.calculate_panorama(NDM, Y, 1, 4);
 
-	malla.calculate_panorama(SDM, Z, 0.5, 4);
-	malla.calculate_panorama(NDM, Z, 0.5, 4);
+	malla.calculate_panorama(SDM, Z, 1, 4);
+	malla.calculate_panorama(NDM, Z, 1, 4);
 
 	malla.combine_panorama(X,output_folder_pe,false);
 	malla.combine_panorama(Y,output_folder_pe,false);
