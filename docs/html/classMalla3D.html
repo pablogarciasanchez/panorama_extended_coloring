@@ -100,7 +100,7 @@ Collaboration diagram for Malla3D:</div>
 <div class="dyncontent">
 <div class="center"><img src="classMalla3D__coll__graph.png" border="0" usemap="#aMalla3D_coll__map" alt="Collaboration graph"/></div>
 <map name="aMalla3D_coll__map" id="aMalla3D_coll__map">
-<area shape="rect" title="This class contains the information about the 3D model." alt="" coords="5,5,212,655"/>
+<area shape="rect" title="This class contains the information about the 3D model." alt="" coords="5,5,172,596"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -127,9 +127,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a62a468f594ed9248bfb756207d79bca9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMalla3D.html#a62a468f594ed9248bfb756207d79bca9">calculate_panorama</a> (<a class="el" href="aux_8h.html#afdfce14f0d12266a9956f9fe5e4fe1fd">Map</a> map, <a class="el" href="aux_8h.html#ae3996976d8ffb3e58d88f58227473f8e">Axis</a> axis, float precision, int power=4)</td></tr>
 <tr class="memdesc:a62a468f594ed9248bfb756207d79bca9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate PANORAMA [extended] representation of the 3D mesh.  <a href="classMalla3D.html#a62a468f594ed9248bfb756207d79bca9">More...</a><br /></td></tr>
 <tr class="separator:a62a468f594ed9248bfb756207d79bca9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae5af4cfebe85c90d999a78d5bb95b4ad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMalla3D.html#ae5af4cfebe85c90d999a78d5bb95b4ad">mesh_pose_norm</a> (<a class="el" href="aux_8h.html#ae3996976d8ffb3e58d88f58227473f8e">Axis</a> rot, <a class="el" href="aux_8h.html#afdfce14f0d12266a9956f9fe5e4fe1fd">Map</a> map, <a class="el" href="aux_8h.html#ae3996976d8ffb3e58d88f58227473f8e">Axis</a> axis, int angle_pass=1, float precision=1, int power=4)</td></tr>
-<tr class="memdesc:ae5af4cfebe85c90d999a78d5bb95b4ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the angle that normalize pose of 3d mesh.  <a href="classMalla3D.html#ae5af4cfebe85c90d999a78d5bb95b4ad">More...</a><br /></td></tr>
-<tr class="separator:ae5af4cfebe85c90d999a78d5bb95b4ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7be542da00ca44f53442c6ad64969b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMalla3D.html#ac7be542da00ca44f53442c6ad64969b0">mesh_pose_norm</a> (int angle_pass=1, float precision=1, int power=4)</td></tr>
+<tr class="memdesc:ac7be542da00ca44f53442c6ad64969b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the normalized pose of 3d mesh.  <a href="classMalla3D.html#ac7be542da00ca44f53442c6ad64969b0">More...</a><br /></td></tr>
+<tr class="separator:ac7be542da00ca44f53442c6ad64969b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ad2058b8df4e1675840a12c298e14bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMalla3D.html#a2ad2058b8df4e1675840a12c298e14bd">combine_panorama</a> (<a class="el" href="aux_8h.html#ae3996976d8ffb3e58d88f58227473f8e">Axis</a> axis, std::string output, bool resize=true)</td></tr>
 <tr class="memdesc:a2ad2058b8df4e1675840a12c298e14bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Combine PANORAMA feature maps SDM, NDM and GNDM in PANORAMA extended representation.  <a href="classMalla3D.html#a2ad2058b8df4e1675840a12c298e14bd">More...</a><br /></td></tr>
 <tr class="separator:a2ad2058b8df4e1675840a12c298e14bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -184,9 +184,18 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:ad15e8de3e89c77f8dde51dc62084d197"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMalla3D.html#ad15e8de3e89c77f8dde51dc62084d197">export_panorama</a> (<a class="el" href="aux_8h.html#afdfce14f0d12266a9956f9fe5e4fe1fd">Map</a> map, <a class="el" href="aux_8h.html#ae3996976d8ffb3e58d88f58227473f8e">Axis</a> axis, bool extended=true)</td></tr>
 <tr class="memdesc:ad15e8de3e89c77f8dde51dc62084d197"><td class="mdescLeft">&#160;</td><td class="mdescRight">Export PANORAMA representation to <a class="el" href="classMalla3D.html#a920f1a697ef80e81254c06ba08f63ae9">sdm</a> , <a class="el" href="classMalla3D.html#a5770605841e5d1e567511fe9b60978ba">ndm</a> or <a class="el" href="classMalla3D.html#a3deba2e5a0815ce0a8a4570f34914ecf">gndm</a>.  <a href="classMalla3D.html#ad15e8de3e89c77f8dde51dc62084d197">More...</a><br /></td></tr>
 <tr class="separator:ad15e8de3e89c77f8dde51dc62084d197"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac01f122da2498b91c843ae328f557ea1"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMalla3D.html#ac01f122da2498b91c843ae328f557ea1">compute_panorama_symetry</a> ()</td></tr>
-<tr class="memdesc:ac01f122da2498b91c843ae328f557ea1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes symetry function of PANORAMA representation.  <a href="classMalla3D.html#ac01f122da2498b91c843ae328f557ea1">More...</a><br /></td></tr>
-<tr class="separator:ac01f122da2498b91c843ae328f557ea1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab69f443dc2a358388b6fb50e4cbcbac1"><td class="memItemLeft" align="right" valign="top">std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMalla3D.html#ab69f443dc2a358388b6fb50e4cbcbac1">compute_panorama_symetry</a> ()</td></tr>
+<tr class="memdesc:ab69f443dc2a358388b6fb50e4cbcbac1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes symmetry values for every comlumn w of PANORAMA representation.  <a href="classMalla3D.html#ab69f443dc2a358388b6fb50e4cbcbac1">More...</a><br /></td></tr>
+<tr class="separator:ab69f443dc2a358388b6fb50e4cbcbac1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cc4d34dae47470b9908b21a772d34e2"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMalla3D.html#a6cc4d34dae47470b9908b21a772d34e2">panorama_symetry_value</a> ()</td></tr>
+<tr class="memdesc:a6cc4d34dae47470b9908b21a772d34e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return max value of symmetry of PANORAMA representation.  <a href="classMalla3D.html#a6cc4d34dae47470b9908b21a772d34e2">More...</a><br /></td></tr>
+<tr class="separator:a6cc4d34dae47470b9908b21a772d34e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5834161d0db601ac08929814967befa7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMalla3D.html#a5834161d0db601ac08929814967befa7">panorama_symetry_column</a> ()</td></tr>
+<tr class="memdesc:a5834161d0db601ac08929814967befa7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return w column where symmetry value of PANORAMA representation is maximun.  <a href="classMalla3D.html#a5834161d0db601ac08929814967befa7">More...</a><br /></td></tr>
+<tr class="separator:a5834161d0db601ac08929814967befa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3382a86ec258f46725512eb9debb4f6c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMalla3D.html#a3382a86ec258f46725512eb9debb4f6c">variance_of_panorama</a> ()</td></tr>
+<tr class="memdesc:a3382a86ec258f46725512eb9debb4f6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute variance of PANORAMA representation.  <a href="classMalla3D.html#a3382a86ec258f46725512eb9debb4f6c">More...</a><br /></td></tr>
+<tr class="separator:a3382a86ec258f46725512eb9debb4f6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -240,7 +249,7 @@ Private Attributes</h2></td></tr>
 <div class="textblock"><p >This class contains the information about the 3D model. </p>
 <p >This class implements the functions related to the PANORAMA representation (extended version) and the SYNPAN pose estimation algorithm.</p>
 <p >It provides the methods for loading and exporting models, as well as the necessary transformations on the 3D mesh.</p>
-<p >Main functionality is described in <a class="el" href="classMalla3D.html#a62a468f594ed9248bfb756207d79bca9">calculate_panorama()</a> and <a class="el" href="classMalla3D.html#ae5af4cfebe85c90d999a78d5bb95b4ad">mesh_pose_norm()</a></p>
+<p >Main functionality is described in <a class="el" href="classMalla3D.html#a62a468f594ed9248bfb756207d79bca9">calculate_panorama()</a> and <a class="el" href="classMalla3D.html#ac7be542da00ca44f53442c6ad64969b0">mesh_pose_norm()</a></p>
 <dl class="section note"><dt>Note</dt><dd>PANORAMA extended method is extended by the use of the NDM gradient. However, for simplicity in the documentation and implementation we use an attribute <a class="el" href="classMalla3D.html#aa724f9894e24c0fa256527a177c50cee">panorama_extended</a> that contains the PANORAMA representation extended 1.5 times. Any reference to the PANORAMA or PANORAMA extended representation is understood to mean PANORAMA extended in the sense of the use of the GNDM feature map regardless of whether the size is extended or not..</dd></dl>
 <dl class="section see"><dt>See also</dt><dd>Ensemble of PANORAMA-based convolutional neural networks for 3D model classification and retrieval <a class="el" href="citelist.html#CITEREF_SFIKAS2018208">[3]</a> </dd></dl>
 
@@ -417,7 +426,7 @@ Here is the caller graph for this function:</div>
 <area shape="rect" href="classMalla3D.html#a16fdfd8b127a8f5795a8d2b5f9bd996d" title="Rotate the mesh." alt="" coords="411,81,562,108"/>
 <area shape="rect" href="classMalla3D.html#ae9fd766758c7a3a259cbff6262355006" title="Scale the mesh to the unit sphere." alt="" coords="409,31,564,57"/>
 <area shape="rect" href="classMalla3D.html#a305f03b369ebc34d35433d419798eded" title="Constructor with two parameters." alt="" coords="5,5,132,32"/>
-<area shape="rect" href="classMalla3D.html#ae5af4cfebe85c90d999a78d5bb95b4ad" title="Compute the angle that normalize pose of 3d mesh." alt="" coords="180,81,361,108"/>
+<area shape="rect" href="classMalla3D.html#ac7be542da00ca44f53442c6ad64969b0" title="Compute the normalized pose of 3d mesh." alt="" coords="180,81,361,108"/>
 <area shape="rect" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="43,81,94,108"/>
 </map>
 </div>
@@ -457,7 +466,7 @@ Here is the caller graph for this function:</div>
 <map name="aclassMalla3D_a5e89df2d0021683c8815b42d3219fe26_icgraph" id="aclassMalla3D_a5e89df2d0021683c8815b42d3219fe26_icgraph">
 <area shape="rect" title="Calculate normals of mesh faces." alt="" coords="612,56,767,83"/>
 <area shape="rect" href="classMalla3D.html#a6264d38ebb5ac470b33eb17d0fb7222f" title="Load data of the mesh from an OBJ Wavefront file." alt="" coords="207,5,334,32"/>
-<area shape="rect" href="classMalla3D.html#ae5af4cfebe85c90d999a78d5bb95b4ad" title="Compute the angle that normalize pose of 3d mesh." alt="" coords="180,107,361,133"/>
+<area shape="rect" href="classMalla3D.html#ac7be542da00ca44f53442c6ad64969b0" title="Compute the normalized pose of 3d mesh." alt="" coords="180,107,361,133"/>
 <area shape="rect" href="classMalla3D.html#a16fdfd8b127a8f5795a8d2b5f9bd996d" title="Rotate the mesh." alt="" coords="411,132,562,159"/>
 <area shape="rect" href="classMalla3D.html#ae9fd766758c7a3a259cbff6262355006" title="Scale the mesh to the unit sphere." alt="" coords="409,31,564,57"/>
 <area shape="rect" href="classMalla3D.html#a305f03b369ebc34d35433d419798eded" title="Constructor with two parameters." alt="" coords="5,5,132,32"/>
@@ -549,7 +558,7 @@ Here is the caller graph for this function:</div>
 <map name="aclassMalla3D_a62a468f594ed9248bfb756207d79bca9_icgraph" id="aclassMalla3D_a62a468f594ed9248bfb756207d79bca9_icgraph">
 <area shape="rect" title="Calculate PANORAMA [extended] representation of the 3D mesh." alt="" coords="333,5,464,47"/>
 <area shape="rect" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,13,56,39"/>
-<area shape="rect" href="classMalla3D.html#ae5af4cfebe85c90d999a78d5bb95b4ad" title="Compute the angle that normalize pose of 3d mesh." alt="" coords="104,38,285,65"/>
+<area shape="rect" href="classMalla3D.html#ac7be542da00ca44f53442c6ad64969b0" title="Compute the normalized pose of 3d mesh." alt="" coords="104,38,285,65"/>
 </map>
 </div>
 
@@ -600,7 +609,7 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a href="https://docs.opencv.org/3.4/da/d54/group__imgproc__transform.html#ga47a974309e9102f5f08231edc7e7529d">cv::resize</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="malla3d_8cpp_source.html#l00977">977</a> of file <a class="el" href="malla3d_8cpp_source.html">malla3d.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="malla3d_8cpp_source.html#l01057">1057</a> of file <a class="el" href="malla3d_8cpp_source.html">malla3d.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -622,8 +631,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="ac01f122da2498b91c843ae328f557ea1" name="ac01f122da2498b91c843ae328f557ea1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac01f122da2498b91c843ae328f557ea1">&#9670;&nbsp;</a></span>compute_panorama_symetry()</h2>
+<a id="ab69f443dc2a358388b6fb50e4cbcbac1" name="ab69f443dc2a358388b6fb50e4cbcbac1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab69f443dc2a358388b6fb50e4cbcbac1">&#9670;&nbsp;</a></span>compute_panorama_symetry()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -632,7 +641,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float Malla3D::compute_panorama_symetry </td>
+          <td class="memname">std::vector&lt; float &gt; Malla3D::compute_panorama_symetry </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -645,24 +654,25 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p>Computes symetry function of PANORAMA representation. </p>
-<p >Symetry of image is defined as following <a class="el" href="citelist.html#CITEREF_sfikas2014pose">[2]</a> :</p>
+<p>Computes symmetry values for every comlumn w of PANORAMA representation. </p>
+<p >Symetry of a image column is defined as following <a class="el" href="citelist.html#CITEREF_sfikas2014pose">[2]</a> :</p>
 <ul>
-<li><img class="formulaInl" alt="$ S(I) = max\{Sym(w) | w \in 1:width\} $" src="form_0.png" width="199" height="14"/></li>
 <li><img class="formulaInl" alt="$ Sym(w) = 1 - \frac{1}{2m} \sum_{h=\frac{height}{2}-m}^{h=\frac{height}{2}-+m} SymDiff(w,h) $" src="form_1.png" width="271" height="26"/></li>
 <li><img class="formulaInl" alt="$ SymDiff(w,h) = \frac{1}{n} \sum_{x=1}^n |(w-x,h) - (w+x,h)| $" src="form_2.png" width="278" height="16"/></li>
 </ul>
-<dl class="section return"><dt>Returns</dt><dd>float Symetry of panorma representation </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>std::vector&lt;float&gt; Vector of symmetry values for every comlumn w </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="malla3d_8cpp_source.html#l00852">852</a> of file <a class="el" href="malla3d_8cpp_source.html">malla3d.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="malla3d_8cpp_source.html#l00851">851</a> of file <a class="el" href="malla3d_8cpp_source.html">malla3d.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classMalla3D_ac01f122da2498b91c843ae328f557ea1_icgraph.png" border="0" usemap="#aclassMalla3D_ac01f122da2498b91c843ae328f557ea1_icgraph" alt=""/></div>
-<map name="aclassMalla3D_ac01f122da2498b91c843ae328f557ea1_icgraph" id="aclassMalla3D_ac01f122da2498b91c843ae328f557ea1_icgraph">
-<area shape="rect" title="Computes symetry function of PANORAMA representation." alt="" coords="333,5,525,47"/>
-<area shape="rect" href="classMalla3D.html#ae5af4cfebe85c90d999a78d5bb95b4ad" title="Compute the angle that normalize pose of 3d mesh." alt="" coords="104,13,285,39"/>
-<area shape="rect" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,13,56,39"/>
+<div class="center"><img src="classMalla3D_ab69f443dc2a358388b6fb50e4cbcbac1_icgraph.png" border="0" usemap="#aclassMalla3D_ab69f443dc2a358388b6fb50e4cbcbac1_icgraph" alt=""/></div>
+<map name="aclassMalla3D_ab69f443dc2a358388b6fb50e4cbcbac1_icgraph" id="aclassMalla3D_ab69f443dc2a358388b6fb50e4cbcbac1_icgraph">
+<area shape="rect" title="Computes symmetry values for every comlumn w of PANORAMA representation." alt="" coords="571,39,763,80"/>
+<area shape="rect" href="classMalla3D.html#a5834161d0db601ac08929814967befa7" title="Return w column where symmetry value of PANORAMA representation is maximun." alt="" coords="333,5,523,47"/>
+<area shape="rect" href="classMalla3D.html#a6cc4d34dae47470b9908b21a772d34e2" title="Return max value of symmetry of PANORAMA representation." alt="" coords="333,71,523,112"/>
+<area shape="rect" href="classMalla3D.html#ac7be542da00ca44f53442c6ad64969b0" title="Compute the normalized pose of 3d mesh." alt="" coords="104,46,285,73"/>
+<area shape="rect" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,46,56,73"/>
 </map>
 </div>
 
@@ -715,7 +725,7 @@ Here is the caller graph for this function:</div>
 <dd>
 <a href="https://docs.opencv.org/3.4/d2/de8/group__core__array.html#ga744f53b69f6e4f12156cdde4e76aed27">cv::vconcat</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="malla3d_8cpp_source.html#l01017">1017</a> of file <a class="el" href="malla3d_8cpp_source.html">malla3d.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="malla3d_8cpp_source.html#l01097">1097</a> of file <a class="el" href="malla3d_8cpp_source.html">malla3d.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -784,7 +794,7 @@ Here is the caller graph for this function:</div>
 <dd>
 <a href="https://docs.opencv.org/3.4/d2/de8/group__core__array.html#ga744f53b69f6e4f12156cdde4e76aed27">cv::vconcat</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="malla3d_8cpp_source.html#l01056">1056</a> of file <a class="el" href="malla3d_8cpp_source.html">malla3d.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="malla3d_8cpp_source.html#l01136">1136</a> of file <a class="el" href="malla3d_8cpp_source.html">malla3d.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -889,7 +899,7 @@ Here is the caller graph for this function:</div>
 <area shape="rect" title="Export PANORAMA representation to sdm , ndm or gndm." alt="" coords="512,13,691,39"/>
 <area shape="rect" href="classMalla3D.html#a62a468f594ed9248bfb756207d79bca9" title="Calculate PANORAMA [extended] representation of the 3D mesh." alt="" coords="333,5,464,47"/>
 <area shape="rect" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,13,56,39"/>
-<area shape="rect" href="classMalla3D.html#ae5af4cfebe85c90d999a78d5bb95b4ad" title="Compute the angle that normalize pose of 3d mesh." alt="" coords="104,38,285,65"/>
+<area shape="rect" href="classMalla3D.html#ac7be542da00ca44f53442c6ad64969b0" title="Compute the normalized pose of 3d mesh." alt="" coords="104,38,285,65"/>
 </map>
 </div>
 
@@ -1002,7 +1012,7 @@ Here is the caller graph for this function:</div>
 <area shape="rect" title="Compute the feature map specified ." alt="" coords="512,13,663,39"/>
 <area shape="rect" href="classMalla3D.html#a62a468f594ed9248bfb756207d79bca9" title="Calculate PANORAMA [extended] representation of the 3D mesh." alt="" coords="333,5,464,47"/>
 <area shape="rect" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,13,56,39"/>
-<area shape="rect" href="classMalla3D.html#ae5af4cfebe85c90d999a78d5bb95b4ad" title="Compute the angle that normalize pose of 3d mesh." alt="" coords="104,38,285,65"/>
+<area shape="rect" href="classMalla3D.html#ac7be542da00ca44f53442c6ad64969b0" title="Compute the normalized pose of 3d mesh." alt="" coords="104,38,285,65"/>
 </map>
 </div>
 
@@ -1076,7 +1086,7 @@ Here is the caller graph for this function:</div>
 <area shape="rect" title="Separates the faces of the mesh according to their height and sector." alt="" coords="512,13,655,39"/>
 <area shape="rect" href="classMalla3D.html#a62a468f594ed9248bfb756207d79bca9" title="Calculate PANORAMA [extended] representation of the 3D mesh." alt="" coords="333,5,464,47"/>
 <area shape="rect" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,13,56,39"/>
-<area shape="rect" href="classMalla3D.html#ae5af4cfebe85c90d999a78d5bb95b4ad" title="Compute the angle that normalize pose of 3d mesh." alt="" coords="104,38,285,65"/>
+<area shape="rect" href="classMalla3D.html#ac7be542da00ca44f53442c6ad64969b0" title="Compute the normalized pose of 3d mesh." alt="" coords="104,38,285,65"/>
 </map>
 </div>
 
@@ -1136,7 +1146,7 @@ Here is the caller graph for this function:</div>
 <area shape="rect" title="Get direction of ray based on axis and angle." alt="" coords="512,13,629,39"/>
 <area shape="rect" href="classMalla3D.html#a62a468f594ed9248bfb756207d79bca9" title="Calculate PANORAMA [extended] representation of the 3D mesh." alt="" coords="333,5,464,47"/>
 <area shape="rect" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,13,56,39"/>
-<area shape="rect" href="classMalla3D.html#ae5af4cfebe85c90d999a78d5bb95b4ad" title="Compute the angle that normalize pose of 3d mesh." alt="" coords="104,38,285,65"/>
+<area shape="rect" href="classMalla3D.html#ac7be542da00ca44f53442c6ad64969b0" title="Compute the normalized pose of 3d mesh." alt="" coords="104,38,285,65"/>
 </map>
 </div>
 
@@ -1204,7 +1214,7 @@ Here is the caller graph for this function:</div>
 <area shape="rect" href="classMalla3D.html#a7ea87c0adeb5a82ff56d04088c78688b" title="Separates the faces of the mesh according to their height and sector." alt="" coords="512,13,655,39"/>
 <area shape="rect" href="classMalla3D.html#a62a468f594ed9248bfb756207d79bca9" title="Calculate PANORAMA [extended] representation of the 3D mesh." alt="" coords="333,5,464,47"/>
 <area shape="rect" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,13,56,39"/>
-<area shape="rect" href="classMalla3D.html#ae5af4cfebe85c90d999a78d5bb95b4ad" title="Compute the angle that normalize pose of 3d mesh." alt="" coords="104,38,285,65"/>
+<area shape="rect" href="classMalla3D.html#ac7be542da00ca44f53442c6ad64969b0" title="Compute the normalized pose of 3d mesh." alt="" coords="104,38,285,65"/>
 </map>
 </div>
 
@@ -1302,7 +1312,7 @@ Here is the caller graph for this function:</div>
 <area shape="rect" title="Get origin of ray based on axis and height." alt="" coords="512,13,636,39"/>
 <area shape="rect" href="classMalla3D.html#a62a468f594ed9248bfb756207d79bca9" title="Calculate PANORAMA [extended] representation of the 3D mesh." alt="" coords="333,5,464,47"/>
 <area shape="rect" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,13,56,39"/>
-<area shape="rect" href="classMalla3D.html#ae5af4cfebe85c90d999a78d5bb95b4ad" title="Compute the angle that normalize pose of 3d mesh." alt="" coords="104,38,285,65"/>
+<area shape="rect" href="classMalla3D.html#ac7be542da00ca44f53442c6ad64969b0" title="Compute the normalized pose of 3d mesh." alt="" coords="104,38,285,65"/>
 </map>
 </div>
 
@@ -1388,7 +1398,7 @@ Here is the caller graph for this function:</div>
 <area shape="rect" href="classMalla3D.html#a62a468f594ed9248bfb756207d79bca9" title="Calculate PANORAMA [extended] representation of the 3D mesh." alt="" coords="333,5,464,47"/>
 <area shape="rect" href="classMalla3D.html#a7ea87c0adeb5a82ff56d04088c78688b" title="Separates the faces of the mesh according to their height and sector." alt="" coords="512,38,655,65"/>
 <area shape="rect" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,13,56,39"/>
-<area shape="rect" href="classMalla3D.html#ae5af4cfebe85c90d999a78d5bb95b4ad" title="Compute the angle that normalize pose of 3d mesh." alt="" coords="104,38,285,65"/>
+<area shape="rect" href="classMalla3D.html#ac7be542da00ca44f53442c6ad64969b0" title="Compute the normalized pose of 3d mesh." alt="" coords="104,38,285,65"/>
 </map>
 </div>
 
@@ -1453,8 +1463,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="ae5af4cfebe85c90d999a78d5bb95b4ad" name="ae5af4cfebe85c90d999a78d5bb95b4ad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae5af4cfebe85c90d999a78d5bb95b4ad">&#9670;&nbsp;</a></span>mesh_pose_norm()</h2>
+<a id="ac7be542da00ca44f53442c6ad64969b0" name="ac7be542da00ca44f53442c6ad64969b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7be542da00ca44f53442c6ad64969b0">&#9670;&nbsp;</a></span>mesh_pose_norm()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1462,24 +1472,6 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">void Malla3D::mesh_pose_norm </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="aux_8h.html#ae3996976d8ffb3e58d88f58227473f8e">Axis</a>&#160;</td>
-          <td class="paramname"><em>rot</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="aux_8h.html#afdfce14f0d12266a9956f9fe5e4fe1fd">Map</a>&#160;</td>
-          <td class="paramname"><em>map</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="aux_8h.html#ae3996976d8ffb3e58d88f58227473f8e">Axis</a>&#160;</td>
-          <td class="paramname"><em>axis</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>angle_pass</em> = <code>1</code>, </td>
         </tr>
@@ -1503,14 +1495,10 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Compute the angle that normalize pose of 3d mesh. </p>
-<p >The normalization angle of the pose is the one that produces a PANORAMA representation of maximum symmetry.</p>
-<p >Rotate the mesh to normalize its pose.</p>
+<p>Compute the normalized pose of 3d mesh. </p>
+<p >This algorithm is an adaptation of the one presented in <a class="el" href="citelist.html#CITEREF_sfikas2014pose">[2]</a></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">rot</td><td>Axis of rotation </td></tr>
-    <tr><td class="paramname">map</td><td>Feature map to calculate rotation </td></tr>
-    <tr><td class="paramname">axis</td><td>Axis of PANORAMA calculation </td></tr>
     <tr><td class="paramname">angle_pass</td><td>Increment of angle to normalize pose </td></tr>
     <tr><td class="paramname">precision</td><td>Precsion used in the PANORAMA computation </td></tr>
     <tr><td class="paramname">power</td><td>Number to raise absolute value in NDM computation </td></tr>
@@ -1518,36 +1506,145 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="malla3d_8cpp_source.html#l00916">916</a> of file <a class="el" href="malla3d_8cpp_source.html">malla3d.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="malla3d_8cpp_source.html#l00984">984</a> of file <a class="el" href="malla3d_8cpp_source.html">malla3d.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classMalla3D_ae5af4cfebe85c90d999a78d5bb95b4ad_cgraph.png" border="0" usemap="#aclassMalla3D_ae5af4cfebe85c90d999a78d5bb95b4ad_cgraph" alt=""/></div>
-<map name="aclassMalla3D_ae5af4cfebe85c90d999a78d5bb95b4ad_cgraph" id="aclassMalla3D_ae5af4cfebe85c90d999a78d5bb95b4ad_cgraph">
-<area shape="rect" title="Compute the angle that normalize pose of 3d mesh." alt="" coords="5,348,187,375"/>
-<area shape="rect" href="classMalla3D.html#a5e89df2d0021683c8815b42d3219fe26" title="Calculate normals of mesh faces." alt="" coords="501,411,655,437"/>
-<area shape="rect" href="classMalla3D.html#a62a468f594ed9248bfb756207d79bca9" title="Calculate PANORAMA [extended] representation of the 3D mesh." alt="" coords="265,201,396,242"/>
-<area shape="rect" href="classMalla3D.html#ac01f122da2498b91c843ae328f557ea1" title="Computes symetry function of PANORAMA representation." alt="" coords="235,370,427,411"/>
-<area shape="rect" href="classMalla3D.html#a16fdfd8b127a8f5795a8d2b5f9bd996d" title="Rotate the mesh." alt="" coords="255,436,406,463"/>
-<area shape="rect" href="classMalla3D.html#ad15e8de3e89c77f8dde51dc62084d197" title="Export PANORAMA representation to sdm , ndm or gndm." alt="" coords="489,107,667,133"/>
-<area shape="rect" href="classMalla3D.html#af31e0135d4e38023e1cb13784247c7d3" title="Compute the feature map specified ." alt="" coords="503,157,653,184"/>
-<area shape="rect" href="classMalla3D.html#a7ea87c0adeb5a82ff56d04088c78688b" title="Separates the faces of the mesh according to their height and sector." alt="" coords="507,208,649,235"/>
-<area shape="rect" href="classMalla3D.html#a1bce49b0d0ef934299b68cd8f29626f6" title="Get sector of a point." alt="" coords="729,259,868,285"/>
-<area shape="rect" href="classMalla3D.html#a6316e6fd15009373da175d7e8a7dd978" title="Get direction of ray based on axis and angle." alt="" coords="519,309,637,336"/>
-<area shape="rect" href="classMalla3D.html#ac1801ab429f5d4531a48016d8629efce" title="Get origin of ray based on axis and height." alt="" coords="516,360,640,387"/>
-<area shape="rect" href="aux_8cpp.html#aee40fe119b557ef2e8c1b596fd28c0b5" title="Convert enum Map to std::string c++ type." alt="" coords="526,5,630,32"/>
-<area shape="rect" href="classMalla3D.html#a16cfe88c11a5a9ab468833cc412b4ba3" title="Compute Ray&#45;Triangle Intersection using Möller&#45;Trumbore algorithm." alt="" coords="475,56,681,83"/>
-<area shape="rect" href="classMalla3D.html#a01febaaa4fb630d6c3b62590ff740e51" title="Get height of a division of the cylinder." alt="" coords="729,208,868,235"/>
-<area shape="rect" href="classMalla3D.html#aa737de641d8f52b3e5e764bbade4aa98" title="Calculate maximun distance from centroid." alt="" coords="499,461,657,488"/>
+<div class="center"><img src="classMalla3D_ac7be542da00ca44f53442c6ad64969b0_cgraph.png" border="0" usemap="#aclassMalla3D_ac7be542da00ca44f53442c6ad64969b0_cgraph" alt=""/></div>
+<map name="aclassMalla3D_ac7be542da00ca44f53442c6ad64969b0_cgraph" id="aclassMalla3D_ac7be542da00ca44f53442c6ad64969b0_cgraph">
+<area shape="rect" title="Compute the normalized pose of 3d mesh." alt="" coords="5,465,187,492"/>
+<area shape="rect" href="classMalla3D.html#a5e89df2d0021683c8815b42d3219fe26" title="Calculate normals of mesh faces." alt="" coords="498,411,653,437"/>
+<area shape="rect" href="classMalla3D.html#a62a468f594ed9248bfb756207d79bca9" title="Calculate PANORAMA [extended] representation of the 3D mesh." alt="" coords="264,201,395,242"/>
+<area shape="rect" href="classMalla3D.html#a5834161d0db601ac08929814967befa7" title="Return w column where symmetry value of PANORAMA representation is maximun." alt="" coords="235,487,424,529"/>
+<area shape="rect" href="classMalla3D.html#a6cc4d34dae47470b9908b21a772d34e2" title="Return max value of symmetry of PANORAMA representation." alt="" coords="235,553,424,594"/>
+<area shape="rect" href="classMalla3D.html#a16fdfd8b127a8f5795a8d2b5f9bd996d" title="Rotate the mesh." alt="" coords="254,436,405,463"/>
+<area shape="rect" href="classMalla3D.html#a3382a86ec258f46725512eb9debb4f6c" title="Compute variance of PANORAMA representation." alt="" coords="257,618,402,659"/>
+<area shape="rect" href="classMalla3D.html#ad15e8de3e89c77f8dde51dc62084d197" title="Export PANORAMA representation to sdm , ndm or gndm." alt="" coords="486,157,665,184"/>
+<area shape="rect" href="classMalla3D.html#af31e0135d4e38023e1cb13784247c7d3" title="Compute the feature map specified ." alt="" coords="500,208,651,235"/>
+<area shape="rect" href="classMalla3D.html#a7ea87c0adeb5a82ff56d04088c78688b" title="Separates the faces of the mesh according to their height and sector." alt="" coords="504,259,647,285"/>
+<area shape="rect" href="classMalla3D.html#a1bce49b0d0ef934299b68cd8f29626f6" title="Get sector of a point." alt="" coords="727,309,865,336"/>
+<area shape="rect" href="classMalla3D.html#a6316e6fd15009373da175d7e8a7dd978" title="Get direction of ray based on axis and angle." alt="" coords="517,360,634,387"/>
+<area shape="rect" href="classMalla3D.html#ac1801ab429f5d4531a48016d8629efce" title="Get origin of ray based on axis and height." alt="" coords="513,5,637,32"/>
+<area shape="rect" href="aux_8cpp.html#aee40fe119b557ef2e8c1b596fd28c0b5" title="Convert enum Map to std::string c++ type." alt="" coords="523,56,627,83"/>
+<area shape="rect" href="classMalla3D.html#a16cfe88c11a5a9ab468833cc412b4ba3" title="Compute Ray&#45;Triangle Intersection using Möller&#45;Trumbore algorithm." alt="" coords="472,107,679,133"/>
+<area shape="rect" href="classMalla3D.html#a01febaaa4fb630d6c3b62590ff740e51" title="Get height of a division of the cylinder." alt="" coords="727,259,865,285"/>
+<area shape="rect" href="classMalla3D.html#ab69f443dc2a358388b6fb50e4cbcbac1" title="Computes symmetry values for every comlumn w of PANORAMA representation." alt="" coords="479,519,671,561"/>
+<area shape="rect" href="classMalla3D.html#aa737de641d8f52b3e5e764bbade4aa98" title="Calculate maximun distance from centroid." alt="" coords="496,461,655,488"/>
 </map>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classMalla3D_ae5af4cfebe85c90d999a78d5bb95b4ad_icgraph.png" border="0" usemap="#aclassMalla3D_ae5af4cfebe85c90d999a78d5bb95b4ad_icgraph" alt=""/></div>
-<map name="aclassMalla3D_ae5af4cfebe85c90d999a78d5bb95b4ad_icgraph" id="aclassMalla3D_ae5af4cfebe85c90d999a78d5bb95b4ad_icgraph">
-<area shape="rect" title="Compute the angle that normalize pose of 3d mesh." alt="" coords="104,5,285,32"/>
+<div class="center"><img src="classMalla3D_ac7be542da00ca44f53442c6ad64969b0_icgraph.png" border="0" usemap="#aclassMalla3D_ac7be542da00ca44f53442c6ad64969b0_icgraph" alt=""/></div>
+<map name="aclassMalla3D_ac7be542da00ca44f53442c6ad64969b0_icgraph" id="aclassMalla3D_ac7be542da00ca44f53442c6ad64969b0_icgraph">
+<area shape="rect" title="Compute the normalized pose of 3d mesh." alt="" coords="104,5,285,32"/>
 <area shape="rect" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,56,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a5834161d0db601ac08929814967befa7" name="a5834161d0db601ac08929814967befa7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5834161d0db601ac08929814967befa7">&#9670;&nbsp;</a></span>panorama_symetry_column()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Malla3D::panorama_symetry_column </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return w column where symmetry value of PANORAMA representation is maximun. </p>
+<p >This is defined as following <a class="el" href="citelist.html#CITEREF_sfikas2014pose">[2]</a> :</p>
+<ul>
+<li><img class="formulaInl" alt="$ S_{index}(I) = argmax\{ Sym(w) | w \in 1:width\} $" src="form_3.png" width="243" height="14"/></li>
+</ul>
+<dl class="section return"><dt>Returns</dt><dd>int w column where symmetry value is maximun </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="malla3d_8cpp_source.html#l00925">925</a> of file <a class="el" href="malla3d_8cpp_source.html">malla3d.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classMalla3D_a5834161d0db601ac08929814967befa7_cgraph.png" border="0" usemap="#aclassMalla3D_a5834161d0db601ac08929814967befa7_cgraph" alt=""/></div>
+<map name="aclassMalla3D_a5834161d0db601ac08929814967befa7_cgraph" id="aclassMalla3D_a5834161d0db601ac08929814967befa7_cgraph">
+<area shape="rect" title="Return w column where symmetry value of PANORAMA representation is maximun." alt="" coords="5,5,195,47"/>
+<area shape="rect" href="classMalla3D.html#ab69f443dc2a358388b6fb50e4cbcbac1" title="Computes symmetry values for every comlumn w of PANORAMA representation." alt="" coords="243,5,435,47"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classMalla3D_a5834161d0db601ac08929814967befa7_icgraph.png" border="0" usemap="#aclassMalla3D_a5834161d0db601ac08929814967befa7_icgraph" alt=""/></div>
+<map name="aclassMalla3D_a5834161d0db601ac08929814967befa7_icgraph" id="aclassMalla3D_a5834161d0db601ac08929814967befa7_icgraph">
+<area shape="rect" title="Return w column where symmetry value of PANORAMA representation is maximun." alt="" coords="333,5,523,47"/>
+<area shape="rect" href="classMalla3D.html#ac7be542da00ca44f53442c6ad64969b0" title="Compute the normalized pose of 3d mesh." alt="" coords="104,13,285,39"/>
+<area shape="rect" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,13,56,39"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a6cc4d34dae47470b9908b21a772d34e2" name="a6cc4d34dae47470b9908b21a772d34e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cc4d34dae47470b9908b21a772d34e2">&#9670;&nbsp;</a></span>panorama_symetry_value()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Malla3D::panorama_symetry_value </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return max value of symmetry of PANORAMA representation. </p>
+<p >Symetry of a image is defined as following <a class="el" href="citelist.html#CITEREF_sfikas2014pose">[2]</a> :</p>
+<ul>
+<li><img class="formulaInl" alt="$ S(I) = max\{Sym(w) | w \in 1:width\} $" src="form_0.png" width="199" height="14"/></li>
+</ul>
+<dl class="section return"><dt>Returns</dt><dd>float max value of symmetry </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="malla3d_8cpp_source.html#l00903">903</a> of file <a class="el" href="malla3d_8cpp_source.html">malla3d.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classMalla3D_a6cc4d34dae47470b9908b21a772d34e2_cgraph.png" border="0" usemap="#aclassMalla3D_a6cc4d34dae47470b9908b21a772d34e2_cgraph" alt=""/></div>
+<map name="aclassMalla3D_a6cc4d34dae47470b9908b21a772d34e2_cgraph" id="aclassMalla3D_a6cc4d34dae47470b9908b21a772d34e2_cgraph">
+<area shape="rect" title="Return max value of symmetry of PANORAMA representation." alt="" coords="5,5,195,47"/>
+<area shape="rect" href="classMalla3D.html#ab69f443dc2a358388b6fb50e4cbcbac1" title="Computes symmetry values for every comlumn w of PANORAMA representation." alt="" coords="243,5,435,47"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classMalla3D_a6cc4d34dae47470b9908b21a772d34e2_icgraph.png" border="0" usemap="#aclassMalla3D_a6cc4d34dae47470b9908b21a772d34e2_icgraph" alt=""/></div>
+<map name="aclassMalla3D_a6cc4d34dae47470b9908b21a772d34e2_icgraph" id="aclassMalla3D_a6cc4d34dae47470b9908b21a772d34e2_icgraph">
+<area shape="rect" title="Return max value of symmetry of PANORAMA representation." alt="" coords="333,5,523,47"/>
+<area shape="rect" href="classMalla3D.html#ac7be542da00ca44f53442c6ad64969b0" title="Compute the normalized pose of 3d mesh." alt="" coords="104,13,285,39"/>
+<area shape="rect" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,13,56,39"/>
 </map>
 </div>
 
@@ -1640,7 +1737,7 @@ Here is the caller graph for this function:</div>
 <area shape="rect" title="Compute Ray&#45;Triangle Intersection using Möller&#45;Trumbore algorithm." alt="" coords="512,13,719,39"/>
 <area shape="rect" href="classMalla3D.html#a62a468f594ed9248bfb756207d79bca9" title="Calculate PANORAMA [extended] representation of the 3D mesh." alt="" coords="333,5,464,47"/>
 <area shape="rect" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,13,56,39"/>
-<area shape="rect" href="classMalla3D.html#ae5af4cfebe85c90d999a78d5bb95b4ad" title="Compute the angle that normalize pose of 3d mesh." alt="" coords="104,38,285,65"/>
+<area shape="rect" href="classMalla3D.html#ac7be542da00ca44f53442c6ad64969b0" title="Compute the normalized pose of 3d mesh." alt="" coords="104,38,285,65"/>
 </map>
 </div>
 
@@ -1698,7 +1795,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="classMalla3D_a16fdfd8b127a8f5795a8d2b5f9bd996d_icgraph.png" border="0" usemap="#aclassMalla3D_a16fdfd8b127a8f5795a8d2b5f9bd996d_icgraph" alt=""/></div>
 <map name="aclassMalla3D_a16fdfd8b127a8f5795a8d2b5f9bd996d_icgraph" id="aclassMalla3D_a16fdfd8b127a8f5795a8d2b5f9bd996d_icgraph">
 <area shape="rect" title="Rotate the mesh." alt="" coords="333,5,484,32"/>
-<area shape="rect" href="classMalla3D.html#ae5af4cfebe85c90d999a78d5bb95b4ad" title="Compute the angle that normalize pose of 3d mesh." alt="" coords="104,5,285,32"/>
+<area shape="rect" href="classMalla3D.html#ac7be542da00ca44f53442c6ad64969b0" title="Compute the normalized pose of 3d mesh." alt="" coords="104,5,285,32"/>
 <area shape="rect" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,56,32"/>
 </map>
 </div>
@@ -1754,6 +1851,51 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a id="a3382a86ec258f46725512eb9debb4f6c" name="a3382a86ec258f46725512eb9debb4f6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3382a86ec258f46725512eb9debb4f6c">&#9670;&nbsp;</a></span>variance_of_panorama()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Malla3D::variance_of_panorama </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute variance of PANORAMA representation. </p>
+<p >Variance of an image is defined as following:</p>
+<ul>
+<li><img class="formulaInl" alt="$ Var(I) = \sum_{}^{} (I(i,j) - \mu )^2 $" src="form_4.png" width="138" height="15"/> where <img class="formulaInl" alt="$ \mu $" src="form_5.png" width="9" height="9"/> is the mean value of the image.</li>
+</ul>
+<dl class="section see"><dt>See also</dt><dd><a href="https://en.wikipedia.org/wiki/Variance">Variance</a> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>float variance of PANORAMA representation </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="malla3d_8cpp_source.html#l00950">950</a> of file <a class="el" href="malla3d_8cpp_source.html">malla3d.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classMalla3D_a3382a86ec258f46725512eb9debb4f6c_icgraph.png" border="0" usemap="#aclassMalla3D_a3382a86ec258f46725512eb9debb4f6c_icgraph" alt=""/></div>
+<map name="aclassMalla3D_a3382a86ec258f46725512eb9debb4f6c_icgraph" id="aclassMalla3D_a3382a86ec258f46725512eb9debb4f6c_icgraph">
+<area shape="rect" title="Compute variance of PANORAMA representation." alt="" coords="333,5,479,47"/>
+<area shape="rect" href="classMalla3D.html#ac7be542da00ca44f53442c6ad64969b0" title="Compute the normalized pose of 3d mesh." alt="" coords="104,13,285,39"/>
+<area shape="rect" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,13,56,39"/>
+</map>
+</div>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="a72f8320f7dc834e4072cb6ab0d378a35" name="a72f8320f7dc834e4072cb6ab0d378a35"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a72f8320f7dc834e4072cb6ab0d378a35">&#9670;&nbsp;</a></span>B</h2>
@@ -1778,7 +1920,7 @@ Here is the caller graph for this function:</div>
 <p>Number of divisions of the cylinder height. </p>
 <p >Is set by default to 180 divisions </p>
 
-<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00091">91</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00090">90</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
 
 </div>
 </div>
@@ -1804,7 +1946,7 @@ Here is the caller graph for this function:</div>
 
 <p>Centroid of the mesh. </p>
 
-<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00080">80</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00079">79</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
 
 </div>
 </div>
@@ -1830,7 +1972,7 @@ Here is the caller graph for this function:</div>
 
 <p>Max distance from centroid to mesh. </p>
 
-<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00082">82</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00081">81</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
 
 </div>
 </div>
@@ -1856,7 +1998,7 @@ Here is the caller graph for this function:</div>
 
 <p>Faces of the mesh. </p>
 
-<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00069">69</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00068">68</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
 
 </div>
 </div>
@@ -1882,7 +2024,7 @@ Here is the caller graph for this function:</div>
 
 <p>Mesh faces divided according to height and sector to which they belong. </p>
 
-<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00071">71</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00070">70</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
 
 </div>
 </div>
@@ -1908,7 +2050,7 @@ Here is the caller graph for this function:</div>
 
 <p>GNDM feature map. </p>
 
-<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00103">103</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00102">102</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
 
 </div>
 </div>
@@ -1934,7 +2076,7 @@ Here is the caller graph for this function:</div>
 
 <p>Height of the cylinder. </p>
 
-<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00084">84</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00083">83</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
 
 </div>
 </div>
@@ -1960,7 +2102,7 @@ Here is the caller graph for this function:</div>
 
 <p>Model's name. </p>
 
-<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00107">107</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00106">106</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
 
 </div>
 </div>
@@ -1986,7 +2128,7 @@ Here is the caller graph for this function:</div>
 
 <p>NDM feature map. </p>
 
-<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00099">99</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00098">98</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
 
 </div>
 </div>
@@ -2012,7 +2154,7 @@ Here is the caller graph for this function:</div>
 
 <p>Normals of mesh faces. </p>
 
-<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00078">78</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00077">77</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
 
 </div>
 </div>
@@ -2038,7 +2180,7 @@ Here is the caller graph for this function:</div>
 
 <p>PANORAMA representation of loaded mesh. </p>
 
-<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00074">74</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00073">73</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
 
 </div>
 </div>
@@ -2064,7 +2206,7 @@ Here is the caller graph for this function:</div>
 
 <p>Extended PANORAMA representation of loaded mesh. </p>
 
-<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00076">76</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00075">75</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
 
 </div>
 </div>
@@ -2090,7 +2232,7 @@ Here is the caller graph for this function:</div>
 
 <p>Radius of the cylinder. </p>
 
-<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00086">86</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00085">85</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
 
 </div>
 </div>
@@ -2116,7 +2258,7 @@ Here is the caller graph for this function:</div>
 
 <p>SDM feature map. </p>
 
-<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00095">95</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00094">94</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
 
 </div>
 </div>
@@ -2142,7 +2284,7 @@ Here is the caller graph for this function:</div>
 
 <p>Vertexs of the mesh. </p>
 
-<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00067">67</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="malla3d_8h_source.html#l00066">66</a> of file <a class="el" href="malla3d_8h_source.html">malla3d.h</a>.</p>
 
 </div>
 </div>

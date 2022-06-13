@@ -3,5 +3,5 @@
 <area shape="rect" id="node2" href="$classMalla3D.html#a7ea87c0adeb5a82ff56d04088c78688b" title="Separates the faces of the mesh according to their height and sector." alt="" coords="512,13,655,39"/>
 <area shape="rect" id="node3" href="$classMalla3D.html#a62a468f594ed9248bfb756207d79bca9" title="Calculate PANORAMA [extended] representation of the 3D mesh." alt="" coords="333,5,464,47"/>
 <area shape="rect" id="node4" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,13,56,39"/>
-<area shape="rect" id="node5" href="$classMalla3D.html#ae5af4cfebe85c90d999a78d5bb95b4ad" title="Compute the angle that normalize pose of 3d mesh." alt="" coords="104,38,285,65"/>
+<area shape="rect" id="node5" href="$classMalla3D.html#ac7be542da00ca44f53442c6ad64969b0" title="Compute the normalized pose of 3d mesh." alt="" coords="104,38,285,65"/>
 </map>

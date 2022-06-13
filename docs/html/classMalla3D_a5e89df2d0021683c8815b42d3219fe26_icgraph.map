@@ -1,7 +1,7 @@
 <map id="Malla3D::calc_normals" name="Malla3D::calc_normals">
 <area shape="rect" id="node1" title="Calculate normals of mesh faces." alt="" coords="612,56,767,83"/>
 <area shape="rect" id="node2" href="$classMalla3D.html#a6264d38ebb5ac470b33eb17d0fb7222f" title="Load data of the mesh from an OBJ Wavefront file." alt="" coords="207,5,334,32"/>
-<area shape="rect" id="node4" href="$classMalla3D.html#ae5af4cfebe85c90d999a78d5bb95b4ad" title="Compute the angle that normalize pose of 3d mesh." alt="" coords="180,107,361,133"/>
+<area shape="rect" id="node4" href="$classMalla3D.html#ac7be542da00ca44f53442c6ad64969b0" title="Compute the normalized pose of 3d mesh." alt="" coords="180,107,361,133"/>
 <area shape="rect" id="node6" href="$classMalla3D.html#a16fdfd8b127a8f5795a8d2b5f9bd996d" title="Rotate the mesh." alt="" coords="411,132,562,159"/>
 <area shape="rect" id="node7" href="$classMalla3D.html#ae9fd766758c7a3a259cbff6262355006" title="Scale the mesh to the unit sphere." alt="" coords="409,31,564,57"/>
 <area shape="rect" id="node3" href="$classMalla3D.html#a305f03b369ebc34d35433d419798eded" title="Constructor with two parameters." alt="" coords="5,5,132,32"/>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_7emalla3d_0',['~Malla3D',['../classMalla3D.html#a62dfcbaaa3fdb632d8238f1355209644',1,'Malla3D']]]
+  ['scale_5fto_5funit_0',['scale_to_unit',['../classMalla3D.html#ae9fd766758c7a3a259cbff6262355006',1,'Malla3D']]]
 ];
