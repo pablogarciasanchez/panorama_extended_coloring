@@ -53,6 +53,7 @@ public:
 	Malla3D(const std::string name, const std::string path);
 	~Malla3D();
 	std::string get_name();
+	void set_name(const std::string name);
 	void export_obj(const std::string path);
 	void rotate_mesh(Axis axis_rot, float angle);
 	void calculate_panorama(Map map, Axis axis, float precision, int power = 4);

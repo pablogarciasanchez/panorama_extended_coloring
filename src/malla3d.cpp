@@ -53,6 +53,15 @@ std::string Malla3D::get_name(){
 }
 
 /**
+ * @brief Set model's name
+ * 
+ * @param name Name for 3D model
+ */
+void Malla3D::set_name(const std::string name){
+	this->name = name;
+}
+
+/**
  * @brief Calculate centroid of mesh
  */
 void Malla3D::calc_centroid(){
@@ -1069,7 +1078,7 @@ void Malla3D::combine_panorama(Axis axis, std::string output, bool resize){
 
 	int r = (int) (panorama_extended.rows * 0.1);
 	int c = (int) (panorama_extended.cols * 0.1);
-	
+
 	if(resize){
 		cv::resize(panorama_extended, panorama_resize, cv::Size(c,r), CV_INTER_CUBIC);
 		cv::imwrite(output + name + "_panorama_ext_" + axis_to_string(axis) + extension , panorama_resize);
