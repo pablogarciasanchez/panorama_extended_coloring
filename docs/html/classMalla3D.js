@@ -28,6 +28,7 @@ var classMalla3D =
     [ "RayIntersectsTriangle", "classMalla3D.html#a16cfe88c11a5a9ab468833cc412b4ba3", null ],
     [ "rotate_mesh", "classMalla3D.html#a16fdfd8b127a8f5795a8d2b5f9bd996d", null ],
     [ "scale_to_unit", "classMalla3D.html#ae9fd766758c7a3a259cbff6262355006", null ],
+    [ "set_name", "classMalla3D.html#ae85de41c2a0e3446316bd930d7d6d0de", null ],
     [ "variance_of_panorama", "classMalla3D.html#a3382a86ec258f46725512eb9debb4f6c", null ],
     [ "B", "classMalla3D.html#a72f8320f7dc834e4072cb6ab0d378a35", null ],
     [ "centroid", "classMalla3D.html#a2eb55877d73534c08957c5cf039b8aa1", null ],
