@@ -62,6 +62,24 @@ void Malla3D::set_name(const std::string name){
 }
 
 /**
+ * @brief Get number of 3D models' vertex
+ * 
+ * @return int number of 3D models' vertex
+ */
+int Malla3D::num_vertexs(){
+	return (int)vertexs.size();
+}
+
+/**
+ * @brief Get number of 3D models' triangles (faces)
+ * 
+ * @return int number of 3D models' faces
+ */
+int Malla3D::num_faces(){
+	return (int)facesIndex.size();
+}
+
+/**
  * @brief Calculate centroid of mesh
  */
 void Malla3D::calc_centroid(){
@@ -716,91 +734,93 @@ float Malla3D::feature_map(Map map, Axis axis, float precision, int power, glm::
  * classification and retrieval @cite SFIKAS2018208
  */
 void Malla3D::calculate_panorama(Map map, Axis axis, float precision, int power){
-	std::chrono::steady_clock::time_point begin;
-	std::chrono::steady_clock::time_point end;
-	begin = std::chrono::steady_clock::now();
+	if(vertexs.size() > 0){
+		std::chrono::steady_clock::time_point begin;
+		std::chrono::steady_clock::time_point end;
+		begin = std::chrono::steady_clock::now();
 
-	panorama.clear();
-	panorama_extended.clear();
-	
-	glm::vec3 direction;
-	glm::vec3 origin;
-
-	int n_colisiones = 0;
-
-	std::vector<glm::vec3> colisiones;
-	std::vector<int> face_hit;
-
-	filter_faces(axis, precision);
-
-	end = std::chrono::steady_clock::now();
-	std::cout << "Face filtering"
-	<< "\t Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "[ms]" << std::endl;
-
-	begin = std::chrono::steady_clock::now();
-
-	for(float i = 0; i < (B/precision); i++){
-		std::vector<float> row(2*(B/precision), 0.0);
-		std::vector<float> row_ext(2*(B/precision)*1.5, 0.0);
-		panorama.push_back(row);
-		panorama_extended.push_back(row_ext);
-	}
-
-	for(float v = 0; v < (B/precision); v++){
-
-		for(float u = 0; u < 2*(B/precision); u++){
-			float angle = u*2*M_PI / (2*(B/precision));
-			int s = get_sector(angle) - 1;
-
-			origin = get_orig(axis,v,precision);
-			direction = get_dir(axis,angle);
-
-			for(int j = 0; j < facesIndex_filter[v][s].size(); j++){
-				glm::vec3 hit_point;
-				glm::vec2 hit;
-				float dist;
-
-				glm::vec3 t1 = vertexs[facesIndex[facesIndex_filter[v][s][j]][0]];
-				glm::vec3 t2 = vertexs[facesIndex[facesIndex_filter[v][s][j]][1]];
-				glm::vec3 t3 = vertexs[facesIndex[facesIndex_filter[v][s][j]][2]];
-
-				if(RayIntersectsTriangle(origin, direction, t1, t2, t3, hit_point)){
-					n_colisiones++;
-					colisiones.push_back(hit_point);
-					face_hit.push_back(facesIndex_filter[v][s][j]);
-				} 
-			}
-			
-			if(n_colisiones > 0){
-				panorama[v][u] = feature_map(map, axis, precision, power, origin, direction, colisiones, face_hit);
-			}
-			
-			n_colisiones = 0;
-			colisiones.clear();
-			face_hit.clear();
-		}
+		panorama.clear();
+		panorama_extended.clear();
 		
-	}
+		glm::vec3 direction;
+		glm::vec3 origin;
 
-	for(int i = 0; i < panorama.size(); i++){
-		for(int j = 0; j < panorama[i].size(); j++){
-			panorama[i][j] = (panorama[i][j] * 255);
-			assert(panorama[i][j] <= 255.0 && panorama[i][j] >= 0.0);
+		int n_colisiones = 0;
+
+		std::vector<glm::vec3> colisiones;
+		std::vector<int> face_hit;
+
+		filter_faces(axis, precision);
+
+		end = std::chrono::steady_clock::now();
+		std::cout << "Face filtering"
+		<< "\t Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "[ms]" << std::endl;
+
+		begin = std::chrono::steady_clock::now();
+
+		for(float i = 0; i < (B/precision); i++){
+			std::vector<float> row(2*(B/precision), 0.0);
+			std::vector<float> row_ext(2*(B/precision)*1.5, 0.0);
+			panorama.push_back(row);
+			panorama_extended.push_back(row_ext);
 		}
-	}
 
-	int max = 2*(B/precision);
-	for(int i = 0; i < panorama_extended.size(); i++){
-		for(int j = 0; j < panorama_extended[i].size(); j++){
-			panorama_extended[i][j] = panorama[i][j%max];
+		for(float v = 0; v < (B/precision); v++){
+
+			for(float u = 0; u < 2*(B/precision); u++){
+				float angle = u*2*M_PI / (2*(B/precision));
+				int s = get_sector(angle) - 1;
+
+				origin = get_orig(axis,v,precision);
+				direction = get_dir(axis,angle);
+
+				for(int j = 0; j < facesIndex_filter[v][s].size(); j++){
+					glm::vec3 hit_point;
+					glm::vec2 hit;
+					float dist;
+
+					glm::vec3 t1 = vertexs[facesIndex[facesIndex_filter[v][s][j]][0]];
+					glm::vec3 t2 = vertexs[facesIndex[facesIndex_filter[v][s][j]][1]];
+					glm::vec3 t3 = vertexs[facesIndex[facesIndex_filter[v][s][j]][2]];
+
+					if(RayIntersectsTriangle(origin, direction, t1, t2, t3, hit_point)){
+						n_colisiones++;
+						colisiones.push_back(hit_point);
+						face_hit.push_back(facesIndex_filter[v][s][j]);
+					} 
+				}
+				
+				if(n_colisiones > 0){
+					panorama[v][u] = feature_map(map, axis, precision, power, origin, direction, colisiones, face_hit);
+				}
+				
+				n_colisiones = 0;
+				colisiones.clear();
+				face_hit.clear();
+			}
+			
 		}
+
+		for(int i = 0; i < panorama.size(); i++){
+			for(int j = 0; j < panorama[i].size(); j++){
+				panorama[i][j] = (panorama[i][j] * 255);
+				assert(panorama[i][j] <= 255.0 && panorama[i][j] >= 0.0);
+			}
+		}
+
+		int max = 2*(B/precision);
+		for(int i = 0; i < panorama_extended.size(); i++){
+			for(int j = 0; j < panorama_extended[i].size(); j++){
+				panorama_extended[i][j] = panorama[i][j%max];
+			}
+		}
+
+		end = std::chrono::steady_clock::now();
+		std::cout << "Map: " <<  map_to_string(map)
+		<< "\t Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "[ms]" << std::endl;
+
+		export_panorama(map,axis,"");
 	}
-
-	end = std::chrono::steady_clock::now();
-	std::cout << "Map: " <<  map_to_string(map)
-	<< "\t Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "[ms]" << std::endl;
-
-	export_panorama(map,axis,"");
 }
 
 /**
@@ -1064,26 +1084,28 @@ void Malla3D::mesh_pose_norm(int angle_pass, float precision, int power){
  * @see [cv::resize](https://docs.opencv.org/3.4/da/d54/group__imgproc__transform.html#ga47a974309e9102f5f08231edc7e7529d)
  */
 void Malla3D::combine_panorama(Axis axis, std::string output, bool resize){
-	std::string extension = ".png";
+	if(vertexs.size() > 0){
+		std::string extension = ".png";
 
-	std::vector<cv::Mat> channels;
+		std::vector<cv::Mat> channels;
 
-	cv::Mat panorama_extended, panorama_resize;
+		cv::Mat panorama_extended, panorama_resize;
 
-	channels.push_back(gndm[(int)axis]);
-	channels.push_back(sdm[(int)axis]);
-	channels.push_back(ndm[(int)axis]);
+		channels.push_back(gndm[(int)axis]);
+		channels.push_back(sdm[(int)axis]);
+		channels.push_back(ndm[(int)axis]);
 
-	cv::merge(channels, panorama_extended);
+		cv::merge(channels, panorama_extended);
 
-	int r = (int) (panorama_extended.rows * 0.1);
-	int c = (int) (panorama_extended.cols * 0.1);
+		int r = (int) (panorama_extended.rows * 0.1);
+		int c = (int) (panorama_extended.cols * 0.1);
 
-	if(resize){
-		cv::resize(panorama_extended, panorama_resize, cv::Size(c,r), CV_INTER_CUBIC);
-		cv::imwrite(output + name + "_panorama_ext_" + axis_to_string(axis) + extension , panorama_resize);
-	} else {
-		cv::imwrite(output + name + "_panorama_ext_" + axis_to_string(axis) + extension , panorama_extended);
+		if(resize){
+			cv::resize(panorama_extended, panorama_resize, cv::Size(c,r), CV_INTER_CUBIC);
+			cv::imwrite(output + name + "_panorama_ext_" + axis_to_string(axis) + extension , panorama_resize);
+		} else {
+			cv::imwrite(output + name + "_panorama_ext_" + axis_to_string(axis) + extension , panorama_extended);
+		}
 	}
 }
 
@@ -1104,26 +1126,27 @@ void Malla3D::combine_panorama(Axis axis, std::string output, bool resize){
  * @see [cv::vconcat](https://docs.opencv.org/3.4/d2/de8/group__core__array.html#ga744f53b69f6e4f12156cdde4e76aed27)
  */
 void Malla3D::concat_panorama(Axis axis, std::string output, bool resize){
-	std::string extension = ".png";
+	if(vertexs.size() > 0){
+		std::string extension = ".png";
 
-	std::vector<cv::Mat> channels;
+		std::vector<cv::Mat> channels;
 
-	cv::Mat panorama, panorama_resize;
+		cv::Mat panorama, panorama_resize;
 
-	cv::Mat feature_array[3] = {sdm[(int)axis],ndm[(int)axis],gndm[(int)axis]};
+		cv::Mat feature_array[3] = {sdm[(int)axis],ndm[(int)axis],gndm[(int)axis]};
 
-	cv::vconcat(feature_array,3,panorama);
+		cv::vconcat(feature_array,3,panorama);
 
-	int r = (int) (panorama.rows * 0.1);
-	int c = (int) (panorama.cols * 0.1);
-	
-	if(resize) {
-		cv::resize(panorama, panorama_resize, cv::Size(c,r), CV_INTER_CUBIC);
-		cv::imwrite(output + name + "_panorama_" + axis_to_string(axis) + extension , panorama_resize);
-	} else {
-		cv::imwrite(output + name + "_panorama_" + axis_to_string(axis) + extension , panorama);
+		int r = (int) (panorama.rows * 0.1);
+		int c = (int) (panorama.cols * 0.1);
+		
+		if(resize) {
+			cv::resize(panorama, panorama_resize, cv::Size(c,r), CV_INTER_CUBIC);
+			cv::imwrite(output + name + "_panorama_" + axis_to_string(axis) + extension , panorama_resize);
+		} else {
+			cv::imwrite(output + name + "_panorama_" + axis_to_string(axis) + extension , panorama);
+		}
 	}
-	
 }
 
 /**

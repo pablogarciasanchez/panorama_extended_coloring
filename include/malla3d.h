@@ -54,6 +54,8 @@ public:
 	~Malla3D();
 	std::string get_name();
 	void set_name(const std::string name);
+	int num_vertexs();
+	int num_faces();
 	void export_obj(const std::string path);
 	void rotate_mesh(Axis axis_rot, float angle);
 	void calculate_panorama(Map map, Axis axis, float precision, int power = 4);
