@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['panorama_5fsymetry_5fcolumn_0',['panorama_symetry_column',['../classMalla3D.html#a5834161d0db601ac08929814967befa7',1,'Malla3D']]],
-  ['panorama_5fsymetry_5fvalue_1',['panorama_symetry_value',['../classMalla3D.html#a6cc4d34dae47470b9908b21a772d34e2',1,'Malla3D']]]
+  ['num_5ffaces_0',['num_faces',['../classMalla3D.html#a2358e59ea2ed1c211c3dd92141758a48',1,'Malla3D']]],
+  ['num_5fvertexs_1',['num_vertexs',['../classMalla3D.html#accdb2eea13f38e0e433f6b856fb83c87',1,'Malla3D']]]
 ];

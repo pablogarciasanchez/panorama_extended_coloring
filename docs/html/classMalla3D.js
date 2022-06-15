@@ -2,6 +2,7 @@ var classMalla3D =
 [
     [ "Malla3D", "classMalla3D.html#af68ae35fbf8c31c0f6bc9fe428e8e178", null ],
     [ "Malla3D", "classMalla3D.html#a305f03b369ebc34d35433d419798eded", null ],
+    [ "Malla3D", "classMalla3D.html#ab2faa4e92193b06747a127a72e9129e5", null ],
     [ "~Malla3D", "classMalla3D.html#a62dfcbaaa3fdb632d8238f1355209644", null ],
     [ "calc_centroid", "classMalla3D.html#a818657957f0d56667383137acd5714e8", null ],
     [ "calc_distance", "classMalla3D.html#aa737de641d8f52b3e5e764bbade4aa98", null ],
@@ -23,6 +24,8 @@ var classMalla3D =
     [ "get_sector", "classMalla3D.html#a1bce49b0d0ef934299b68cd8f29626f6", null ],
     [ "load_obj", "classMalla3D.html#a6264d38ebb5ac470b33eb17d0fb7222f", null ],
     [ "mesh_pose_norm", "classMalla3D.html#ac7be542da00ca44f53442c6ad64969b0", null ],
+    [ "num_faces", "classMalla3D.html#a2358e59ea2ed1c211c3dd92141758a48", null ],
+    [ "num_vertexs", "classMalla3D.html#accdb2eea13f38e0e433f6b856fb83c87", null ],
     [ "panorama_symetry_column", "classMalla3D.html#a5834161d0db601ac08929814967befa7", null ],
     [ "panorama_symetry_value", "classMalla3D.html#a6cc4d34dae47470b9908b21a772d34e2", null ],
     [ "RayIntersectsTriangle", "classMalla3D.html#a16cfe88c11a5a9ab468833cc412b4ba3", null ],

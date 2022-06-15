@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['scale_5fto_5funit_0',['scale_to_unit',['../classMalla3D.html#ae9fd766758c7a3a259cbff6262355006',1,'Malla3D']]],
-  ['set_5fname_1',['set_name',['../classMalla3D.html#ae85de41c2a0e3446316bd930d7d6d0de',1,'Malla3D']]]
+  ['rayintersectstriangle_0',['RayIntersectsTriangle',['../classMalla3D.html#a16cfe88c11a5a9ab468833cc412b4ba3',1,'Malla3D']]],
+  ['rotate_5fmesh_1',['rotate_mesh',['../classMalla3D.html#a16fdfd8b127a8f5795a8d2b5f9bd996d',1,'Malla3D']]]
 ];
