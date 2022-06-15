@@ -39,6 +39,28 @@ Malla3D::Malla3D(const std::string name, const std::string path){
 }
 
 /**
+ * @brief Copy constructor
+ * 
+ * @param malla 3D model original data
+ */
+Malla3D::Malla3D(const Malla3D& malla){
+	vertexs = malla.vertexs;
+	facesIndex = malla.facesIndex;
+	facesIndex_filter = malla.facesIndex_filter;
+	normals = malla.normals;
+	centroid = malla.centroid;
+	d_max = malla.d_max;
+	height = malla.height;
+	radius = malla.radius;
+	panorama = malla.panorama;
+	panorama_extended = malla.panorama_extended;
+	sdm = malla.sdm;
+	ndm = malla.ndm;
+	gndm = malla.gndm;
+	name = malla.name;
+}
+
+/**
  * @brief Default destructor
  */
 Malla3D::~Malla3D(){}
