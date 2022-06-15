@@ -7,8 +7,28 @@
  */
 
 
+void panorama(Malla3D& malla, std::string output_folder_pe, std::string output_folder_fm){
+	malla.calculate_panorama(SDM, X, 1, 4);
+	malla.calculate_panorama(NDM, X, 1, 4);
+
+	malla.calculate_panorama(SDM, Y, 1, 4);
+	malla.calculate_panorama(NDM, Y, 1, 4);
+
+	malla.calculate_panorama(SDM, Z, 1, 4);
+	malla.calculate_panorama(NDM, Z, 1, 4);
+
+	malla.combine_panorama(X,output_folder_pe,false);
+	malla.combine_panorama(Y,output_folder_pe,false);
+	malla.combine_panorama(Z,output_folder_pe,false);
+
+	malla.concat_panorama(SDM,output_folder_fm,false);
+	malla.concat_panorama(NDM,output_folder_fm,false);
+	malla.concat_panorama(GNDM,output_folder_fm,false);
+}
 
 int main(int argc, char * argv[]) {
+
+	srand (time(NULL));
 
 	if(argc != 5){
 		std::cout << "Wrong parameters" << std::endl;
@@ -30,68 +50,79 @@ int main(int argc, char * argv[]) {
 		std::cout << "Loaded " << malla.get_name() << std::endl;
 
 		std::string rot_name = malla.get_name() + "_0";
+		std::string orig_name = malla.get_name();
 		malla.set_name(rot_name);
 
 		// malla.mesh_pose_norm();
 
-		malla.calculate_panorama(SDM, X, 1, 4);
-		malla.calculate_panorama(NDM, X, 1, 4);
+		panorama(malla,output_folder_pe,output_folder_fm);
 
-		malla.calculate_panorama(SDM, Y, 1, 4);
-		malla.calculate_panorama(NDM, Y, 1, 4);
+		int cont = 1;
+		for(int i = 0; i < 3; i++){
+			Malla3D malla_rot(malla);
+			std::string rot_name;
 
-		malla.calculate_panorama(SDM, Z, 1, 4);
-		malla.calculate_panorama(NDM, Z, 1, 4);
+			int rot_angle_y = rand() % 180 + 1;
+			float rot_radians_y = float(rot_angle_y) * (M_PI/180.0);
+			std::cout << "Rotando en el eje Y:" << rot_angle_y << std::endl;
+			malla_rot.rotate_mesh(Y,rot_radians_y);
+			rot_name = orig_name + "_" + std::to_string(cont);
+			malla_rot.set_name(rot_name);
+			cont++;
 
-		malla.combine_panorama(X,output_folder_pe,false);
-		malla.combine_panorama(Y,output_folder_pe,false);
-		malla.combine_panorama(Z,output_folder_pe,false);
+			int rot_angle_x1 = rand() % 11 + 5;
+			int rot_angle_x2 = rand() % 11 + 5;
+			int rot_angle_z1 = rand() % 11 + 5;
+			int rot_angle_z2 = rand() % 11 + 5;
 
-		malla.concat_panorama(SDM,output_folder_fm,false);
-		malla.concat_panorama(NDM,output_folder_fm,false);
-		malla.concat_panorama(GNDM,output_folder_fm,false);
+			float rot_radians_x1 = float(rot_angle_x1) * (M_PI/180.0);
+			float rot_radians_x2 = 2*M_PI - (float(rot_angle_x2) * (M_PI/180.0));
+			float rot_radians_z1 = float(rot_angle_z1) * (M_PI/180.0);
+			float rot_radians_z2 = 2*M_PI - (float(rot_angle_z2) * (M_PI/180.0));
 
-		int cont = 0;
-		for(int ax = 0; ax < 3; ax++){
-			std::cout << "Loading " << name << "\tPath: " << path << "..." << std::endl;
+			
+			Malla3D malla_x1(malla_rot);
+			rot_name = orig_name + "_" + std::to_string(cont);
+			malla_x1.set_name(rot_name);
+			cont++;
+			Malla3D malla_x2(malla_rot);
+			rot_name = orig_name + "_" + std::to_string(cont);
+			malla_x2.set_name(rot_name);
+			cont++;
+			Malla3D malla_z1(malla_rot);
+			rot_name = orig_name + "_" + std::to_string(cont);
+			malla_z1.set_name(rot_name);
+			cont++;
+			Malla3D malla_z2(malla_rot);
+			rot_name = orig_name + "_" + std::to_string(cont);
+			malla_z2.set_name(rot_name);
+			cont++;
 
-			Malla3D malla(name, path);
+			std::cout << "Rotando en el eje X:" << rot_radians_x1 * (180.0/M_PI) << std::endl;
+			malla_x1.rotate_mesh(X,rot_radians_x1);
+			std::cout << "Rotando en el eje X:" << rot_radians_x2 * (180.0/M_PI)<< std::endl;
+			malla_x2.rotate_mesh(X,rot_radians_x2);
+			std::cout << "Rotando en el eje Z:" << rot_radians_z1 * (180.0/M_PI)<< std::endl;
+			malla_z1.rotate_mesh(Z,rot_radians_z1);
+			std::cout << "Rotando en el eje Z:" << rot_radians_z2 * (180.0/M_PI)<< std::endl;
+			malla_z2.rotate_mesh(Z,rot_radians_z2);
 
-			std::cout << "Loaded " << malla.get_name() << std::endl;
-			std::string orig_name = malla.get_name();
+			panorama(malla_rot,output_folder_pe,output_folder_fm);
+			panorama(malla_x1,output_folder_pe,output_folder_fm);
+			panorama(malla_x2,output_folder_pe,output_folder_fm);
+			panorama(malla_z1,output_folder_pe,output_folder_fm);
+			panorama(malla_z2,output_folder_pe,output_folder_fm);
 
-			int ind = 1;
-			float angle = 15.0;
-			for(float i = angle; i <= 180.0; i += angle, ind++){
+			// malla.export_obj("214_Izq.obj");
+			// malla_rot.export_obj("214_Izq_rot.obj");
+			// malla_x1.export_obj("214_Izq_x1.obj");
+			// malla_x2.export_obj("214_Izq_x2.obj");
+			// malla_z1.export_obj("214_Izq_z1.obj");
+			// malla_z2.export_obj("214_Izq_z2.obj");
 
-				std::string rot_name = orig_name + "_" + std::to_string(cont);
-				malla.set_name(rot_name);
-				cont++;
-
-				std::cout << "Rotando en el eje: " << axis_to_string((Axis)ax)
-				<< " un angulo de: " << ind*angle << std::endl;
-				std::cout << "ind " << ind << std::endl;
-				std::cout << "angle " << angle << std::endl;
-
-				malla.rotate_mesh((Axis)ax,angle*(M_PI/180.0));
-				malla.calculate_panorama(SDM, X, 1, 4);
-				malla.calculate_panorama(NDM, X, 1, 4);
-
-				malla.calculate_panorama(SDM, Y, 1, 4);
-				malla.calculate_panorama(NDM, Y, 1, 4);
-
-				malla.calculate_panorama(SDM, Z, 1, 4);
-				malla.calculate_panorama(NDM, Z, 1, 4);
-
-				malla.combine_panorama(X,output_folder_pe,false);
-				malla.combine_panorama(Y,output_folder_pe,false);
-				malla.combine_panorama(Z,output_folder_pe,false);
-
-				malla.concat_panorama(SDM,output_folder_fm,false);
-				malla.concat_panorama(NDM,output_folder_fm,false);
-				malla.concat_panorama(GNDM,output_folder_fm,false);			
-			}
+			
 		}
+		
 	}
 	return 0;
 }
