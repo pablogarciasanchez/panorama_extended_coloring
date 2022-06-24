@@ -1,7 +1,7 @@
 #include "malla3d.h"
 
 /** @file malla3d.cpp
- *  @brief Implementation of class Malla3D
+ *  @brief Implementation of class Mesh3D
  * 	@author [Alejandro Manzanares Lemus](https://github.com/Alexmnzlms)
  * 
  */
@@ -9,7 +9,7 @@
 /**
  * @brief Default constructor
  */
-Malla3D::Malla3D(){
+Mesh3D::Mesh3D(){
 	for(int i = 0; i < 3; i++){
 		cv::Mat aux;
 		sdm.push_back(aux);
@@ -27,7 +27,7 @@ Malla3D::Malla3D(){
  * @param path string containing the relative path to the 3D model to be loaded
  * @see load_obj()
  */
-Malla3D::Malla3D(const std::string name, const std::string path){
+Mesh3D::Mesh3D(const std::string name, const std::string path){
 	for(int i = 0; i < 3; i++){
 		cv::Mat aux;
 		sdm.push_back(aux);
@@ -41,36 +41,36 @@ Malla3D::Malla3D(const std::string name, const std::string path){
 /**
  * @brief Copy constructor
  * 
- * @param malla 3D model original data
+ * @param mesh 3D model original data
  */
-Malla3D::Malla3D(const Malla3D& malla){
-	vertexs = malla.vertexs;
-	facesIndex = malla.facesIndex;
-	facesIndex_filter = malla.facesIndex_filter;
-	normals = malla.normals;
-	centroid = malla.centroid;
-	d_max = malla.d_max;
-	height = malla.height;
-	radius = malla.radius;
-	panorama = malla.panorama;
-	panorama_extended = malla.panorama_extended;
-	sdm = malla.sdm;
-	ndm = malla.ndm;
-	gndm = malla.gndm;
-	name = malla.name;
+Mesh3D::Mesh3D(const Mesh3D& mesh){
+	vertexs = mesh.vertexs;
+	facesIndex = mesh.facesIndex;
+	facesIndex_filter = mesh.facesIndex_filter;
+	normals = mesh.normals;
+	centroid = mesh.centroid;
+	d_max = mesh.d_max;
+	height = mesh.height;
+	radius = mesh.radius;
+	panorama = mesh.panorama;
+	panorama_extended = mesh.panorama_extended;
+	sdm = mesh.sdm;
+	ndm = mesh.ndm;
+	gndm = mesh.gndm;
+	name = mesh.name;
 }
 
 /**
  * @brief Default destructor
  */
-Malla3D::~Malla3D(){}
+Mesh3D::~Mesh3D(){}
 
 /**
  * @brief Get model's name
  * 
  * @return std::string Model's name
  */
-std::string Malla3D::get_name(){
+std::string Mesh3D::get_name(){
 	return name;
 }
 
@@ -79,7 +79,7 @@ std::string Malla3D::get_name(){
  * 
  * @param name Name for 3D model
  */
-void Malla3D::set_name(const std::string name){
+void Mesh3D::set_name(const std::string name){
 	this->name = name;
 }
 
@@ -88,7 +88,7 @@ void Malla3D::set_name(const std::string name){
  * 
  * @return int number of 3D models' vertex
  */
-int Malla3D::num_vertexs(){
+int Mesh3D::num_vertexs(){
 	return (int)vertexs.size();
 }
 
@@ -97,14 +97,14 @@ int Malla3D::num_vertexs(){
  * 
  * @return int number of 3D models' faces
  */
-int Malla3D::num_faces(){
+int Mesh3D::num_faces(){
 	return (int)facesIndex.size();
 }
 
 /**
  * @brief Calculate centroid of mesh
  */
-void Malla3D::calc_centroid(){
+void Mesh3D::calc_centroid(){
 	float sum_x, sum_y, sum_z;
 	sum_x = sum_y = sum_z = 0.0;
 	
@@ -126,7 +126,7 @@ void Malla3D::calc_centroid(){
 /**
  * @brief Calculate normals of mesh faces
  */
-void Malla3D::calc_normals(){
+void Mesh3D::calc_normals(){
 	normals.clear();
 	glm::vec3 v1, v2, v3;
 	for(int i = 0; i < facesIndex.size(); i++){
@@ -145,7 +145,7 @@ void Malla3D::calc_normals(){
 /**
  * @brief Calculate maximun distance from centroid
  */
-void Malla3D::calc_distance(){
+void Mesh3D::calc_distance(){
 	float dist;
 	float max = glm::distance(vertexs[0],centroid);
 	for(int i = 1; i < vertexs.size(); i++){
@@ -163,7 +163,7 @@ void Malla3D::calc_distance(){
 /**
  * @brief Scale the mesh to the unit sphere
  */
-void Malla3D::scale_to_unit(){
+void Mesh3D::scale_to_unit(){
 	std::vector<glm::vec3> v_unit;
 
 	for(int i = 0; i < vertexs.size(); i++){
@@ -189,7 +189,7 @@ void Malla3D::scale_to_unit(){
  * @param axis_rot Axis of rotation
  * @param angle Angles desired to rotate de mesh
  */
-void Malla3D::rotate_mesh(Axis axis_rot, float angle){
+void Mesh3D::rotate_mesh(Axis axis_rot, float angle){
 	std::vector<glm::vec3> mesh_rotate;
 	glm::vec3 rotate_vertex;
 	switch (axis_rot)
@@ -237,7 +237,7 @@ void Malla3D::rotate_mesh(Axis axis_rot, float angle){
  * @return bool Indicates whether the read was successful (true) or unsuccessful (false)
  * @see [OBJ Wavefront specification](http://paulbourke.net/dataformats/obj/)
  */
-bool Malla3D::load_obj(const std::string path){
+bool Mesh3D::load_obj(const std::string path){
 	std::vector< unsigned int > vertexIndices;
 	std::vector< glm::vec3 > temp_vertices;
 	std::ifstream file;
@@ -296,7 +296,7 @@ bool Malla3D::load_obj(const std::string path){
  * @brief Export mesh data to OBJ Wavefront file
  * @param path string containing the path where you will export the model to
  */
-void Malla3D::export_obj(const std::string path){
+void Mesh3D::export_obj(const std::string path){
 	std::ofstream file;
 	file.open(path);
 
@@ -332,7 +332,7 @@ void Malla3D::export_obj(const std::string path){
  * @see [Fast, Minimum Storage Ray/Triangle Intersection](https://cadxfem.org/inf/Fast%20MinimumStorage%20RayTriangle%20Intersection.pdf)
  * @cite Moller97
  */
-bool Malla3D::RayIntersectsTriangle(glm::vec3 rayOrigin, 
+bool Mesh3D::RayIntersectsTriangle(glm::vec3 rayOrigin, 
 									glm::vec3 rayVector, 
 									glm::vec3 vertex0,
 									glm::vec3 vertex1,
@@ -385,7 +385,7 @@ bool Malla3D::RayIntersectsTriangle(glm::vec3 rayOrigin,
  * @see calculate_panorama()
  * @return vec3 Point of origin
  */
-glm::vec3 Malla3D::get_orig(Axis axis, float v, float precision){
+glm::vec3 Mesh3D::get_orig(Axis axis, float v, float precision){
 	glm::vec3 orig;
 
 	switch (axis)
@@ -419,7 +419,7 @@ glm::vec3 Malla3D::get_orig(Axis axis, float v, float precision){
  * @see calculate_panorama()
  * @return vec3 Vector of ray
  */
-glm::vec3 Malla3D::get_dir(Axis axis, float angle){
+glm::vec3 Mesh3D::get_dir(Axis axis, float angle){
 	glm::vec3 dir;
 	
 	switch (axis)
@@ -454,7 +454,7 @@ glm::vec3 Malla3D::get_dir(Axis axis, float angle){
  * @see calculate_panorama()
  * @return float Height of v division of the cylinder
  */
-float Malla3D::get_height(Axis axis, float v, float precision){
+float Mesh3D::get_height(Axis axis, float v, float precision){
 	float h;
 
 	switch (axis)
@@ -480,7 +480,7 @@ float Malla3D::get_height(Axis axis, float v, float precision){
  * @param point Point coordinates
  * @return int Sector of point point
  */
-int Malla3D::get_sector(glm::vec2 point){
+int Mesh3D::get_sector(glm::vec2 point){
 	int sector = -1;
 	float x = point.x;
 	float y = point.y;
@@ -503,7 +503,7 @@ int Malla3D::get_sector(glm::vec2 point){
  * @param angle Angle of vector
  * @return int Sector of vector represented by angle
  */
-int Malla3D::get_sector(float angle){
+int Mesh3D::get_sector(float angle){
 	int sector = -1;
 	float x = radius * cos(angle);
 	float y = radius * sin(angle);
@@ -544,7 +544,7 @@ int Malla3D::get_sector(float angle){
  * @param precision Precsion used in the PANORAMA computation
  * @see calculate_panorama()
  */
-void Malla3D::filter_faces(Axis axis, float precision){
+void Mesh3D::filter_faces(Axis axis, float precision){
 	float v_height;
 
 	float threshold = 0.5;
@@ -671,7 +671,7 @@ void Malla3D::filter_faces(Axis axis, float precision){
  * @see calculate_panorama()
  * @return float Value of feature map
  */
-float Malla3D::feature_map(Map map, Axis axis, float precision, int power, glm::vec3 origin, 
+float Mesh3D::feature_map(Map map, Axis axis, float precision, int power, glm::vec3 origin, 
 							glm::vec3 direction, std::vector<glm::vec3> &colisiones, 
 							std::vector<int> &faces_hit){
 
@@ -755,7 +755,7 @@ float Malla3D::feature_map(Map map, Axis axis, float precision, int power, glm::
  * @see Ensemble of PANORAMA-based convolutional neural networks for 3D model 
  * classification and retrieval @cite SFIKAS2018208
  */
-void Malla3D::calculate_panorama(Map map, Axis axis, float precision, int power){
+void Mesh3D::calculate_panorama(Map map, Axis axis, float precision, int power){
 	if(vertexs.size() > 0){
 		std::chrono::steady_clock::time_point begin;
 		std::chrono::steady_clock::time_point end;
@@ -860,7 +860,7 @@ void Malla3D::calculate_panorama(Map map, Axis axis, float precision, int power)
  * @see [cv::imwrite()](https://docs.opencv.org/4.x/d4/da8/group__imgcodecs.html#gabbc7ef1aa2edfaa87772f1202d67e0ce)
  * @see [cv::Laplacian()](https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html#gad78703e4c8fe703d479c1860d76429e6)
  */
-void Malla3D::export_panorama(Map map, Axis axis, bool extended){
+void Mesh3D::export_panorama(Map map, Axis axis, bool extended){
 	cv::Mat panorama_cv;
 
 	if(extended){
@@ -899,7 +899,7 @@ void Malla3D::export_panorama(Map map, Axis axis, bool extended){
  * 
  * @return std::vector<float> Vector of symmetry values for every comlumn w
  */
-std::vector<float> Malla3D::compute_panorama_symetry(){
+std::vector<float> Mesh3D::compute_panorama_symetry(){
 	float height_sym = panorama.size();
 	float width_sym = panorama[0].size();
 	float m = 0.4 * height_sym;
@@ -951,7 +951,7 @@ std::vector<float> Malla3D::compute_panorama_symetry(){
  * 
  * @return float max value of symmetry
  */
-float Malla3D::panorama_symetry_value(){
+float Mesh3D::panorama_symetry_value(){
 	
 	std::vector<float> sumas = compute_panorama_symetry();
 
@@ -973,7 +973,7 @@ float Malla3D::panorama_symetry_value(){
  * 
  * @return int w column where symmetry value is maximun
  */
-int Malla3D::panorama_symetry_column(){
+int Mesh3D::panorama_symetry_column(){
 	
 	std::vector<float> sumas = compute_panorama_symetry();
 
@@ -998,7 +998,7 @@ int Malla3D::panorama_symetry_column(){
  * @see [Variance](https://en.wikipedia.org/wiki/Variance)
  * @return float variance of PANORAMA representation
  */
-float Malla3D::variance_of_panorama(){
+float Mesh3D::variance_of_panorama(){
 	float sum = 0.0;
 	float sq_diff = 0.0;
 
@@ -1032,7 +1032,7 @@ float Malla3D::variance_of_panorama(){
  * @param precision Precsion used in the PANORAMA computation
  * @param power Number to raise absolute value in NDM computation
  */
-void Malla3D::mesh_pose_norm(int angle_pass, float precision, int power){
+void Mesh3D::mesh_pose_norm(int angle_pass, float precision, int power){
 	float best_sym = 0;
 	float best_rot = 0;
 	float min_var = 1000000000.0;
@@ -1105,7 +1105,7 @@ void Malla3D::mesh_pose_norm(int angle_pass, float precision, int power){
  * 
  * @see [cv::resize](https://docs.opencv.org/3.4/da/d54/group__imgproc__transform.html#ga47a974309e9102f5f08231edc7e7529d)
  */
-void Malla3D::combine_panorama(Axis axis, std::string output, bool resize){
+void Mesh3D::combine_panorama(Axis axis, std::string output, bool resize){
 	if(vertexs.size() > 0){
 		std::string extension = ".png";
 
@@ -1147,7 +1147,7 @@ void Malla3D::combine_panorama(Axis axis, std::string output, bool resize){
  * @see [cv::resize](https://docs.opencv.org/3.4/da/d54/group__imgproc__transform.html#ga47a974309e9102f5f08231edc7e7529d)
  * @see [cv::vconcat](https://docs.opencv.org/3.4/d2/de8/group__core__array.html#ga744f53b69f6e4f12156cdde4e76aed27)
  */
-void Malla3D::concat_panorama(Axis axis, std::string output, bool resize){
+void Mesh3D::concat_panorama(Axis axis, std::string output, bool resize){
 	if(vertexs.size() > 0){
 		std::string extension = ".png";
 
@@ -1187,7 +1187,7 @@ void Malla3D::concat_panorama(Axis axis, std::string output, bool resize){
  * @see [cv::resize](https://docs.opencv.org/3.4/da/d54/group__imgproc__transform.html#ga47a974309e9102f5f08231edc7e7529d)
  * @see [cv::vconcat](https://docs.opencv.org/3.4/d2/de8/group__core__array.html#ga744f53b69f6e4f12156cdde4e76aed27)
  */
-void Malla3D::concat_panorama(Map map, std::string output, bool resize){
+void Mesh3D::concat_panorama(Map map, std::string output, bool resize){
 	std::string extension = ".png";
 
 	std::vector<cv::Mat> channels;

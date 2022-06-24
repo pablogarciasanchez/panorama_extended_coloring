@@ -18,7 +18,7 @@
 #include "aux.h"
 
 /** @file malla3d.h
- *  @brief Implementation of class Malla3D
+ *  @brief Implementation of class Mesh3D
  * 	@author [Alejandro Manzanares Lemus](https://github.com/Alexmnzlms)
  * 
  */
@@ -47,12 +47,12 @@
  * classification and retrieval @cite SFIKAS2018208
  */
 
-class Malla3D{
+class Mesh3D{
 public:
-	Malla3D();
-	Malla3D(const std::string name, const std::string path);
-	Malla3D(const Malla3D& malla),
-	~Malla3D();
+	Mesh3D();
+	Mesh3D(const std::string name, const std::string path);
+	Mesh3D(const Mesh3D& mesh),
+	~Mesh3D();
 	std::string get_name();
 	void set_name(const std::string name);
 	int num_vertexs();
