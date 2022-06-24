@@ -1,4 +1,0 @@
-<map id="Malla3D::variance_of_panorama" name="Malla3D::variance_of_panorama">
-<area shape="rect" id="node1" title="Compute variance of PANORAMA representation." alt="" coords="235,5,380,47"/>
-<area shape="rect" id="node2" href="$classMalla3D.html#ac7be542da00ca44f53442c6ad64969b0" title="Compute the normalized pose of 3d mesh." alt="" coords="5,13,187,39"/>
-</map>

@@ -1,5 +1,0 @@
-<map id="Malla3D::scale_to_unit" name="Malla3D::scale_to_unit">
-<area shape="rect" id="node1" title="Scale the mesh to the unit sphere." alt="" coords="5,31,160,57"/>
-<area shape="rect" id="node2" href="$classMalla3D.html#aa737de641d8f52b3e5e764bbade4aa98" title="Calculate maximun distance from centroid." alt="" coords="208,5,367,32"/>
-<area shape="rect" id="node3" href="$classMalla3D.html#a5e89df2d0021683c8815b42d3219fe26" title="Calculate normals of mesh faces." alt="" coords="210,56,365,83"/>
-</map>

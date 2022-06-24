@@ -1,7 +1,0 @@
-<map id="Malla3D::export_panorama" name="Malla3D::export_panorama">
-<area shape="rect" id="node1" title="Export PANORAMA representation to sdm , ndm or gndm." alt="" coords="512,31,691,57"/>
-<area shape="rect" id="node2" href="$classMalla3D.html#a62a468f594ed9248bfb756207d79bca9" title="Calculate PANORAMA [extended] representation of the 3D mesh." alt="" coords="333,23,464,65"/>
-<area shape="rect" id="node3" href="$classMalla3D.html#ac7be542da00ca44f53442c6ad64969b0" title="Compute the normalized pose of 3d mesh." alt="" coords="104,5,285,32"/>
-<area shape="rect" id="node4" href="$main_8cpp.html#ab8cd84210ffb14e863c64563b3c0f93d" title=" " alt="" coords="155,56,234,83"/>
-<area shape="rect" id="node5" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,56,83"/>
-</map>

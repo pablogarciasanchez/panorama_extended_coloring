@@ -1,5 +1,0 @@
-<map id="Malla3D::calc_centroid" name="Malla3D::calc_centroid">
-<area shape="rect" id="node1" title="Calculate centroid of mesh." alt="" coords="355,5,509,32"/>
-<area shape="rect" id="node2" href="$classMalla3D.html#a6264d38ebb5ac470b33eb17d0fb7222f" title="Load data of the mesh from an OBJ Wavefront file." alt="" coords="180,5,307,32"/>
-<area shape="rect" id="node3" href="$classMalla3D.html#a305f03b369ebc34d35433d419798eded" title="Constructor with two parameters." alt="" coords="5,5,132,32"/>
-</map>

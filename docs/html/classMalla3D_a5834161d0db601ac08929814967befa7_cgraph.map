@@ -1,4 +1,0 @@
-<map id="Malla3D::panorama_symetry_column" name="Malla3D::panorama_symetry_column">
-<area shape="rect" id="node1" title="Return w column where symmetry value of PANORAMA representation is maximun." alt="" coords="5,5,195,47"/>
-<area shape="rect" id="node2" href="$classMalla3D.html#ab69f443dc2a358388b6fb50e4cbcbac1" title="Computes symmetry values for every comlumn w of PANORAMA representation." alt="" coords="243,5,435,47"/>
-</map>

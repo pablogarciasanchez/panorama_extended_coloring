@@ -1,6 +1,6 @@
-\_form#0=199x14:$ S(I) = max\{Sym(w) | w \in 1:width\} $
-\_form#1=271x26:$ Sym(w) = 1 - \frac{1}{2m} \sum_{h=\frac{height}{2}-m}^{h=\frac{height}{2}-+m} SymDiff(w,h) $
-\_form#2=278x16:$ SymDiff(w,h) = \frac{1}{n} \sum_{x=1}^n |(w-x,h) - (w+x,h)| $
+\_form#0=271x26:$ Sym(w) = 1 - \frac{1}{2m} \sum_{h=\frac{height}{2}-m}^{h=\frac{height}{2}-+m} SymDiff(w,h) $
+\_form#1=278x16:$ SymDiff(w,h) = \frac{1}{n} \sum_{x=1}^n |(w-x,h) - (w+x,h)| $
+\_form#2=199x14:$ S(I) = max\{Sym(w) | w \in 1:width\} $
 \_form#3=243x14:$ S_{index}(I) = argmax\{ Sym(w) | w \in 1:width\} $
 \_form#4=138x15:$ Var(I) = \sum_{}^{} (I(i,j) - \mu )^2 $
 \_form#5=9x9:$ \mu $

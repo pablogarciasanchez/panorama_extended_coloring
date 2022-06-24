@@ -1,9 +1,0 @@
-<map id="Malla3D::calc_distance" name="Malla3D::calc_distance">
-<area shape="rect" id="node1" title="Calculate maximun distance from centroid." alt="" coords="612,43,771,69"/>
-<area shape="rect" id="node2" href="$classMalla3D.html#a6264d38ebb5ac470b33eb17d0fb7222f" title="Load data of the mesh from an OBJ Wavefront file." alt="" coords="207,5,334,32"/>
-<area shape="rect" id="node4" href="$classMalla3D.html#a16fdfd8b127a8f5795a8d2b5f9bd996d" title="Rotate the mesh." alt="" coords="411,93,562,120"/>
-<area shape="rect" id="node7" href="$classMalla3D.html#ae9fd766758c7a3a259cbff6262355006" title="Scale the mesh to the unit sphere." alt="" coords="409,43,564,69"/>
-<area shape="rect" id="node3" href="$classMalla3D.html#a305f03b369ebc34d35433d419798eded" title="Constructor with two parameters." alt="" coords="5,5,132,32"/>
-<area shape="rect" id="node5" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="245,68,296,95"/>
-<area shape="rect" id="node6" href="$classMalla3D.html#ac7be542da00ca44f53442c6ad64969b0" title="Compute the normalized pose of 3d mesh." alt="" coords="180,119,361,145"/>
-</map>

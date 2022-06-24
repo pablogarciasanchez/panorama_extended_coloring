@@ -1,5 +1,0 @@
-<map id="Malla3D::filter_faces" name="Malla3D::filter_faces">
-<area shape="rect" id="node1" title="Separates the faces of the mesh according to their height and sector." alt="" coords="5,31,148,57"/>
-<area shape="rect" id="node2" href="$classMalla3D.html#a01febaaa4fb630d6c3b62590ff740e51" title="Get height of a division of the cylinder." alt="" coords="196,5,335,32"/>
-<area shape="rect" id="node3" href="$classMalla3D.html#a1bce49b0d0ef934299b68cd8f29626f6" title="Get sector of a point." alt="" coords="196,56,335,83"/>
-</map>

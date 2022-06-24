@@ -1,5 +1,0 @@
-<map id="Malla3D::rotate_mesh" name="Malla3D::rotate_mesh">
-<area shape="rect" id="node1" title="Rotate the mesh." alt="" coords="235,31,385,57"/>
-<area shape="rect" id="node2" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="71,5,121,32"/>
-<area shape="rect" id="node3" href="$classMalla3D.html#ac7be542da00ca44f53442c6ad64969b0" title="Compute the normalized pose of 3d mesh." alt="" coords="5,56,187,83"/>
-</map>
