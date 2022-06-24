@@ -1,6 +1,6 @@
 <map id="src/main.cpp" name="src/main.cpp">
-<area shape="rect" id="node1" title="Example of use of Malla3D." alt="" coords="873,5,970,32"/>
-<area shape="rect" id="node2" href="$malla3d_8h.html" title="Implementation of class Malla3D." alt="" coords="882,80,961,107"/>
+<area shape="rect" id="node1" title="Example of use of Mesh3D." alt="" coords="873,5,970,32"/>
+<area shape="rect" id="node2" href="$malla3d_8h.html" title="Implementation of class Mesh3D." alt="" coords="882,80,961,107"/>
 <area shape="rect" id="node3" title=" " alt="" coords="5,155,72,181"/>
 <area shape="rect" id="node4" title=" " alt="" coords="97,155,154,181"/>
 <area shape="rect" id="node5" title=" " alt="" coords="179,155,240,181"/>

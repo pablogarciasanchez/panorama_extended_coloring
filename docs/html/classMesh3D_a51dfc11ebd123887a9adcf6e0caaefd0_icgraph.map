@@ -1,0 +1,5 @@
+<map id="Mesh3D::rotate_mesh" name="Mesh3D::rotate_mesh">
+<area shape="rect" id="node1" title="Rotate the mesh." alt="" coords="236,31,387,57"/>
+<area shape="rect" id="node2" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="71,5,122,32"/>
+<area shape="rect" id="node3" href="$classMesh3D.html#a46b3dc7efd61e25fb9f157b7b3592747" title="Compute the normalized pose of 3d mesh." alt="" coords="5,56,188,83"/>
+</map>

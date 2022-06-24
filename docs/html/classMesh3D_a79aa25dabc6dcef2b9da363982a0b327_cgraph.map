@@ -1,0 +1,4 @@
+<map id="Mesh3D::panorama_symetry_column" name="Mesh3D::panorama_symetry_column">
+<area shape="rect" id="node1" title="Return w column where symmetry value of PANORAMA representation is maximun." alt="" coords="5,5,196,47"/>
+<area shape="rect" id="node2" href="$classMesh3D.html#af0f98a56d1011b6b05d6a80de0bff1d0" title="Computes symmetry values for every comlumn w of PANORAMA representation." alt="" coords="244,5,437,47"/>
+</map>

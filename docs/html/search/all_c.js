@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['radius_0',['radius',['../classMalla3D.html#a3e714a103977db6162b4e332ab9da164',1,'Malla3D']]],
-  ['rayintersectstriangle_1',['RayIntersectsTriangle',['../classMalla3D.html#a16cfe88c11a5a9ab468833cc412b4ba3',1,'Malla3D']]],
-  ['rotate_5fmesh_2',['rotate_mesh',['../classMalla3D.html#a16fdfd8b127a8f5795a8d2b5f9bd996d',1,'Malla3D']]]
+  ['radius_0',['radius',['../classMesh3D.html#aab9c280f05b5c39562f188a0d5ce0e1c',1,'Mesh3D']]],
+  ['rayintersectstriangle_1',['RayIntersectsTriangle',['../classMesh3D.html#afae60cf7754feb072082d08d46660609',1,'Mesh3D']]],
+  ['rotate_5fmesh_2',['rotate_mesh',['../classMesh3D.html#a51dfc11ebd123887a9adcf6e0caaefd0',1,'Mesh3D']]]
 ];

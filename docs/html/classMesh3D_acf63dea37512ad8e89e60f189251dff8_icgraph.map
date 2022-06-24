@@ -1,0 +1,9 @@
+<map id="Mesh3D::calc_distance" name="Mesh3D::calc_distance">
+<area shape="rect" id="node1" title="Calculate maximun distance from centroid." alt="" coords="616,43,775,69"/>
+<area shape="rect" id="node2" href="$classMesh3D.html#a94234b43ba455dd77181c00a6033e427" title="Load data of the mesh from an OBJ Wavefront file." alt="" coords="209,5,336,32"/>
+<area shape="rect" id="node4" href="$classMesh3D.html#a51dfc11ebd123887a9adcf6e0caaefd0" title="Rotate the mesh." alt="" coords="415,93,565,120"/>
+<area shape="rect" id="node7" href="$classMesh3D.html#a655d57a3ca7d22cef507c9f511a1eeb7" title="Scale the mesh to the unit sphere." alt="" coords="412,43,568,69"/>
+<area shape="rect" id="node3" href="$classMesh3D.html#ade933c1bff0263ae0cae0d1661b7e834" title="Constructor with two parameters." alt="" coords="5,5,133,32"/>
+<area shape="rect" id="node5" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="247,68,298,95"/>
+<area shape="rect" id="node6" href="$classMesh3D.html#a46b3dc7efd61e25fb9f157b7b3592747" title="Compute the normalized pose of 3d mesh." alt="" coords="181,119,364,145"/>
+</map>

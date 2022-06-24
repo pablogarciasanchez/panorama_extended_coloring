@@ -1,0 +1,7 @@
+<map id="Mesh3D::load_obj" name="Mesh3D::load_obj">
+<area shape="rect" id="node1" title="Load data of the mesh from an OBJ Wavefront file." alt="" coords="5,81,132,108"/>
+<area shape="rect" id="node2" href="$classMesh3D.html#a3d12b5c589feb91e1f2fd0af74d1fd61" title="Calculate centroid of mesh." alt="" coords="180,5,336,32"/>
+<area shape="rect" id="node3" href="$classMesh3D.html#acf63dea37512ad8e89e60f189251dff8" title="Calculate maximun distance from centroid." alt="" coords="384,81,543,108"/>
+<area shape="rect" id="node4" href="$classMesh3D.html#a689d7bf2e99e13c7b8bed8bba533690a" title="Calculate normals of mesh faces." alt="" coords="385,144,541,171"/>
+<area shape="rect" id="node5" href="$classMesh3D.html#a655d57a3ca7d22cef507c9f511a1eeb7" title="Scale the mesh to the unit sphere." alt="" coords="180,107,336,133"/>
+</map>

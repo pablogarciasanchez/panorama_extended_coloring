@@ -1,7 +1,7 @@
 <map id="include/aux.h" name="include/aux.h">
 <area shape="rect" id="node1" title="Auxiliar enums definitions and functions related." alt="" coords="135,5,234,32"/>
-<area shape="rect" id="node2" href="$malla3d_8h.html" title="Implementation of class Malla3D." alt="" coords="58,80,181,107"/>
+<area shape="rect" id="node2" href="$malla3d_8h.html" title="Implementation of class Mesh3D." alt="" coords="58,80,181,107"/>
 <area shape="rect" id="node5" href="$aux_8cpp.html" title="Auxiliar enums definitions and functions related." alt="" coords="205,80,295,107"/>
-<area shape="rect" id="node3" href="$main_8cpp.html" title="Example of use of Malla3D." alt="" coords="5,155,103,181"/>
-<area shape="rect" id="node4" href="$malla3d_8cpp.html" title="Implementation of class Malla3D." alt="" coords="127,155,242,181"/>
+<area shape="rect" id="node3" href="$main_8cpp.html" title="Example of use of Mesh3D." alt="" coords="5,155,103,181"/>
+<area shape="rect" id="node4" href="$malla3d_8cpp.html" title="Implementation of class Mesh3D." alt="" coords="127,155,242,181"/>
 </map>

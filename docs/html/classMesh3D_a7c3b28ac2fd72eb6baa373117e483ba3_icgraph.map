@@ -1,0 +1,8 @@
+<map id="Mesh3D::get_sector" name="Mesh3D::get_sector">
+<area shape="rect" id="node1" title="Get sector of a point." alt="" coords="768,31,908,57"/>
+<area shape="rect" id="node2" href="$classMesh3D.html#a0a984cd43ac240bc77aedaa564824fbb" title="Calculate PANORAMA [extended] representation of the 3D mesh." alt="" coords="335,31,529,57"/>
+<area shape="rect" id="node6" href="$classMesh3D.html#a8cfc87c76eed8c2e11c14f87d2e2788a" title="Separates the faces of the mesh according to their height and sector." alt="" coords="577,56,720,83"/>
+<area shape="rect" id="node3" href="$classMesh3D.html#a46b3dc7efd61e25fb9f157b7b3592747" title="Compute the normalized pose of 3d mesh." alt="" coords="104,5,287,32"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#a2c209674c35c64c91f02b662b0902b5f" title=" " alt="" coords="156,56,235,83"/>
+<area shape="rect" id="node5" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,56,83"/>
+</map>

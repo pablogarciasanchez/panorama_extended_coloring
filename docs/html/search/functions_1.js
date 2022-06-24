@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['calc_5fcentroid_0',['calc_centroid',['../classMalla3D.html#a818657957f0d56667383137acd5714e8',1,'Malla3D']]],
-  ['calc_5fdistance_1',['calc_distance',['../classMalla3D.html#aa737de641d8f52b3e5e764bbade4aa98',1,'Malla3D']]],
-  ['calc_5fnormals_2',['calc_normals',['../classMalla3D.html#a5e89df2d0021683c8815b42d3219fe26',1,'Malla3D']]],
-  ['calculate_5fpanorama_3',['calculate_panorama',['../classMalla3D.html#a62a468f594ed9248bfb756207d79bca9',1,'Malla3D']]],
-  ['combine_5fpanorama_4',['combine_panorama',['../classMalla3D.html#a2ad2058b8df4e1675840a12c298e14bd',1,'Malla3D']]],
-  ['compute_5fpanorama_5fsymetry_5',['compute_panorama_symetry',['../classMalla3D.html#ab69f443dc2a358388b6fb50e4cbcbac1',1,'Malla3D']]],
-  ['concat_5fpanorama_6',['concat_panorama',['../classMalla3D.html#a9485ecd9e591a9c98f39dd51c94b0970',1,'Malla3D::concat_panorama(Axis axis, std::string output, bool resize=true)'],['../classMalla3D.html#acd23c27749083c74f51a61888a9d651d',1,'Malla3D::concat_panorama(Map map, std::string output, bool resize=true)']]]
+  ['calc_5fcentroid_0',['calc_centroid',['../classMesh3D.html#a3d12b5c589feb91e1f2fd0af74d1fd61',1,'Mesh3D']]],
+  ['calc_5fdistance_1',['calc_distance',['../classMesh3D.html#acf63dea37512ad8e89e60f189251dff8',1,'Mesh3D']]],
+  ['calc_5fnormals_2',['calc_normals',['../classMesh3D.html#a689d7bf2e99e13c7b8bed8bba533690a',1,'Mesh3D']]],
+  ['calculate_5fpanorama_3',['calculate_panorama',['../classMesh3D.html#a0a984cd43ac240bc77aedaa564824fbb',1,'Mesh3D']]],
+  ['combine_5fpanorama_4',['combine_panorama',['../classMesh3D.html#abcfbcc10775544bcf4c5d1d706dd23b5',1,'Mesh3D']]],
+  ['compute_5fpanorama_5fsymetry_5',['compute_panorama_symetry',['../classMesh3D.html#af0f98a56d1011b6b05d6a80de0bff1d0',1,'Mesh3D']]],
+  ['concat_5fpanorama_6',['concat_panorama',['../classMesh3D.html#a5d8447c5025429061006dd3fb2d4632b',1,'Mesh3D::concat_panorama(Axis axis, std::string output, bool resize=true)'],['../classMesh3D.html#abdb5122f16e589704d94ab9153c98fd0',1,'Mesh3D::concat_panorama(Map map, std::string output, bool resize=true)']]]
 ];

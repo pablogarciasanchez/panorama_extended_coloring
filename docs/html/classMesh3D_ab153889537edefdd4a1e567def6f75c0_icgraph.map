@@ -1,0 +1,4 @@
+<map id="Mesh3D::panorama_symetry_value" name="Mesh3D::panorama_symetry_value">
+<area shape="rect" id="node1" title="Return max value of symmetry of PANORAMA representation." alt="" coords="236,5,427,47"/>
+<area shape="rect" id="node2" href="$classMesh3D.html#a46b3dc7efd61e25fb9f157b7b3592747" title="Compute the normalized pose of 3d mesh." alt="" coords="5,13,188,39"/>
+</map>

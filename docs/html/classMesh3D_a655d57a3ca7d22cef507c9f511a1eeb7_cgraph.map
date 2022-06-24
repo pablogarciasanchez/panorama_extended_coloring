@@ -1,0 +1,5 @@
+<map id="Mesh3D::scale_to_unit" name="Mesh3D::scale_to_unit">
+<area shape="rect" id="node1" title="Scale the mesh to the unit sphere." alt="" coords="5,31,161,57"/>
+<area shape="rect" id="node2" href="$classMesh3D.html#acf63dea37512ad8e89e60f189251dff8" title="Calculate maximun distance from centroid." alt="" coords="209,5,368,32"/>
+<area shape="rect" id="node3" href="$classMesh3D.html#a689d7bf2e99e13c7b8bed8bba533690a" title="Calculate normals of mesh faces." alt="" coords="211,56,367,83"/>
+</map>

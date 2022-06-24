@@ -1,0 +1,12 @@
+<map id="Mesh3D::calculate_panorama" name="Mesh3D::calculate_panorama">
+<area shape="rect" id="node1" title="Calculate PANORAMA [extended] representation of the 3D mesh." alt="" coords="5,183,200,209"/>
+<area shape="rect" id="node2" href="$classMesh3D.html#a2b2c5e6a2bc74dae6e2f033f402ab5f5" title="Export PANORAMA representation to sdm , ndm or gndm." alt="" coords="262,5,441,32"/>
+<area shape="rect" id="node3" href="$classMesh3D.html#afbf78c4b5703f84162afa3e89faad9cb" title="Compute the feature map specified ." alt="" coords="276,56,427,83"/>
+<area shape="rect" id="node4" href="$classMesh3D.html#a8cfc87c76eed8c2e11c14f87d2e2788a" title="Separates the faces of the mesh according to their height and sector." alt="" coords="280,107,423,133"/>
+<area shape="rect" id="node6" href="$classMesh3D.html#a7c3b28ac2fd72eb6baa373117e483ba3" title="Get sector of a point." alt="" coords="503,157,643,184"/>
+<area shape="rect" id="node7" href="$classMesh3D.html#a3bef9be7ab66d7007f7d0c2dafd78430" title="Get direction of ray based on axis and angle." alt="" coords="292,208,411,235"/>
+<area shape="rect" id="node8" href="$classMesh3D.html#a26d29a9bbd2d5e4c83deeab8bf6f7288" title="Get origin of ray based on axis and height." alt="" coords="289,259,414,285"/>
+<area shape="rect" id="node9" href="$aux_8cpp.html#aee40fe119b557ef2e8c1b596fd28c0b5" title="Convert enum Map to std::string c++ type." alt="" coords="299,309,403,336"/>
+<area shape="rect" id="node10" href="$classMesh3D.html#afae60cf7754feb072082d08d46660609" title="Compute Ray&#45;Triangle Intersection using Möller&#45;Trumbore algorithm." alt="" coords="248,360,455,387"/>
+<area shape="rect" id="node5" href="$classMesh3D.html#ac1f0f4c6d293fcaef2b3b049a9b6d410" title="Get height of a division of the cylinder." alt="" coords="503,107,642,133"/>
+</map>

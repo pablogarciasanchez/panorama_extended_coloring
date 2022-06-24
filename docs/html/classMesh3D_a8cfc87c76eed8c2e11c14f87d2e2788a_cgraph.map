@@ -1,0 +1,5 @@
+<map id="Mesh3D::filter_faces" name="Mesh3D::filter_faces">
+<area shape="rect" id="node1" title="Separates the faces of the mesh according to their height and sector." alt="" coords="5,31,148,57"/>
+<area shape="rect" id="node2" href="$classMesh3D.html#ac1f0f4c6d293fcaef2b3b049a9b6d410" title="Get height of a division of the cylinder." alt="" coords="197,5,335,32"/>
+<area shape="rect" id="node3" href="$classMesh3D.html#a7c3b28ac2fd72eb6baa373117e483ba3" title="Get sector of a point." alt="" coords="196,56,336,83"/>
+</map>

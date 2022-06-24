@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_7emalla3d_0',['~Malla3D',['../classMalla3D.html#a62dfcbaaa3fdb632d8238f1355209644',1,'Malla3D']]]
+  ['_7emesh3d_0',['~Mesh3D',['../classMesh3D.html#a108c133bc3340e895204e9ce5c1053c1',1,'Mesh3D']]]
 ];

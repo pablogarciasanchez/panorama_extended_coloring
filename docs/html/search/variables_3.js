@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['facesindex_0',['facesIndex',['../classMalla3D.html#a25cf8395098c9ead76d2d782d1e6908e',1,'Malla3D']]],
-  ['facesindex_5ffilter_1',['facesIndex_filter',['../classMalla3D.html#a6bbba1770a560e320dcfaed133ec88d2',1,'Malla3D']]]
+  ['facesindex_0',['facesIndex',['../classMesh3D.html#a0bd4659ad0cee8f023274b071f9e9da8',1,'Mesh3D']]],
+  ['facesindex_5ffilter_1',['facesIndex_filter',['../classMesh3D.html#a5890a3b07c3c40312ef2dbd87da6ab20',1,'Mesh3D']]]
 ];

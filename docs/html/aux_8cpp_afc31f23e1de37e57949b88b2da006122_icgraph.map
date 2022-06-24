@@ -1,7 +1,7 @@
 <map id="axis_to_string" name="axis_to_string">
-<area shape="rect" id="node1" title="Convert enum Axis to std::string c++ type." alt="" coords="469,31,572,57"/>
-<area shape="rect" id="node2" href="$classMalla3D.html#a2ad2058b8df4e1675840a12c298e14bd" title="Combine PANORAMA feature maps SDM, NDM and GNDM in PANORAMA extended representation." alt="" coords="231,5,421,32"/>
-<area shape="rect" id="node5" href="$classMalla3D.html#a9485ecd9e591a9c98f39dd51c94b0970" title="Concatenation PANORAMA feature maps SDM and NDM." alt="" coords="235,56,417,83"/>
-<area shape="rect" id="node3" href="$main_8cpp.html#ab8cd84210ffb14e863c64563b3c0f93d" title=" " alt="" coords="104,31,183,57"/>
+<area shape="rect" id="node1" title="Convert enum Axis to std::string c++ type." alt="" coords="471,31,573,57"/>
+<area shape="rect" id="node2" href="$classMesh3D.html#abcfbcc10775544bcf4c5d1d706dd23b5" title="Combine PANORAMA feature maps SDM, NDM and GNDM in PANORAMA extended representation." alt="" coords="231,5,423,32"/>
+<area shape="rect" id="node5" href="$classMesh3D.html#a5d8447c5025429061006dd3fb2d4632b" title="Concatenation PANORAMA feature maps SDM and NDM." alt="" coords="235,56,418,83"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#a2c209674c35c64c91f02b662b0902b5f" title=" " alt="" coords="104,31,183,57"/>
 <area shape="rect" id="node4" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,31,56,57"/>
 </map>
