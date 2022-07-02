@@ -14,3 +14,4 @@ graph*
 PANORAMA/*
 *.png
 !docs/html/*.png
+*.obj
