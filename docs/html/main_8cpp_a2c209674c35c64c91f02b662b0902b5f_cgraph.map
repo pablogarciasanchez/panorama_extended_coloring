@@ -1,8 +1,10 @@
 <map id="panorama" name="panorama">
-<area shape="rect" id="node1" title=" " alt="" coords="5,360,84,387"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,411,84,437"/>
 <area shape="rect" id="node2" href="$classMesh3D.html#a0a984cd43ac240bc77aedaa564824fbb" title="Calculate PANORAMA [extended] representation of the 3D mesh." alt="" coords="132,208,327,235"/>
 <area shape="rect" id="node12" href="$classMesh3D.html#abcfbcc10775544bcf4c5d1d706dd23b5" title="Combine PANORAMA feature maps SDM, NDM and GNDM in PANORAMA extended representation." alt="" coords="133,360,325,387"/>
 <area shape="rect" id="node14" href="$classMesh3D.html#a5d8447c5025429061006dd3fb2d4632b" title="Concatenation PANORAMA feature maps SDM and NDM." alt="" coords="138,411,321,437"/>
+<area shape="rect" id="node15" href="$classMesh3D.html#aa6622ada4c4b5c1d7c14c9cd1e1e3a64" title="Export mesh data to OBJ Wavefront file." alt="" coords="160,461,299,488"/>
+<area shape="rect" id="node16" href="$classMesh3D.html#ac9ef3a098d6014a58c94c7584f339229" title="Get model&#39;s name." alt="" coords="161,512,297,539"/>
 <area shape="rect" id="node3" href="$classMesh3D.html#a2b2c5e6a2bc74dae6e2f033f402ab5f5" title="Export PANORAMA representation to sdm , ndm or gndm." alt="" coords="389,5,567,32"/>
 <area shape="rect" id="node4" href="$classMesh3D.html#afbf78c4b5703f84162afa3e89faad9cb" title="Compute the feature map specified ." alt="" coords="403,56,553,83"/>
 <area shape="rect" id="node5" href="$classMesh3D.html#a8cfc87c76eed8c2e11c14f87d2e2788a" title="Separates the faces of the mesh according to their height and sector." alt="" coords="407,107,549,133"/>
