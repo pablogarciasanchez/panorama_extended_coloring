@@ -1,161 +1,138 @@
 #include "mesh3d.h"
+#include <map>
+#include <string>
 
 /** @file main.cpp
- *  @brief Example of use of Mesh3D
  * 	@author [Alejandro Manzanares Lemus](https://github.com/Alexmnzlms)
- * 
  */
 
-
-void panorama(Mesh3D& malla, std::string output_folder_pe, std::string output_folder_fm){
-	malla.calculate_panorama(SDM, X, 1, 4);
-	malla.calculate_panorama(NDM, X, 1, 4);
-
-	malla.calculate_panorama(SDM, Y, 1, 4);
-	malla.calculate_panorama(NDM, Y, 1, 4);
-
-	malla.calculate_panorama(SDM, Z, 1, 4);
-	malla.calculate_panorama(NDM, Z, 1, 4);
-
-	malla.combine_panorama(X,output_folder_pe,false);
-	malla.combine_panorama(Y,output_folder_pe,false);
-	malla.combine_panorama(Z,output_folder_pe,false);
-
-	malla.concat_panorama(SDM,output_folder_fm,false);
-	malla.concat_panorama(NDM,output_folder_fm,false);
-	malla.concat_panorama(GNDM,output_folder_fm,false);
-}
+// Estructura para los datos asociados a cada muestra
+struct DatosMuestra {
+    double Edad;
+    double Edad_predicha;
+    double Diferencia;
+    int Indicador;
+    double ponderacionX;
+    double ponderacionY;
+    double ponderacionZ;
+};
 
 int main(int argc, char * argv[]) {
 
 	srand (time(NULL));
 
-	if(argc != 5){
+	if(argc != 7){
 		std::cout << "Wrong parameters" << std::endl;
-		std::cout << "bin/panorama_extended [model name] [relive route to 3D model]"
-		<< " [output folder PANORAMA extended] [output folder feature map]"  << std::endl;
+		std::cout << "bin/panorama_extended [name] [relive route to 3D model]"
+		<< " [relive route to saliency map X]" << " [route to saliency map Y] " << " [route to saliency map Y] "
+		<< "[output folder]" << std::endl;
 		exit(-1);
 	}
 
 	std::string name = argv[1];
 	std::string path = argv[2];
-	std::string output_folder_pe = argv[3];
-	std::string output_folder_fm = argv[4];
+	std::string path_X = argv[3];
+	std::string path_Y = argv[4];
+    std::string path_Z = argv[5];
+	std::string output = argv[6];
 
 	std::cout << "Loading " << name << "\tPath: " << path << "..." << std::endl;
+    
+    // Nombre del archivo
+    std::string filename = "./predicciones.csv";
 
-	Mesh3D malla(name, path);
+    // Abre el archivo para lectura
+    std::ifstream inFile(filename);
 
-	if (malla.num_vertexs() > 0){
-		std::cout << "Loaded " << malla.get_name() << std::endl;
+    // Verifica si el archivo se abrió correctamente
+    if (!inFile) {
+        std::cerr << "No se pudo abrir el archivo " << filename << std::endl;
+        return 1;
+    }
+    
+    // Mapa para relacionar cada nombre de muestra con sus datos
+    std::map<std::string, DatosMuestra> diccionario;
 
-		std::string rot_name = malla.get_name() + "_0";
-		std::string orig_name = malla.get_name();
-		malla.set_name(rot_name);
+    // Leer el archivo línea por línea
+    std::string line;
+    while (std::getline(inFile, line)) {
+        std::istringstream stream(line);
+        std::string token;
 
-		// malla.mesh_pose_norm();
+        // Leer el nombre de la muestra
+        std::getline(stream, token, ',');
+        std::string nombre_muestra = token;
+        
+        // Leer el resto de los datos
+        DatosMuestra datos;
+        stream >> datos.Edad;
+        stream.ignore(1, ',');
+        stream >> datos.Edad_predicha;
+        stream.ignore(1, ',');
+        stream >> datos.Diferencia;
+        stream.ignore(1, ',');
+        stream >> datos.Indicador;
+        stream.ignore(1, ',');
+        stream >> datos.ponderacionX;
+        stream.ignore(1, ',');
+        stream >> datos.ponderacionY;
+        stream.ignore(1, ',');
+        stream >> datos.ponderacionZ;
 
-		int rot_angle_x1 = rand() % 11 + 5;
-		int rot_angle_x2 = rand() % 11 + 5;
-		int rot_angle_z1 = rand() % 11 + 5;
-		int rot_angle_z2 = rand() % 11 + 5;
+        // Insertar los datos en el diccionario
+        diccionario[nombre_muestra] = datos;
+    }
+    
+    // Cierra el archivo
+    inFile.close();
 
-		float rot_radians_x1 = float(rot_angle_x1) * (M_PI/180.0);
-		float rot_radians_x2 = 2*M_PI - (float(rot_angle_x2) * (M_PI/180.0));
-		float rot_radians_z1 = float(rot_angle_z1) * (M_PI/180.0);
-		float rot_radians_z2 = 2*M_PI - (float(rot_angle_z2) * (M_PI/180.0));
+    // Ahora puedes acceder a los datos usando el nombre de la muestra
+    DatosMuestra muestra = diccionario[name];
+    std::cout << "Nombre: " << name << std::endl;
+    std::cout << "Edad: " << muestra.Edad << std::endl;
+    std::cout << "Edad_predicha: " << muestra.Edad_predicha << std::endl;
+    std::cout << "Importancia de la vista X: " << muestra.ponderacionX << std::endl;
+    std::cout << "Importancia de la vista Y: " << muestra.ponderacionY << std::endl;
+    std::cout << "Importancia de la vista Z: " << muestra.ponderacionZ << std::endl;
+    
+    Axis axis;
+    
+    Mesh3D mallaX(name, path, true);  // Carga de la malla desde el archivo original para vista X
+    if (mallaX.num_vertexs() > 0) {
+        std::cout << "Loaded " << mallaX.get_name() << std::endl;
 
-		int cont = 1;
-		Mesh3D malla_x1(malla);
-		rot_name = orig_name + "_" + std::to_string(cont);
-		malla_x1.set_name(rot_name);
-		cont++;
-		Mesh3D malla_x2(malla);
-		rot_name = orig_name + "_" + std::to_string(cont);
-		malla_x2.set_name(rot_name);
-		cont++;
-		Mesh3D malla_z1(malla);
-		rot_name = orig_name + "_" + std::to_string(cont);
-		malla_z1.set_name(rot_name);
-		cont++;
-		Mesh3D malla_z2(malla);
-		rot_name = orig_name + "_" + std::to_string(cont);
-		malla_z2.set_name(rot_name);
-		cont++;
+        std::cout << "Coloring: " << path_X << "..." << std::endl;
+        axis = X;
+        mallaX.color_3d_model(path_X, axis);
+        mallaX.export_obj(output + "/" + name + "_X_colored.obj", true);
+    
+    }
+    
+    // Coloreando vista Y
+    Mesh3D mallaY(name, path, true);  // Carga de la malla desde el archivo original para vista Y
+    if (mallaY.num_vertexs() > 0) {
+        std::cout << "Loaded " << mallaY.get_name() << std::endl;
 
-		std::cout << "Rotating in axis X:" << rot_radians_x1 * (180.0/M_PI) << std::endl;
-		malla_x1.rotate_mesh(X,rot_radians_x1);
-		std::cout << "Rotating in axis X:" << rot_radians_x2 * (180.0/M_PI)<< std::endl;
-		malla_x2.rotate_mesh(X,rot_radians_x2);
-		std::cout << "Rotating in axis Z:" << rot_radians_z1 * (180.0/M_PI)<< std::endl;
-		malla_z1.rotate_mesh(Z,rot_radians_z1);
-		std::cout << "Rotating in axis Z:" << rot_radians_z2 * (180.0/M_PI)<< std::endl;
-		malla_z2.rotate_mesh(Z,rot_radians_z2);
+        std::cout << "Coloring: " << path_Y << "..." << std::endl;
+        axis = Y;
+        mallaY.color_3d_model(path_Y, axis);
+        mallaY.export_obj(output + "/" + name + "_Y_colored.obj", true);
+    }
+    
+    // Coloreando vista Z
+    Mesh3D mallaZ(name, path, true);  // Carga de la malla desde el archivo original para vista Z
+    if (mallaZ.num_vertexs() > 0) {
+        std::cout << "Loaded " << mallaZ.get_name() << std::endl;
 
-		panorama(malla_x1,output_folder_pe,output_folder_fm);
-		panorama(malla_x2,output_folder_pe,output_folder_fm);
-		panorama(malla_z1,output_folder_pe,output_folder_fm);
-		panorama(malla_z2,output_folder_pe,output_folder_fm);
-
-		panorama(malla,output_folder_pe,output_folder_fm);
-
-		
-		for(int i = 0; i < 3; i++){
-			Mesh3D malla_rot(malla);
-			std::string rot_name;
-
-			int rot_angle_y = rand() % 180 + 1;
-			float rot_radians_y = float(rot_angle_y) * (M_PI/180.0);
-			std::cout << "Rotating in axis Y:" << rot_angle_y << std::endl;
-			malla_rot.rotate_mesh(Y,rot_radians_y);
-			rot_name = orig_name + "_" + std::to_string(cont);
-			malla_rot.set_name(rot_name);
-			cont++;
-
-			int rot_angle_x1 = rand() % 11 + 5;
-			int rot_angle_x2 = rand() % 11 + 5;
-			int rot_angle_z1 = rand() % 11 + 5;
-			int rot_angle_z2 = rand() % 11 + 5;
-
-			float rot_radians_x1 = float(rot_angle_x1) * (M_PI/180.0);
-			float rot_radians_x2 = 2*M_PI - (float(rot_angle_x2) * (M_PI/180.0));
-			float rot_radians_z1 = float(rot_angle_z1) * (M_PI/180.0);
-			float rot_radians_z2 = 2*M_PI - (float(rot_angle_z2) * (M_PI/180.0));
-
-			
-			Mesh3D malla_x1(malla_rot);
-			rot_name = orig_name + "_" + std::to_string(cont);
-			malla_x1.set_name(rot_name);
-			cont++;
-			Mesh3D malla_x2(malla_rot);
-			rot_name = orig_name + "_" + std::to_string(cont);
-			malla_x2.set_name(rot_name);
-			cont++;
-			Mesh3D malla_z1(malla_rot);
-			rot_name = orig_name + "_" + std::to_string(cont);
-			malla_z1.set_name(rot_name);
-			cont++;
-			Mesh3D malla_z2(malla_rot);
-			rot_name = orig_name + "_" + std::to_string(cont);
-			malla_z2.set_name(rot_name);
-			cont++;
-
-			std::cout << "Rotating in axis X:" << rot_radians_x1 * (180.0/M_PI) << std::endl;
-			malla_x1.rotate_mesh(X,rot_radians_x1);
-			std::cout << "Rotating in axis X:" << rot_radians_x2 * (180.0/M_PI)<< std::endl;
-			malla_x2.rotate_mesh(X,rot_radians_x2);
-			std::cout << "Rotating in axis Z:" << rot_radians_z1 * (180.0/M_PI)<< std::endl;
-			malla_z1.rotate_mesh(Z,rot_radians_z1);
-			std::cout << "Rotating in axis Z:" << rot_radians_z2 * (180.0/M_PI)<< std::endl;
-			malla_z2.rotate_mesh(Z,rot_radians_z2);
-
-			panorama(malla_rot,output_folder_pe,output_folder_fm);
-			panorama(malla_x1,output_folder_pe,output_folder_fm);
-			panorama(malla_x2,output_folder_pe,output_folder_fm);
-			panorama(malla_z1,output_folder_pe,output_folder_fm);
-			panorama(malla_z2,output_folder_pe,output_folder_fm);
-		}
-		
-	}
+        std::cout << "Coloring: " << path_Z << "..." << std::endl;
+        axis = Z;
+        mallaZ.color_3d_model(path_Z, axis);
+        mallaZ.export_obj(output + "/" + name + "_Z_colored.obj", true);
+    }
+    
+    Mesh3D combinedMesh(name,path,true);
+    combinedMesh.combine_mesh(mallaX, mallaY, mallaZ, muestra.ponderacionX, muestra.ponderacionY, muestra.ponderacionZ);
+    combinedMesh.export_obj(output + "/" + name + "_combined_colored.obj", true);
+    
 	return 0;
 }
