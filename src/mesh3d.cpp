@@ -25,16 +25,17 @@ Mesh3D::Mesh3D(){
  * Constructor calls load_obj() function to load de mesh data and store model's name.
  * @param name string containing model's name
  * @param path string containing the relative path to the 3D model to be loaded
+ * @param color TO DO
  * @see load_obj()
  */
-Mesh3D::Mesh3D(const std::string name, const std::string path){
+Mesh3D::Mesh3D(const std::string name, const std::string path, bool color){
 	for(int i = 0; i < 3; i++){
 		cv::Mat aux;
 		sdm.push_back(aux);
 		ndm.push_back(aux);
 		gndm.push_back(aux);
 	}
-	load_obj(path);
+	load_obj(path, color);
 	this->name = name;
 }
 
@@ -237,7 +238,7 @@ void Mesh3D::rotate_mesh(Axis axis_rot, float angle){
  * @return bool Indicates whether the read was successful (true) or unsuccessful (false)
  * @see [OBJ Wavefront specification](http://paulbourke.net/dataformats/obj/)
  */
-bool Mesh3D::load_obj(const std::string path){
+bool Mesh3D::load_obj(const std::string path, bool color){
 	std::vector< unsigned int > vertexIndices;
 	std::vector< glm::vec3 > temp_vertices;
 	std::ifstream file;
@@ -261,6 +262,9 @@ bool Mesh3D::load_obj(const std::string path){
 			file >> vertex.y;
 			file >> vertex.z;
 			vertexs.push_back(vertex);
+			if(color){
+                vertexColor.push_back({0.0, 0.0, 0.5});
+			}
 		} else if (header == "f"){
 			std::string vertex1, vertex2, vertex3;
 			std::vector<int> vertexIndex;
@@ -296,12 +300,29 @@ bool Mesh3D::load_obj(const std::string path){
  * @brief Export mesh data to OBJ Wavefront file
  * @param path string containing the path where you will export the model to
  */
-void Mesh3D::export_obj(const std::string path){
+void Mesh3D::export_obj(const std::string path, bool color){
 	std::ofstream file;
 	file.open(path);
 
 	for(int i = 0; i < vertexs.size(); i++){
-		file << "v " << vertexs[i][0] << " " << vertexs[i][1] << " " << vertexs[i][2] << std::endl;
+		file << "v " << vertexs[i][0] << " " << vertexs[i][1] << " " << vertexs[i][2] << " ";
+		if(color){
+			double red = vertexColor[i][0];
+			if(red > 1.0){
+				red = 1.0;
+			}
+			double green = vertexColor[i][1];
+			if(green > 1.0){
+				green = 1.0;
+			}
+			double blue = vertexColor[i][2];
+			if(blue > 1.0){
+				blue = 1.0;
+			}
+			file << red << " " << green << " " << blue << std::endl;
+		} else {
+			file << std::endl;
+		}
 	}
 
 	for(int j = 0; j < facesIndex.size(); j++){
@@ -1230,3 +1251,301 @@ void Mesh3D::concat_panorama(Map map, std::string output, bool resize){
 	}
 	
 }
+/** @brief
+ * 
+ * 
+*/
+void Mesh3D::color_3d_model(std::string image_path, Axis axis){
+    /*
+	cv::Mat img_orig = cv::imread(image_path, cv::IMREAD_GRAYSCALE);
+	// cv::Mat img = img_orig.colRange(0,72);
+	cv::Mat img = img_orig;
+    */
+    
+    cv::Mat img_orig = cv::imread(image_path, cv::IMREAD_GRAYSCALE);
+    //std::cout << "Ancho (cols): " << img_orig.cols << std::endl;
+    //std::cout << "Alto (rows): " << img_orig.rows << std::endl;
+    int third = img_orig.cols / 3;
+
+    cv::Mat first_chunk = img_orig.colRange(0, third);
+    cv::Mat second_chunk = img_orig.colRange(third, 2 * third);
+    cv::Mat third_chunk = img_orig.colRange(2 * third, img_orig.cols);
+
+    // Calcular la media entre first_chunk y third_chunk
+    cv::Mat average_chunk;
+    cv::addWeighted(first_chunk, 0.5, third_chunk, 0.5, 0, average_chunk);
+
+    cv::Mat img;
+    cv::hconcat(average_chunk, second_chunk, img);
+    
+    //cv::Mat img;
+    //cv::hconcat(first_chunk, second_chunk, img);
+    
+    // Imprimir las dimensiones
+    //std::cout << "Ancho (cols): " << img.cols << std::endl;
+    //std::cout << "Alto (rows): " << img.rows << std::endl;
+    
+	//cv::imshow("Window",img);
+	//cv::waitKey();
+	// std::vector<cv::Mat> three_channels;
+	// cv::split(img,three_channels);
+
+	cv::Mat img_resize;
+	cv::resize(img,img_resize,cv::Size(2*B,B));
+	// cv::imshow("Window",img_resize);
+	// cv::waitKey();
+	// cv::destroyAllWindows();
+
+	// Now I can access each channel separately
+	// for(int i=0; i<img.rows; i++){
+	// 	for(int j=0; j<img.cols; j++){
+	// 		int red = static_cast<int>(three_channels[0].at<uint8_t>(i,j));
+	// 		int green = static_cast<int>(three_channels[1].at<uint8_t>(i,j));
+	// 		int blue = static_cast<int>(three_channels[2].at<uint8_t>(i,j));
+	// 		// std::cout << red << " " << green << " " << blue << std::endl;
+	// 	}	
+		// std::cout << std::endl;
+	// }
+
+	// std::cout << three_channels[0] << std::endl;
+
+	if(vertexs.size() > 0){
+
+		//Axis axis = Y;
+
+		std::chrono::steady_clock::time_point begin;
+		std::chrono::steady_clock::time_point end;
+		begin = std::chrono::steady_clock::now();
+		
+		glm::vec3 direction;
+		glm::vec3 origin;
+
+		int n_colisiones = 0;
+
+		std::vector<glm::vec3> colisiones;
+		std::vector<int> face_hit;
+
+		filter_faces(axis, 1);
+
+		end = std::chrono::steady_clock::now();
+		// std::cout << "Face filtering"
+		// << "\t Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "[ms]" << std::endl;
+
+		begin = std::chrono::steady_clock::now();
+
+		for(float v = 0; v < B; v++){
+			std::cout << B-v << std::endl;
+
+			for(float u = 0; u < 2*B; u++){
+
+				// int red = static_cast<int>(three_channels[2].at<uint8_t>(v,u));
+				// int green = static_cast<int>(three_channels[1].at<uint8_t>(v,u));
+				// int blue = static_cast<int>(three_channels[1].at<uint8_t>(v,u));
+				int gray = static_cast<int>(img_resize.at<uint8_t>(v,u));
+				// red = gray;
+				// blue = gray;
+				// green = gray;
+				// std::cout << u << " " << v << " " << red << " " << green << " " << blue << std::endl;
+				float angle = u*2*M_PI / (2*B);
+				// std::cout << angle << std::endl;
+				int s = get_sector(angle) - 1;
+
+				origin = get_orig(axis,v,1);
+				direction = get_dir(axis,angle);
+
+				if(gray != 0){
+					for(int j = 0; j < facesIndex_filter[v][s].size(); j++){
+						glm::vec3 hit_point;
+						glm::vec2 hit;
+						float dist;
+
+						// std::cout << facesIndex[j][0] << " " << facesIndex[j][1] << " " << facesIndex[j][2] << std::endl;
+
+						glm::vec3 t1 = vertexs[facesIndex[facesIndex_filter[v][s][j]][0]];
+						glm::vec3 t2 = vertexs[facesIndex[facesIndex_filter[v][s][j]][1]];
+						glm::vec3 t3 = vertexs[facesIndex[facesIndex_filter[v][s][j]][2]];
+
+						if(RayIntersectsTriangle(origin, direction, t1, t2, t3, hit_point)){
+							n_colisiones++;
+							colisiones.push_back(hit_point);
+							face_hit.push_back(facesIndex_filter[v][s][j]);
+						} 
+					}
+				
+					if(n_colisiones > 0){
+						// panorama[v][u] = feature_map(map, axis, precision, power, origin, direction, colisiones, face_hit);
+						float dist;
+						float dist_max = -1;
+						float ind_max = -1;
+
+						for(int c = 0; c < colisiones.size(); c++){ 
+							dist = glm::distance(colisiones[c],origin); 
+							if((dist > dist_max) && (dist > 0)){
+								ind_max = c;
+								dist_max = dist;
+							}
+						}
+
+						// std::cout << "COLISION " << face_hit[ind_max] << " " << colisiones[ind_max].x << " " << colisiones[ind_max].y << " " << colisiones[ind_max].y << std::endl;
+						// std::cout << ind_max << std::endl;
+						// std::cout << face_hit.size() << std::endl;
+						// std::cout << face_hit[ind_max] << std::endl;
+						auto vertex_index = facesIndex[face_hit[ind_max]];
+						// std::cout << vertex_index[0] << " " << vertex_index[1] << " " << vertex_index[2] << std::endl;
+						// std::cout << "gray value: " << gray << std::endl;
+						double true_color = gray / 255.0;
+
+                        double red_value, green_value, blue_value;
+
+                        if (true_color <= 0.125)
+                        {
+                            red_value = 0;
+                            green_value = 0;
+                            blue_value = 0.5 + true_color * 4.0; // [0.5, 1.0]
+                        }
+                        else if (true_color <= 0.375)
+                        {
+                            red_value = 0;
+                            green_value = (true_color - 0.125) * 4.0; // [0, 1.0]
+                            blue_value = 1;
+                        }
+                        else if (true_color <= 0.625)
+                        {
+                            red_value = (true_color - 0.375) * 4.0; // [0, 1.0]
+                            green_value = 1;
+                            blue_value = 1 - (true_color - 0.375) * 4.0; // [1.0, 0]
+                        }
+                        else if (true_color <= 0.875)
+                        {
+                            red_value = 1;
+                            green_value = 1 - (true_color - 0.625) * 4.0; // [1.0, 0]
+                            blue_value = 0;
+                        }
+                        else
+                        {
+                            red_value = 1 - (true_color - 0.875) * 4.0; // [1.0, 0.5]
+                            green_value = 0;
+                            blue_value = 0;
+                        }
+
+						vertexColor[vertex_index[0]][0] = red_value;
+						vertexColor[vertex_index[0]][1] = green_value;
+						vertexColor[vertex_index[0]][2] = blue_value;
+						vertexColor[vertex_index[1]][0] = red_value;
+						vertexColor[vertex_index[1]][1] = green_value;
+						vertexColor[vertex_index[1]][2] = blue_value;
+						vertexColor[vertex_index[2]][0] = red_value;
+						vertexColor[vertex_index[2]][1] = green_value;
+						vertexColor[vertex_index[2]][2] = blue_value;
+
+
+					} else {
+						// std::cout << "NO COLISION" << std::endl;
+						// if(red != 0 || blue != 0 || green != 0){
+						// 	std::cout << "Origen: " << origin.x << " " << origin.y << " " << origin.z << std::endl;
+						// 	std::cout << "Direction: " << direction.x << " " << direction.y << " " << direction.z << std::endl;
+						// 	// exit(1);
+						// }
+						
+					}
+					
+					n_colisiones = 0;
+					colisiones.clear();
+					face_hit.clear();
+				}
+			}
+		}	
+	}
+
+	// cv::imshow("Windows", three_channels[1]);
+	// cv::waitKey();
+}
+
+void Mesh3D::combine_mesh(const Mesh3D& mesh1,const Mesh3D& mesh2,const Mesh3D& mesh3, float ponderacionX, float ponderacionY, float ponderacionZ){
+    if(mesh1.vertexColor.size() != mesh2.vertexColor.size() ||
+       mesh1.vertexColor.size() != mesh3.vertexColor.size()){
+        return;
+    }
+
+    double true_color1;
+    double true_color2;
+    double true_color3;
+    double true_color;
+    
+    for(size_t i = 0; i < mesh1.vertexColor.size(); ++i){
+        
+        //Para mesh1 y true_color1
+        if (mesh1.vertexColor[i][0] == 0 && mesh1.vertexColor[i][1] == 0 && mesh1.vertexColor[i][2] >= 0.5 && mesh1.vertexColor[i][2] <= 1.0){
+            true_color1 = (mesh1.vertexColor[i][2] - 0.5) / 4.0;
+        }else if (mesh1.vertexColor[i][0] == 0 && mesh1.vertexColor[i][2] == 1 && mesh1.vertexColor[i][1] >= 0 && mesh1.vertexColor[i][1] <= 1.0){
+            true_color1 = 0.125 + mesh1.vertexColor[i][1] / 4.0;
+        }else if (mesh1.vertexColor[i][1] == 1 && mesh1.vertexColor[i][0] >= 0 && mesh1.vertexColor[i][0] <= 1.0 && mesh1.vertexColor[i][2] >= 0 && mesh1.vertexColor[i][2] <= 1.0){
+            true_color1 = 0.375 + mesh1.vertexColor[i][0] / 4.0;
+        }else if (mesh1.vertexColor[i][0] == 1 && mesh1.vertexColor[i][2] == 0 && mesh1.vertexColor[i][1] >= 0 && mesh1.vertexColor[i][1] <= 1.0){
+            true_color1 = 0.625 + (1 - mesh1.vertexColor[i][1]) / 4.0;
+        }else if (mesh1.vertexColor[i][1] == 0 && mesh1.vertexColor[i][2] == 0 && mesh1.vertexColor[i][0] >= 0.5 && mesh1.vertexColor[i][0] <= 1.0){
+            true_color1 = 0.875 + (1 - mesh1.vertexColor[i][0]) / 4.0;
+        }
+        
+        // Para mesh2 y true_color2
+        if (mesh2.vertexColor[i][0] == 0 && mesh2.vertexColor[i][1] == 0 && mesh2.vertexColor[i][2] >= 0.5 && mesh2.vertexColor[i][2] <= 1.0){
+            true_color2 = (mesh2.vertexColor[i][2] - 0.5) / 4.0;
+        }else if (mesh2.vertexColor[i][0] == 0 && mesh2.vertexColor[i][2] == 1 && mesh2.vertexColor[i][1] >= 0 && mesh2.vertexColor[i][1] <= 1.0){
+            true_color2 = 0.125 + mesh2.vertexColor[i][1] / 4.0;
+        }else if (mesh2.vertexColor[i][1] == 1 && mesh2.vertexColor[i][0] >= 0 && mesh2.vertexColor[i][0] <= 1.0 && mesh2.vertexColor[i][2] >= 0 && mesh2.vertexColor[i][2] <= 1.0){
+            true_color2 = 0.375 + mesh2.vertexColor[i][0] / 4.0;
+        }else if (mesh2.vertexColor[i][0] == 1 && mesh2.vertexColor[i][2] == 0 && mesh2.vertexColor[i][1] >= 0 && mesh2.vertexColor[i][1] <= 1.0){
+            true_color2 = 0.625 + (1 - mesh2.vertexColor[i][1]) / 4.0;
+        }else if (mesh2.vertexColor[i][1] == 0 && mesh2.vertexColor[i][2] == 0 && mesh2.vertexColor[i][0] >= 0.5 && mesh2.vertexColor[i][0] <= 1.0){
+            true_color2 = 0.875 + (1 - mesh2.vertexColor[i][0]) / 4.0;
+        }
+        
+        // Para mesh3 y true_color3
+        if (mesh3.vertexColor[i][0] == 0 && mesh3.vertexColor[i][1] == 0 && mesh3.vertexColor[i][2] >= 0.5 && mesh3.vertexColor[i][2] <= 1.0){
+            true_color3 = (mesh3.vertexColor[i][2] - 0.5) / 4.0;
+        }else if (mesh3.vertexColor[i][0] == 0 && mesh3.vertexColor[i][2] == 1 && mesh3.vertexColor[i][1] >= 0 && mesh3.vertexColor[i][1] <= 1.0){
+            true_color3 = 0.125 + mesh3.vertexColor[i][1] / 4.0;
+        }else if (mesh3.vertexColor[i][1] == 1 && mesh3.vertexColor[i][0] >= 0 && mesh3.vertexColor[i][0] <= 1.0 && mesh3.vertexColor[i][2] >= 0 && mesh3.vertexColor[i][2] <= 1.0){
+            true_color3 = 0.375 + mesh3.vertexColor[i][0] / 4.0;
+        }else if (mesh3.vertexColor[i][0] == 1 && mesh3.vertexColor[i][2] == 0 && mesh3.vertexColor[i][1] >= 0 && mesh3.vertexColor[i][1] <= 1.0){
+            true_color3 = 0.625 + (1 - mesh3.vertexColor[i][1]) / 4.0;
+        }else if (mesh3.vertexColor[i][1] == 0 && mesh3.vertexColor[i][2] == 0 && mesh3.vertexColor[i][0] >= 0.5 && mesh3.vertexColor[i][0] <= 1.0){
+            true_color3 = 0.875 + (1 - mesh3.vertexColor[i][0]) / 4.0;
+        }
+        
+        true_color = std::max({true_color1, true_color2, true_color3});
+        
+        double red_value, green_value, blue_value;
+
+        if (true_color <= 0.125){
+            red_value = 0;
+            green_value = 0;
+            blue_value = 0.5 + true_color * 4.0; // [0.5, 1.0]
+        }else if (true_color <= 0.375){
+            red_value = 0;
+            green_value = (true_color - 0.125) * 4.0; // [0, 1.0]
+            blue_value = 1;
+        }else if (true_color <= 0.625){
+            red_value = (true_color - 0.375) * 4.0; // [0, 1.0]
+            green_value = 1;
+            blue_value = 1 - (true_color - 0.375) * 4.0; // [1.0, 0]
+        }else if (true_color <= 0.875){
+            red_value = 1;
+            green_value = 1 - (true_color - 0.625) * 4.0; // [1.0, 0]
+            blue_value = 0;
+        }else{
+            red_value = 1 - (true_color - 0.875) * 4.0; // [1.0, 0.5]
+            green_value = 0;
+            blue_value = 0;
+        }
+        
+        this->vertexColor[i][0] = red_value;
+        this->vertexColor[i][1] = green_value;
+        this->vertexColor[i][2] = blue_value;
+        
+    }
+    
+}
+
+
+
