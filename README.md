@@ -19,5 +19,5 @@ Documentation is avaliable in: [https://alexmnzlms.github.io/panorama_extended/]
 ## Usage
 ```bash
 make init
-bin/panorama_extended [model name] [relive route to 3D model] [output folder PANORAMA extended] [output folder feature map]
+bin/panorama_extended_coloring [model name] [relive route to 3D model] [heatmap_X] [heatmap_Y] [heatmap_Z] [output folder colored 3D model]
 ```
