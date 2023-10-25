@@ -50,20 +50,22 @@
 class Mesh3D{
 public:
 	Mesh3D();
-	Mesh3D(const std::string name, const std::string path);
-	Mesh3D(const Mesh3D& mesh),
+	Mesh3D(const std::string name, const std::string path, bool color = false);
+	Mesh3D(const Mesh3D& mesh);
 	~Mesh3D();
 	std::string get_name();
 	void set_name(const std::string name);
 	int num_vertexs();
 	int num_faces();
-	void export_obj(const std::string path);
+	void export_obj(const std::string path, bool color = false);
 	void rotate_mesh(Axis axis_rot, float angle);
 	void calculate_panorama(Map map, Axis axis, float precision, int power = 4);
 	void mesh_pose_norm(int angle_pass = 1, float precision = 1, int power = 4);
 	void combine_panorama(Axis axis, std::string output, bool resize = true);
 	void concat_panorama(Axis axis, std::string output, bool resize = true);
 	void concat_panorama(Map map, std::string output,  bool resize = true);
+	void color_3d_model(std::string image_path, Axis axis);
+    void combine_mesh(const Mesh3D& mallaX,const Mesh3D& mallaY,const Mesh3D& mallaZ,float ponderacionX,float ponderacionY,float ponderacionZ);
 						
 private:
 	/** @brief Vertexs of the mesh */
@@ -72,6 +74,8 @@ private:
 	std::vector<std::vector<int>> facesIndex; 
 	/** @brief Mesh faces divided according to height and sector to which they belong */
 	std::vector<std::vector<std::vector<int>>> facesIndex_filter; 
+	/** @brief Colors of vertexs */
+	std::vector<std::vector<double>> vertexColor; 
 
 	/** @brief PANORAMA representation of loaded mesh */
 	std::vector<std::vector<float>> panorama; 
@@ -91,7 +95,7 @@ private:
 	 * 
 	 * Is set by default to 180 divisions
 	 */
-	int B = 180;
+	int B = 180*10;
 	/**
 	 * @brief SDM feature map
 	 */
@@ -114,7 +118,7 @@ private:
 	void calc_distance();
 	void scale_to_unit();
 
-	bool load_obj(const std::string path);
+	bool load_obj(const std::string path, bool color);
 
 	bool RayIntersectsTriangle(glm::vec3 rayOrigin, 
 								glm::vec3 rayVector, 
