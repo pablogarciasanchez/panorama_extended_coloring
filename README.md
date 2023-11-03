@@ -4,7 +4,7 @@ Este repositorio es la implementación del preprocesador de modelos 3D a imagene
 
 Este código forma parte del Trabajo de Fin de Grado de Alejandro Manzanares Lemus para el Grado de Ingeniería Informática de la Universidad de Granada.
 
-La funcionalidad extendida (panorama_extended_coloring) permite el coloreo de modelos 3D a partir de mapas de relevancia 2D.
+La funcionalidad extendida (panorama_extended_coloring) permite el coloreo de modelos 3D a partir de los mapas de relevancia 2D de cada una de sus vistas.
 
 ## Uso
 ```bash
