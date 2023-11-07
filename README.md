@@ -1,10 +1,6 @@
 # panorama_extended_coloring
 
-Este repositorio es la implementación del preprocesador de modelos 3D a imagenes 2D mediante proyección cilíndrica presentado en el articulo [Ensemble of PANORAMA-based convolutional neural networks for 3D model classification and retrieval](https://www.sciencedirect.com/science/article/pii/S0097849317301978)
-
-Este código forma parte del Trabajo de Fin de Grado de Alejandro Manzanares Lemus para el Grado de Ingeniería Informática de la Universidad de Granada.
-
-La funcionalidad extendida (panorama_extended_coloring) permite el coloreo de modelos 3D a partir de los mapas de relevancia 2D de cada una de sus vistas.
+Este repositorio es un fork de [panorama_extended](https://github.com/Alexmnzlms/panorama_extended), para colorear modelos 3D a partir de los mapas de relevancia 2D de cada una de sus vistas.
 
 ## Uso
 ```bash
