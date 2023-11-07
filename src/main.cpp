@@ -86,7 +86,6 @@ int main(int argc, char * argv[]) {
     // Cierra el archivo
     inFile.close();
 
-    // Ahora puedes acceder a los datos usando el nombre de la muestra
     DatosMuestra muestra = diccionario[name];
     std::cout << "Nombre: " << name << std::endl;
     std::cout << "Edad: " << muestra.Edad << std::endl;
